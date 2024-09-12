@@ -17,17 +17,23 @@
     background-blend-mode: overlay; /* Blend the gradient and image */
 }
 
-.navbar{
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Distributes space between children */
+    align-items: center; /* Aligns items vertically centered */
     width: 1200px;
     height: 75px;
     margin: auto;
 }
 
-.icon{
-    width: 200px;
-    float: left;
-    height: 70px;
+
+.icon {
+    width: 20px;
+    height: 20px;
+    /* Remove float property */
+    /* Additional margin or padding can be added if needed */
 }
+
 
 .logo{
     color: #964B00;
@@ -45,53 +51,54 @@
     height: 70px;
 }
 
-ul{
-    float: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+/* Ensure the ul element has a background and curved border */
+ul {
+    float: left !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important; /* Remove default padding */
+    margin: 0 !important; /* Remove default margin */
+    background: linear-gradient(
+        to top, 
+        rgba(255, 223, 186, 0.7), /* Pastel light brown */
+        rgba(255, 234, 204, 0.7) /* Lighter pastel shade */
+    ) !important; /* Gradient background */
+    border-radius: 10px !important; /* Curved corners for the ul */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important; /* Optional: soft shadow for depth */
+    padding: 10px !important; /* Space inside the ul */
 }
 
-ul li{
-    list-style: none;
-    margin-left: 62px;
-    margin-top: 27px;
-    font-size: 14px;
+/* Style for each li element */
+ul li {
+    list-style: none !important;
+    margin: 0 10px !important; /* Space between items */
+    border: 2px solid rgba(0, 0, 0, 0.2) !important; /* Transparent border */
+    border-radius: 10px !important; /* Curved corners for each item */
+    padding: 5px !important; /* Space inside each item */
 }
 
-ul li a{
-    text-decoration: none;
-    color: #664228;
-    font-family: Arial;
-    font-weight: bold;
-    transition: 0.4s ease-in-out;
+/* Style for the a tag inside li */
+ul li a {
+    text-decoration: none !important;
+    color: #664228 !important;
+    font-family: Arial !important;
+    font-weight: bold !important;
+    display: block !important; /* Make link block-level to fit the border */
+    padding: 10px 20px !important; /* Padding inside the link */
+    border-radius: 8px !important; /* Curved corners for the link */
+    transition: background-color 0.3s ease, color 0.3s ease !important; /* Smooth transition */
 }
 
-ul li a:hover{
-    color: #964B00;
+/* Hover effect for the a tag */
+ul li a:hover {
+    color: #964B00 !important;
+    background-color: rgba(255, 234, 204, 0.5) !important; /* Slightly different background on hover */
 }
 
-.search{
-    width: 330px;
-    float: left;
-    margin-left: 270px;
-}
 
-.srch{
-    font-family: 'Times New Roman';
-    width: 200px;
-    height: 40px;
-    background: transparent;
-    border: 1px solid #964B00;
-    margin-top: 13px;
-    color: #664228;
-    border-right: none;
-    font-size: 16px;
-    float: left;
-    padding: 10px;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-}
+
 
 .btn{
     width: 100px;
@@ -114,12 +121,9 @@ ul li a:hover{
     outline: none;
 }
 
-.srch:focus{
-    outline: none;
-}
 
 .content{
-    width: 1200px;
+    width: 12000px;
     height: auto;
     margin: auto;
     color: #964B00;
@@ -163,7 +167,7 @@ ul li a:hover{
 }
 
 .cn:hover{
-    background-color: #fff;
+    background-color: #ffffff;
 }
 
 .content span{
@@ -179,13 +183,15 @@ ul li a:hover{
         rgba(248, 233, 220, 0.9) /* Lighter pastel brown */
     );
     position: absolute;
-    top: -20px;
-    left: 870px;
-    transform: translate(-285%, -5%);
+    top: 150px; /* Adjust this value to move the form down */
+    left: 870px; /* Adjust as needed */
     border-radius: 50px;
     padding: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: soft shadow for added depth */
+    /* Optional: Remove or adjust transform if it conflicts */
+    /* transform: translate(-285%, 0%); */
 }
+
 
 .form h2{
     width: 220px;
@@ -273,3 +279,36 @@ ul li a:hover{
 .icons ion-icon:hover{
     color: #964B00;
 }
+
+
+
+/* General Reset for menu-item */
+.menu-item h3,
+.menu-item p,
+.menu-item span {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* h3 Styling */
+.menu-item h3 {
+    color: #664228;
+    font-size: 20px;
+    margin: 0;
+}
+
+/* p Styling */
+.menu-item p {
+    color: #777;
+    margin: 5px 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+/* span Styling */
+.menu-item span {
+    font-weight: bold;
+    color: #964B00;
+    font-size: 18px;
+}
+
+

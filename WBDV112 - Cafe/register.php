@@ -11,16 +11,24 @@
     <div class="main">
         <div class="navbar">
             <div class="icon">
-                <h2 class="logo">Café Solstice</h2>
+               <img src="images/logo01.jpg" alt="Logo" style="
+    max-width: 120px;
+    height: auto;
+    border: 5px solid rgba(0, 0, 0, 0.2); /* Transparent border */
+    border-radius: 15px; /* Curved border */
+    padding: 5px; /* Space between the image and border */
+    background-clip: padding-box; /* Ensures background does not overlap border */
+    margin-left: 100px; /* Move the image to the right; adjust as needed */
+">
             </div>
 
             <div class="menu">
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="#">Menu</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="menu.php">Menu</a></li>
+                    <li><a href="gallery.php">Gallery</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="aboutus.php">About</a></li>
                 </ul>
             </div>
         </div>
@@ -39,6 +47,10 @@
             </div>
         </div>
     </div>
+
+<!-- Include the footer -->
+    <?php include('footer.php'); ?>
+
 
 </body>
 </html>
