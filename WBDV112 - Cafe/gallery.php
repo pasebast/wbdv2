@@ -1,33 +1,18 @@
+<?php
+// Initialize session and cart, etc.
+session_start();
+// Your existing code...
+
+// Get the current page filename
+$current_page = basename($_SERVER['REQUEST_URI']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Café Solstice - Gallery</title>
     <link rel="stylesheet" href="sty.css"> <!-- Link to your external stylesheet -->
-    <style>
-        .gallery-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
-
-        .gallery-item {
-            border: 3px solid rgba(0, 0, 0, 0.3); /* Slightly transparent border */
-            border-radius: 20px; /* Rounded corners */
-            padding: 5px; /* Space between the image and border */
-            background-clip: padding-box; /* Ensures background does not overlap border */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
-            margin: 10px; /* Space around each image */
-            max-width: 400px; /* Set a maximum width for images */
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 15px; /* Rounded corners for the image itself */
-        }
-    </style>
 </head>
 <body>
     <div class="main">
@@ -37,17 +22,17 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="gallery.php">Gallery</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <li><a href="aboutus.php">About</a></li>
+                    <li><a href="index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
+                    <li><a href="menu.php" class="<?php echo ($current_page == 'menu.php') ? 'active' : ''; ?>">Menu</a></li>
+                    <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
+                    <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
+                    <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="content">
-            <h1>Gallery</h1>
+            <h1 class="centered-heading">Store Ambiance</h1>
             <div class="gallery-container">
                 <!-- First Image -->
                 <div class="gallery-item">
@@ -66,9 +51,8 @@
             </div>
         </div>
     </div>
-	
-	<!-- Include the footer -->
-    <?php include('footer.php'); ?>
 
+    <!-- Include the footer -->
+    <?php include('footer.php'); ?>
 </body>
 </html>

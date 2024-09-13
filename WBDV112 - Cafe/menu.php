@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session to use session variables
+session_start(); // Start the session
 
 // Initialize cart
 if (!isset($_SESSION['cart'])) {
@@ -9,18 +9,13 @@ if (!isset($_SESSION['cart'])) {
 // Initialize message
 $message = '';
 
-// Handle adding item to cart
+// Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['add_to_cart'])) {
         $item = $_POST['item'];
-        if (!isset($_SESSION['cart'][$item])) {
-            $_SESSION['cart'][$item] = 0;
-        }
-        $_SESSION['cart'][$item]++;
+        $_SESSION['cart'][$item] = isset($_SESSION['cart'][$item]) ? $_SESSION['cart'][$item] + 1 : 1;
         $message = "Item added to cart!";
     }
-    
-    // Handle clearing the cart
     if (isset($_POST['clear_cart'])) {
         $_SESSION['cart'] = array();
         $message = "Cart cleared!";
@@ -28,12 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Calculate total items in cart
-$cartCount = 0;
-if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $quantity) {
-        $cartCount += $quantity;
-    }
-}
+$cartCount = array_sum($_SESSION['cart']);
+
+// Get the current page filename
+$current_page = basename($_SERVER['REQUEST_URI']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,173 +34,8 @@ if (isset($_SESSION['cart'])) {
     <meta charset="UTF-8">
     <title>Café Solstice - Menu</title>
     <link rel="stylesheet" href="sty.css">
-    <style>
-        /* Add styles for menu container to use Flexbox */
-        .menu-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: flex-start;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            border: 2px solid rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            padding: 10px;
-            max-width: 350px;
-            background-color: #f9f9f9;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .menu-item img {
-            max-width: 120px;
-            height: auto;
-            border: 2px solid rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            padding: 5px;
-            background-clip: padding-box;
-            margin-right: 15px;
-        }
-
-        .menu-item h3 {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            color: #664228;
-            font-size: 20px;
-            margin: 0 0 10px 0;
-        }
-
-        .menu-item p {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            color: #000000;
-            font-size: 16px;
-            line-height: 1.4;
-            margin: 5px 0;
-        }
-
-        .menu-item span {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            font-weight: bold;
-            color: #964B00;
-            font-size: 18px;
-        }
-
-        .order-button {
-            background-color: #964B00;
-            color: #FFFFFF;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            transition: background-color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .order-button svg {
-            color: #FFFFFF;
-        }
-
-        .cart-icon {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #964B00;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cart-icon span {
-            background: #fff;
-            border-radius: 50%;
-            padding: 3px 8px;
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            color: #964B00;
-            font-size: 14px;
-        }
-
-        .cart-popup {
-            display: none;
-            position: fixed;
-            top: 10%;
-            right: 10px;
-            max-width: 300px;
-            width: 100%;
-            background: #fff;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            padding: 15px;
-            color: #964B00;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            box-sizing: border-box;
-            border-radius: 8px;
-            overflow: auto;
-        }
-
-        .cart-popup h2 {
-            margin-top: 0;
-        }
-
-        .cart-popup ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .cart-popup li {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-        }
-
-        .cart-popup button {
-            background-color: #964B00;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .cart-popup button:hover {
-            background-color: #804000;
-        }
-
-        .cart-popup .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .message {
-            background-color: #dff0d8;
-            color: #3c763d;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #d6e9c6;
-            border-radius: 4px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
-
     <div class="main">
         <div class="navbar">
             <div class="icon">
@@ -215,11 +43,11 @@ if (isset($_SESSION['cart'])) {
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="gallery.php">Gallery</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <li><a href="aboutus.php">About</a></li>
+                    <li><a href="index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
+                    <li><a href="menu.php" class="<?php echo ($current_page == 'menu.php') ? 'active' : ''; ?>">Menu</a></li>
+                    <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
+                    <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
+                    <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
                 </ul>
             </div>
         </div>
@@ -240,7 +68,7 @@ if (isset($_SESSION['cart'])) {
         <div class="cart-popup" id="cartPopup">
             <div class="close" onclick="toggleCartPopup()">&times;</div>
             <h2>Your Cart</h2>
-            <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
+            <?php if (!empty($_SESSION['cart'])): ?>
                 <ul>
                     <?php foreach ($_SESSION['cart'] as $item => $quantity): ?>
                         <li><?php echo htmlspecialchars($item); ?>: <?php echo htmlspecialchars($quantity); ?></li>
@@ -249,7 +77,7 @@ if (isset($_SESSION['cart'])) {
                 <form method="POST" action="checkout.php">
                     <button type="submit">Checkout</button>
                 </form>
-                <form method="POST" style="margin-top: 10px;">
+                <form method="POST">
                     <button name="clear_cart" type="submit">Clear Cart</button>
                 </form>
             <?php else: ?>
@@ -258,75 +86,114 @@ if (isset($_SESSION['cart'])) {
         </div>
 
         <div class="content">
-            <h1>Our Menu</h1>
-            <div class="menu-container">
-                <!-- Solstice Berry Bliss Item -->
-                <div class="menu-item">
-                    <img src="images/menu01.png" alt="Solstice Berry Bliss">
-                    <div>
-                        <h3>Solstice Berry Bliss</h3>
-                        <p>A creamy blend of strawberries and cream, capturing the sweetness of a summer solstice.</p>
-                        <span>PHP 150.00</span>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="item" value="solstice_berry_bliss">
-                            <input type="hidden" name="add_to_cart" value="1">
-                            <button class="order-button" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                                    <circle cx="8" cy="21" r="1" fill="currentColor"/>
-                                    <circle cx="18" cy="21" r="1" fill="currentColor"/>
-                                    <path d="M1 1h4l2 5h13l3 9H6" fill="none"/>
-                                </svg>
-                                Order Now
-                            </button>
-                        </form>
-                    </div>
-                </div>
+            <div class="menu-category">
+                <h2>Frappe <img src="images/icon01.png" alt="Frappe Icon" class="category-icon"></h2>
+                <div class="menu-container">
+                    <?php 
+                    $frappeItems = array(
+                        array("image" => "images/menu01.png", "name" => "Solstice Berry Bliss", "desc" => "A creamy blend of strawberries and cream, capturing the sweetness.", "price" => "PHP 150.00"),
+                        array("image" => "images/menu02.png", "name" => "Eclipse Choco Delight", "desc" => "A rich chocolate frappé that mirrors the allure.", "price" => "PHP 120.00"),
+                        array("image" => "images/menu03.png", "name" => "Aurora Matcha Dream", "desc" => "A smooth green frappé inspired by the aurora.", "price" => "PHP 190.00")
+                    );
 
-                <!-- Eclipse Choco Delight Item -->
-                <div class="menu-item">
-                    <img src="images/menu02.png" alt="Eclipse Choco Delight">
-                    <div>
-                        <h3>Eclipse Choco Delight</h3>
-                        <p>A rich chocolate frappé that mirrors the allure of an eclipse.</p>
-                        <span>PHP 120.00</span>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="item" value="eclipse_choco_delight">
-                            <input type="hidden" name="add_to_cart" value="1">
-                            <button class="order-button" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                                    <circle cx="8" cy="21" r="1" fill="currentColor"/>
-                                    <circle cx="18" cy="21" r="1" fill="currentColor"/>
-                                    <path d="M1 1h4l2 5h13l3 9H6" fill="none"/>
-                                </svg>
-                                Order Now
-                            </button>
-                        </form>
+                    foreach ($frappeItems as $item): ?>
+                    <div class="menu-item">
+                        <img src="<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                        <div>
+                            <h3><?php echo htmlspecialchars($item['name']); ?></h3>
+                            <p><?php echo htmlspecialchars($item['desc']); ?></p>
+                            <span><?php echo htmlspecialchars($item['price']); ?></span>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="item" value="<?php echo htmlspecialchars(strtolower(str_replace(' ', '_', $item['name']))); ?>">
+                                <input type="hidden" name="add_to_cart" value="1">
+                                <button class="order-button" type="submit" onclick="startCartAnimation(event)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                                        <circle cx="8" cy="21" r="1" fill="currentColor"/>
+                                        <circle cx="18" cy="21" r="1" fill="currentColor"/>
+                                        <path d="M1 1h4l2 5h13l3 9H6" fill="none"/>
+                                    </svg>
+                                    Order Now
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Aurora Matcha Dream Item -->
-                <div class="menu-item">
-                    <img src="images/menu03.png" alt="Aurora Matcha Dream">
-                    <div>
-                        <h3>Aurora Matcha Dream</h3>
-                        <p>A smooth green tea frappé inspired by the aurora.</p>
-                        <span>PHP 190.00</span>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="item" value="aurora_matcha_dream">
-                            <input type="hidden" name="add_to_cart" value="1">
-                            <button class="order-button" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                                    <circle cx="8" cy="21" r="1" fill="currentColor"/>
-                                    <circle cx="18" cy="21" r="1" fill="currentColor"/>
-                                    <path d="M1 1h4l2 5h13l3 9H6" fill="none"/>
-                                </svg>
-                                Order Now
-                            </button>
-                        </form>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
+
+            <div class="menu-category">
+                <h2>Coffee <img src="images/icon02.png" alt="Coffee Icon" class="category-icon"></h2>
+                <div class="menu-container">
+                    <?php 
+                    $coffeeItems = array(
+                        array("image" => "images/menu04.png", "name" => "Espresso Delight", "desc" => "A strong and rich espresso to kickstart your day.", "price" => "PHP 100.00"),
+                        array("image" => "images/menu05.png", "name" => "Latte Art Magic", "desc" => "Smooth latte with beautiful art on top.", "price" => "PHP 130.00"),
+                        array("image" => "images/menu06.png", "name" => "Cappuccino Bliss", "desc" => "A perfect blend of espresso, steamed milk, and foam.", "price" => "PHP 140.00")
+                    );
+
+                    foreach ($coffeeItems as $item): ?>
+                    <div class="menu-item">
+                        <img src="<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                        <div>
+                            <h3><?php echo htmlspecialchars($item['name']); ?></h3>
+                            <p><?php echo htmlspecialchars($item['desc']); ?></p>
+                            <span><?php echo htmlspecialchars($item['price']); ?></span>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="item" value="<?php echo htmlspecialchars(strtolower(str_replace(' ', '_', $item['name']))); ?>">
+                                <input type="hidden" name="add_to_cart" value="1">
+                                <button class="order-button" type="submit" onclick="startCartAnimation(event)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                                        <circle cx="8" cy="21" r="1" fill="currentColor"/>
+                                        <circle cx="18" cy="21" r="1" fill="currentColor"/>
+                                        <path d="M1 1h4l2 5h13l3 9H6" fill="none"/>
+                                    </svg>
+                                    Order Now
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h2>Iced Drinks <img src="images/icon03.png" alt="Iced Drinks Icon" class="category-icon"></h2>
+                <div class="menu-container">
+                    <?php 
+                    $icedDrinksItems = array(
+                        array("image" => "images/menu07.png", "name" => "Iced Americano", "desc" => "A strong and refreshing iced Americano.", "price" => "PHP 110.00"),
+                        array("image" => "images/menu08.png", "name" => "Iced Mocha", "desc" => "A delightful iced mocha with a touch of chocolate.", "price" => "PHP 160.00"),
+                        array("image" => "images/menu09.png", "name" => "Iced Caramel Latte", "desc" => "A smooth caramel latte served chilled.", "price" => "PHP 170.00")
+                    );
+
+                    foreach ($icedDrinksItems as $item): ?>
+                    <div class="menu-item">
+                        <img src="<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                        <div>
+                            <h3><?php echo htmlspecialchars($item['name']); ?></h3>
+                            <p><?php echo htmlspecialchars($item['desc']); ?></p>
+                            <span><?php echo htmlspecialchars($item['price']); ?></span>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="item" value="<?php echo htmlspecialchars(strtolower(str_replace(' ', '_', $item['name']))); ?>">
+                                <input type="hidden" name="add_to_cart" value="1">
+                                <button class="order-button" type="submit" onclick="startCartAnimation(event)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                                        <circle cx="8" cy="21" r="1" fill="currentColor"/>
+                                        <circle cx="18" cy="21" r="1" fill="currentColor"/>
+                                        <path d="M1 1h4l2 5h13l3 9H6" fill="none"/>
+                                    </svg>
+                                    Order Now
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
         </div>
+
+        <div id="cartItemAnimation" class="cart-item-animation"></div>
     </div>
 
     <script>
@@ -334,9 +201,28 @@ if (isset($_SESSION['cart'])) {
             var popup = document.getElementById('cartPopup');
             popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
         }
+
+        function startCartAnimation(event) {
+            event.preventDefault();
+            var cartItem = document.getElementById('cartItemAnimation');
+            var button = event.currentTarget;
+            var rect = button.getBoundingClientRect();
+            var cartRect = document.querySelector('.cart-icon').getBoundingClientRect();
+
+            cartItem.style.left = rect.left + 'px';
+            cartItem.style.top = rect.top + 'px';
+            cartItem.style.display = 'block';
+            cartItem.style.animation = 'moveToCart 0.5s forwards';
+
+            setTimeout(function() {
+                cartItem.style.display = 'none';
+            }, 500);
+
+            // Submit form after animation
+            button.closest('form').submit();
+        }
     </script>
-<footer class="footer">
+    
     <?php include('footer.php'); ?>
-</footer>
 </body>
 </html>

@@ -119,8 +119,10 @@ body {
     opacity: 1;
 }
 
-
-
+/* Show the background on active menu item */
+.menu ul li a.active::before {
+    opacity: 1;
+}
 
 /* Content Styling */
 .content {
@@ -133,20 +135,18 @@ body {
     flex: 1; /* Allow content to expand */
 }
 
-
 /* Coffee Image Styling */
 .coffee-image {
     width: 300px; /* Adjust width as needed */
     height: auto; /* Maintain aspect ratio */
     margin-left: 20px; /* Space between form and image */
-   
 }
 
 /* Text Block Styling */
 .text-block {
     width: 50%; /* Take up half of the content area */
     text-align: left;
-	margin-right: 30px; /* Space between text block and form */
+    margin-right: 30px; /* Space between text block and form */
 }
 
 .text-block h1 {
@@ -155,7 +155,6 @@ body {
     letter-spacing: 2px;
     color: #964B00;
     margin-bottom: 20px;
-	
 }
 
 .text-block span {
@@ -184,7 +183,7 @@ body {
     max-width: 1000px;
     z-index: 2; /* Ensure form is above background */
     position: relative;
-	margin-right: 50px; /* Space between form and coffee image */
+    margin-right: 50px; /* Space between form and coffee image */
 }
 
 /* Form Elements */
@@ -298,3 +297,276 @@ body {
 .footer p {
     margin: 10px 0; /* Space around text */
 }
+
+/* Menu Category Styling */
+.menu-category {
+    margin-bottom: 2rem;
+}
+
+.menu-category h2 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #964B00;
+    font-size: 24px;
+    margin-bottom: 1rem;
+}
+
+/* Updated Menu Container */
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+/* Updated Menu Item */
+.menu-item {
+    display: flex;
+    align-items: center;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 10px;
+    max-width: 350px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item img {
+    max-width: 120px;
+    height: auto;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 5px;
+    background-clip: padding-box;
+    margin-right: 15px;
+}
+
+.menu-item h3 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #664228;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+.menu-item p {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #000000;
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 5px 0;
+}
+
+.menu-item span {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-weight: bold;
+    color: #964B00;
+    font-size: 18px;
+}
+
+/* Updated Order Button */
+.order-button {
+    background-color: #964B00;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.order-button svg {
+    color: #FFFFFF;
+}
+
+/* Cart Animation */
+.cart-item-animation {
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+    transition: transform 0.5s ease-in-out, left 0.5s ease-in-out, top 0.5s ease-in-out;
+    transform-origin: center center;
+    display: none; /* Hidden by default */
+}
+
+@keyframes moveToCart {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.5);
+        left: calc(100vw - 60px); /* Adjust to align with your cart icon */
+        top: 10px; /* Adjust to align with your cart icon */
+        opacity: 0;
+    }
+}
+
+/* Cart Popup Styling */
+.cart-popup {
+    display: none;
+    position: fixed;
+    top: 10%;
+    right: 10px;
+    max-width: 300px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 15px;
+    color: #964B00;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    box-sizing: border-box;
+    border-radius: 8px;
+    overflow: auto;
+}
+
+.cart-popup h2 {
+    margin-top: 0;
+}
+
+.cart-popup ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-popup li {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.cart-popup button {
+    background-color: #964B00;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.cart-popup button:hover {
+    background-color: #7a3e1c;
+}
+
+/* Cart Icon Styling */
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+/* Category Icon Styling */
+.category-icon {
+    width: 24px; /* Adjust the size as needed */
+    height: auto;
+    vertical-align: middle; /* Align with text */
+    margin-left: 10px; /* Space between text and icon */
+}
+
+/* Ensure menu items have the hover effect applied */
+.menu ul li a.active::before {
+    opacity: 1; /* Ensure image is visible for active item */
+}
+
+.menu ul li a.active {
+    color: #964B00; /* Example active color */
+    font-weight: bold;
+}
+
+
+.gallery-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            border: 3px solid rgba(0, 0, 0, 0.3); /* Slightly transparent border */
+            border-radius: 20px; /* Rounded corners */
+            padding: 5px; /* Space between the image and border */
+            background-clip: padding-box; /* Ensures background does not overlap border */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+            margin: 10px; /* Space around each image */
+            max-width: 400px; /* Set a maximum width for images */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px; /* Rounded corners for the image itself */
+        }
+		
+		/* Center the heading */
+.centered-heading {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: #964B00;
+    margin: 2px;
+}
+
+.abouttext {
+            width: 1200px;
+            margin: auto;
+            padding: 20px;
+            color: #964B00;
+            margin-top: 80px; /* Ensure content does not hit the navbar */
+        }
+		
+		
+h2 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #964B00;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+		
+.abouttext p {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #664228;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+        }
+		
+		
+		.team-member {
+            width: 30%;
+            text-align: center;
+        }
+        .team-member img {
+            max-width: 100%;
+            height: auto;
+            border: 3px solid rgba(0, 0, 0, 0.3); /* Slightly visible border */
+            border-radius: 10px; /* Curved corners */
+            margin-bottom: 10px;
+        }
+        .team-member h3 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #664228;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .team-member p {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #000000;
+            font-size: 16px;
+        }
+        .team-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }

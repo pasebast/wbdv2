@@ -1,3 +1,12 @@
+<?php
+// Initialize session and cart, etc.
+session_start();
+// Your existing code...
+
+// Get the current page filename
+$current_page = basename($_SERVER['REQUEST_URI']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +22,11 @@
             </div>
              <div class="menu">
                 <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="menu.php">Menu</a></li>
-                    <li><a href="gallery.php">Gallery</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <li><a href="aboutus.php">About</a></li>
+                    <li><a href="index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
+                    <li><a href="menu.php" class="<?php echo ($current_page == 'menu.php') ? 'active' : ''; ?>">Menu</a></li>
+                    <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
+                    <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
+                    <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
                 </ul>
             </div>
         </div>
@@ -27,13 +36,9 @@
     margin: auto;
     padding: 20px;
     color: #964B00;
+    margin-top: 80px; /* Add this line to ensure content does not hit the navbar */
 ">
-            <h1 style="
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    font-size: 36px;
-    text-align: center;
-    margin-bottom: 20px;
-">Contact Us</h1>
+            
             <div class="contact-container" style="
     display: flex;
     justify-content: space-between;
