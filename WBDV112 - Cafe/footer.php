@@ -3,27 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Footer</title>
-    <style>
-        .footer {
-            background: #964B00; /* Dark brown background */
-            color: #FFFFFF; /* White text */
-            padding: 20px 0; /* Top and bottom padding */
-            text-align: center; /* Center align text */
-            position: relative; /* Ensure footer stays at the bottom of content */
-        }
-        .footer .social-links a {
-            color: #FFFFFF; /* White icons */
-            font-size: 24px; /* Icon size */
-            margin: 0 10px; /* Space between icons */
-            transition: color 0.3s ease; /* Smooth color transition */
-        }
-        .footer .social-links a:hover {
-            color: #ff7200; /* Change color on hover */
-        }
-        .footer p {
-            margin: 10px 0; /* Space around text */
-        }
-    </style>
+    
 </head>
 <body>
     <footer class="footer">

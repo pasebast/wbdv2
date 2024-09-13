@@ -3,21 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Café Solstice - About Us</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your external stylesheet -->
+    <link rel="stylesheet" href="sty.css"> <!-- Link to your external stylesheet -->
 </head>
 <body>
     <div class="main">
         <div class="navbar">
             <div class="icon">
-               <img src="images/logo01.jpg" alt="Logo" style="
-    max-width: 120px;
-    height: auto;
-    border: 5px solid rgba(0, 0, 0, 0.2); /* Transparent border */
-    border-radius: 15px; /* Curved border */
-    padding: 5px; /* Space between the image and border */
-    background-clip: padding-box; /* Ensures background does not overlap border */
-    margin-left: 100px; /* Move the image to the right; adjust as needed */
-">
+               <img src="images/logo01.png" alt="Logo">
             </div>
 			
             <div class="menu">
@@ -121,7 +113,7 @@
     color: #664228;
     font-size: 20px;
     margin-bottom: 5px;
-">Windston Churchill</h3>
+">Winston Churchill</h3>
                         <p style="
     font-family: 'Comic Sans MS', cursive, sans-serif;
     color: #000000;

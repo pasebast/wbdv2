@@ -4,22 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Register - Café Solstice</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sty.css">
 </head>
 <body>
 
     <div class="main">
         <div class="navbar">
             <div class="icon">
-               <img src="images/logo01.jpg" alt="Logo" style="
-    max-width: 120px;
-    height: auto;
-    border: 5px solid rgba(0, 0, 0, 0.2); /* Transparent border */
-    border-radius: 15px; /* Curved border */
-    padding: 5px; /* Space between the image and border */
-    background-clip: padding-box; /* Ensures background does not overlap border */
-    margin-left: 100px; /* Move the image to the right; adjust as needed */
-">
+               <img src="images/logo01.png" alt="Logo">
             </div>
 
             <div class="menu">
