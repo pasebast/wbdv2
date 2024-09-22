@@ -30,26 +30,70 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 </ul>
             </div>
         </div>
+		
+		<!-- Store Ambiance Text -->
+    <div class="abouttext">
+        <h2>Store Ambiance</h2>
+        <p>Our store offers a unique blend of comfort and style, designed to give you a relaxing experience. Take a look at our ambiance through the gallery below.</p>
+    </div>
 
-        <div class="content">
-            <h1 class="centered-heading">Store Ambiance</h1>
+
+       
+            
             <div class="gallery-container">
                 <!-- First Image -->
                 <div class="gallery-item">
-                    <img src="images/place01.jpg" alt="Gallery Image 1">
+                    <img src="images/gallery01.jpg" alt="Gallery Image 1">
                 </div>
 
                 <!-- Second Image -->
                 <div class="gallery-item">
-                    <img src="images/place02.jpg" alt="Gallery Image 2">
+                    <img src="images/gallery02.jpg" alt="Gallery Image 2">
                 </div>
 
                 <!-- Third Image -->
                 <div class="gallery-item">
-                    <img src="images/place03.jpg" alt="Gallery Image 3">
+                    <img src="images/gallery03.jpg" alt="Gallery Image 3">
                 </div>
+				
+				<div class="gallery-item">
+                    <img src="images/gallery04.jpg" alt="Gallery Image 3">
+                </div>
+				
+				<div class="gallery-item">
+                    <img src="images/gallery05.jpg" alt="Gallery Image 3">
+                </div>
+				
+				<div class="gallery-item">
+                    <img src="images/gallery06.jpg" alt="Gallery Image 3">
+                </div>
+				
+				<div class="gallery-item">
+                    <img src="images/gallery07.jpg" alt="Gallery Image 3">
+                </div>	
+			
+				<div class="gallery-item">
+                    <img src="images/gallery08.jpg" alt="Gallery Image 3">
+                </div>
+				
+				<div class="gallery-item">
+                    <img src="images/gallery09.jpg" alt="Gallery Image 3">
+                </div>
+				
+				<div class="gallery-item">
+                    <img src="images/gallery10.jpg" alt="Gallery Image 3">
+                </div>
+				
+				<div class="gallery-item">
+                    <img src="images/gallery11.jpg" alt="Gallery Image 3">
+                </div>
+				
+				<div class="gallery-item">
+                    <img src="images/gallery12.jpg" alt="Gallery Image 3">
+                </div>
+				
             </div>
-        </div>
+        
     </div>
 
     <!-- Include the footer -->

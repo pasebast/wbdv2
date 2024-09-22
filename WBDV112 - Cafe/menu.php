@@ -87,13 +87,13 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 
         <div class="content">
             <div class="menu-category">
-                <h2>Frappe <img src="images/icon01.png" alt="Frappe Icon" class="category-icon"></h2>
+                <h2>Frappe</h2>
                 <div class="menu-container">
                     <?php 
                     $frappeItems = array(
-                        array("image" => "images/menu01.png", "name" => "Solstice Berry Bliss", "desc" => "A blend capturing the sweetness of strawberries.", "price" => "PHP 150.00"),
-                        array("image" => "images/menu02.png", "name" => "Eclipse Choco Delight", "desc" => "A chocolate frappé that mirrors the allure.", "price" => "PHP 120.00"),
-                        array("image" => "images/menu03.png", "name" => "Aurora Matcha Dream", "desc" => "A smooth green frappé inspired by the aurora.", "price" => "PHP 190.00")
+                        array("image" => "images/menu01.png", "name" => "Solstice Berry Bliss", "desc" => "A creamy and refreshing blend of strawberries and cream, capturing the sweetness of a summer solstice.", "price" => "PHP 150.00"),
+                        array("image" => "images/menu02.png", "name" => "Eclipse Choco Delight", "desc" => "A rich and creamy chocolate chip frappé that mirrors the allure of an eclipse—a rare, delightful experience.", "price" => "PHP 120.00"),
+                        array("image" => "images/menu03.png", "name" => "Aurora Matcha Dream", "desc" => "A smooth and creamy green tea frappé inspired by the natural beauty of the aurora.", "price" => "PHP 190.00")
                     );
 
                     foreach ($frappeItems as $item): ?>
@@ -102,7 +102,9 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                         <div>
                             <h3><?php echo htmlspecialchars($item['name']); ?></h3>
                             <p><?php echo htmlspecialchars($item['desc']); ?></p>
+							
                             <span><?php echo htmlspecialchars($item['price']); ?></span>
+							
                             <form method="POST" style="display:inline;">
                                 <input type="hidden" name="item" value="<?php echo htmlspecialchars(strtolower(str_replace(' ', '_', $item['name']))); ?>">
                                 <input type="hidden" name="add_to_cart" value="1">
@@ -119,15 +121,13 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                     </div>
                     <?php endforeach; ?>
                 </div>
-            </div>
-
-            <div class="menu-category">
-                <h2>Hot Coffee <img src="images/icon02.png" alt="Coffee Icon" class="category-icon"></h2>
+				<div class="menu-category">
+                <h2>Hot Coffee </h2>
                 <div class="menu-container">
                     <?php 
                     $coffeeItems = array(
-                        array("image" => "images/menu04.png", "name" => "Solstice Shot", "desc" => "An espresso embodying the powerful energy of the solstice.", "price" => "PHP 100.00"),
-                        array("image" => "images/menu05.png", "name" => "Sunrise Brew", "desc" => "A warm brew that awakens the first light of a solstice sunrise.", "price" => "PHP 130.00"),
+                        array("image" => "images/menu04.png", "name" => "Solstice Shot", "desc" => "A bold and invigorating espresso, embodying the powerful energy of the solstice.", "price" => "PHP 100.00"),
+                        array("image" => "images/menu05.png", "name" => "Sunrise Brew", "desc" => "A warm, invigorating brew that awakens your senses like the first light of a solstice sunrise.", "price" => "PHP 130.00"),
                         array("image" => "images/menu06.png", "name" => "Dawn Flat White", "desc" => "A smooth and creamy flat white that reflects the quiet beauty of dawn.", "price" => "PHP 140.00")
                     );
 
@@ -156,14 +156,14 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 </div>
             </div>
 			
-		<div class="menu-category">
-                <h2>Iced Coffee <img src="images/icon04.png" alt="Coffee Icon" class="category-icon"></h2>
+			<div class="menu-category">
+                <h2>Iced Coffee </h2>
                 <div class="menu-container">
                     <?php 
                     $coffeeItems = array(
-                        array("image" => "images/menu10.png", "name" => "Vanilla Breeze", "desc" => "A smooth cold brew infused with the light sweetness of vanilla cream.", "price" => "PHP 100.00"),
-                        array("image" => "images/menu11.png", "name" => "Midday Cappuccino", "desc" => "A crisp and invigorating iced cappuccino", "price" => "PHP 130.00"),
-                        array("image" => "images/menu12.png", "name" => "Golden Hour Caramel", "desc" => "A rich blend of smooth espresso, velvety milk, and sweet caramel drizzle.", "price" => "PHP 140.00")
+                        array("image" => "images/menu10.png", "name" => "Vanilla Breeze", "desc" => "A smooth cold brew infused with the light sweetness of vanilla cream, creating a refreshing experience as gentle as a solstice breeze.", "price" => "PHP 100.00"),
+                        array("image" => "images/menu11.png", "name" => "Midday Cappuccino", "desc" => "A crisp and invigorating iced cappuccino, perfect for a refreshing boost during the peak of your day.", "price" => "PHP 130.00"),
+                        array("image" => "images/menu12.png", "name" => "Golden Hour Caramel", "desc" => "A rich blend of smooth espresso, velvety milk, and sweet caramel drizzle, inspired by the golden light of the solstice’s sunset.", "price" => "PHP 140.00")
                     );
 
                     foreach ($coffeeItems as $item): ?>
@@ -191,14 +191,14 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 </div>
             </div>
 			
-            <div class="menu-category">
-                <h2>Iced Tea <img src="images/icon03.png" alt="Iced Drinks Icon" class="category-icon"></h2>
+			<div class="menu-category">
+                <h2>Iced Tea </h2>
                 <div class="menu-container">
                     <?php 
                     $icedDrinksItems = array(
-                        array("image" => "images/menu07.png", "name" => "Crimson Twilight Tea", "desc" => "A refreshing hibiscus tea with pomegranate pearls.", "price" => "PHP 110.00"),
-                        array("image" => "images/menu08.png", "name" => "Vanilla Cloud", "desc" => "A delightful fusion of tea, coffee jelly, and smooth vanilla cold foam", "price" => "PHP 160.00"),
-                        array("image" => "images/menu09.png", "name" => "Zenith Grapefruit Tea", "desc" => "A vibrant iced tea blend of ruby grapefruit and honey.", "price" => "PHP 170.00")
+                        array("image" => "images/menu07.png", "name" => "Crimson Twilight Tea", "desc" => "A refreshing hibiscus tea with pomegranate pearls, inspired by the deep hues of twilight.", "price" => "PHP 110.00"),
+                        array("image" => "images/menu08.png", "name" => "Vanilla Cloud", "desc" => "A delightful fusion of bold black tea, coffee jelly, and smooth vanilla cold foam, this drink mirrors the soft clouds of the solstice sky.", "price" => "PHP 160.00"),
+                        array("image" => "images/menu09.png", "name" => "Zenith Grapefruit Tea", "desc" => "A vibrant iced tea blend of ruby grapefruit and honey, representing the peak of refreshment during the zenith.", "price" => "PHP 170.00")
                     );
 
                     foreach ($icedDrinksItems as $item): ?>
@@ -227,13 +227,13 @@ $current_page = basename($_SERVER['REQUEST_URI']);
             </div>
 			
 			<div class="menu-category">
-                <h2>Bottled Drinks <img src="images/icon05.png" alt="Iced Drinks Icon" class="category-icon"></h2>
+                <h2>Bottled Drinks </h2>
                 <div class="menu-container">
                     <?php 
                     $icedDrinksItems = array(
-                        array("image" => "images/menu13.png", "name" => "Spring Water", "desc" => "This bottled water captures the essence of a hidden spring", "price" => "PHP 110.00"),
-                        array("image" => "images/menu14.png", "name" => "Horizon Wildberry Kombucha", "desc" => "A crisp and invigorating kombucha with wildberry essence.", "price" => "PHP 160.00"),
-                        array("image" => "images/menu15.png", "name" => "Stellar Soy Cocoa", "desc" => "A soy chocolate drink that offers an indulgent experience.", "price" => "PHP 170.00")
+                        array("image" => "images/menu13.png", "name" => "Spring Water", "desc" => "Pure and refreshing, this bottled water captures the essence of a hidden spring.", "price" => "PHP 110.00"),
+                        array("image" => "images/menu14.png", "name" => "Horizon Wildberry Kombucha", "desc" => "A crisp and invigorating kombucha with wildberry essence, inspired by the endless possibilities of the horizon.", "price" => "PHP 160.00"),
+                        array("image" => "images/menu15.png", "name" => "Stellar Soy Cocoa", "desc" => "A velvety soy chocolate drink that offers a rich and indulgent experience, reminiscent of the sparkling beauty of the stars.", "price" => "PHP 170.00")
                     );
 
                     foreach ($icedDrinksItems as $item): ?>
@@ -260,6 +260,11 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                     <?php endforeach; ?>
                 </div>
             </div>
+			
+			
+            </div>
+
+			
 			
 
         </div>
