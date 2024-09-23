@@ -38,8 +38,8 @@ body {
     height: 75px;
     margin: 0 auto;
     padding: 0 20px;
-    
-    position: fixed;
+    margin-bottom: 20px; /* Add space below the navbar */
+    position: relative;
     top: 0;
     left: 0;
     z-index: 1000;
@@ -133,6 +133,10 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     flex: 1; /* Allow content to expand */
+	align-items: center;
+    justify-content: center; /* Center the content horizontally */
+	position: relative;
+	
 }
 
 /* Coffee Image Styling */
@@ -281,6 +285,7 @@ body {
     position: relative; /* Position relative to its normal position */
     width: 100%; /* Full width */
     bottom: 0; /* Stick to the bottom of the content */
+	
 }
 
 .footer .social-links a {
@@ -891,9 +896,9 @@ h2 {
     justify-content: center;
     align-items: center;
     min-height: 80vh; /* Minimum height to fill the screen */
-    padding: 40px 20px;
+    padding: 80px 20px;
     background: rgba(255, 234, 204, 0.8); /* Light background color */
-	margin-top: 80px; /* Ensure content does not hit the navbar */
+
 }
 
 /* Receipt Styling */
