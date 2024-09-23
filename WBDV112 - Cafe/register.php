@@ -1,7 +1,7 @@
 <?php
 // Initialize session and cart, etc.
 session_start();
-// Your existing code...
+
 
 // Get the current page filename
 $current_page = basename($_SERVER['REQUEST_URI']);
@@ -33,20 +33,50 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 </ul>
             </div>
         </div>
+ <!-- Background Image -->
+    <img src="images/coffee02.jpg" alt="Coffee Background" class="background-image"> <!-- Add this line -->
 
-        <div class="content">
-            <h2>Register</h2>
-            <div class="form">
-                <form action="register_process.php" method="post">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit" class="btnn">Register</button>
-                </form>
-                <p class="link">Already have an account?<br>
-                <a href="index.php">Login here</a></p>
+         <!-- Registration Section -->
+        <div class="register-container">
+            <!-- Welcome Message and Instructions -->
+            <div class="intro">
+                <h1>Welcome to Café Solstice !</h1>
+                <p>We’re excited to have you join us. Please fill out the form below to create your account. Make sure to use a valid email address, as you’ll need it to activate your account.</p>
             </div>
-        </div>
+
+            <!-- Flex Container for Content -->
+            <div class="register-content">
+                <!-- Additional Information Section -->
+                <div class="register-info">
+                    <h2>Why Register?</h2>
+                    <p>Registering with us gives you access to exclusive content, personalized recommendations, and the ability to connect with our vibrant community. Don't miss out on the opportunity to stay updated with the latest news and events.</p>
+                    <h2>Membership Benefits</h2>
+                    <p>As a member, you’ll enjoy special discounts, early access to events, and the opportunity to participate in our forums and discussions. We value our community and strive to provide the best experience for our members.</p>
+                    <h2>Need Help?</h2>
+                    <p>If you have any questions or encounter any issues while registering, feel free to reach out to our support team at <a href="mailto:contact@cafesolstice.com">contact@cafesolstice.com</a>. We’re here to help!</p>
+                </div>
+
+                <!-- Registration Form Section -->
+                <div class="register-form">
+                    <form action="register_process.php" method="POST">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Choose a Username" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Create a Password" required>
+
+                        <label for="confirm_password">Confirm Password:</label>
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+
+                        <button type="submit" class="btnn">Register</button>
+                    </form>
+                </div>
+            </div>
+			</div>
+			
     </div>
 
 <!-- Include the footer -->

@@ -1,7 +1,7 @@
 <?php
 // Initialize session and cart, etc.
 session_start();
-// Your existing code...
+
 
 // Get the current page filename
 $current_page = basename($_SERVER['REQUEST_URI']);
@@ -31,6 +31,8 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 </ul>
             </div>
         </div>
+ <!-- Background Image -->
+    <img src="images/coffee02.jpg" alt="Coffee Background" class="background-image"> <!-- Add this line -->
 
         <div class="abouttext">
             <section>
@@ -42,18 +44,18 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 <h2>Meet Our Team</h2>
                 <div class="team-container">
                     <div class="team-member">
-                        <img src="images/pic01.jpg" alt="Alice Guo">
-                        <h3>Alice Guo</h3>
+                        <img src="images/test03.jpg" alt="Alice Guo">
+                        <h3>Song Yiren</h3>
                         <p>Founder & Head Barista</p>
                     </div>
                     <div class="team-member">
-                        <img src="images/pic02.jpg" alt="Winston Churchill">
-                        <h3>Winston Churchill</h3>
+                        <img src="images/test01.jpg" alt="Winston Churchill">
+                        <h3>Walter White</h3>
                         <p>Pastry Chef</p>
                     </div>
                     <div class="team-member">
-                        <img src="images/pic03.jpg" alt="René Descartes">
-                        <h3>René Descartes</h3>
+                        <img src="images/test02.png" alt="René Descartes">
+                        <h3>Jesse Pinkman</h3>
                         <p>Customer Service</p>
                     </div>
                 </div>

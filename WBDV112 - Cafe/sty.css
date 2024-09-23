@@ -260,16 +260,16 @@ body {
     color: #964B00;
 }
 
-/* Coffee Image Styling */
+/* Background Image Styling */
 .background-image {
-    position: absolute;
+    position: fixed; /* Fixes the image in place */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the container */
-    z-index: 0; /* Ensure image is behind content */
-    opacity: 0.3; /* Optional: adjust opacity as needed */
+    object-fit: cover; /* Ensures the image covers the container */
+    z-index: -1; /* Ensure image is behind all content */
+    opacity: 0.2; /* Adjust opacity for a subtle effect */
 }
 
 /* Footer Styling */
@@ -550,7 +550,7 @@ h2 {
         }
         .team-member img {
             max-width: 100%;
-            height: auto;
+            height: 350px;
             border: 3px solid rgba(0, 0, 0, 0.3); /* Slightly visible border */
             border-radius: 10px; /* Curved corners */
             margin-bottom: 10px;
@@ -667,4 +667,392 @@ h2 {
     line-height: 1.6;
     color: #664228; /* Text color */
     margin-bottom: 20px; /* Space below paragraph */
+}
+
+
+
+
+/* Styling for Register Container */
+.register-container {
+    width: 80%;
+    margin: 60px auto;
+    padding-top: 60px;
+}
+
+/* Intro Section Styling */
+.intro {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #964B00;
+}
+
+.intro h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #664228;
+}
+
+/* Flexbox Container for Register Content */
+.register-content {
+    display: flex; /* Flexbox layout for text and form */
+    justify-content: space-between; /* Space between text and form */
+    align-items: flex-start; /* Align items at the top */
+    flex-wrap: nowrap; /* Prevent wrapping to keep side-by-side */
+    gap: 20px; /* Space between text and form */
+}
+
+/* Register Info Styling */
+.register-info {
+    width: 55%; /* Set the width for the text section */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 16px;
+    line-height: 1.6; /* Spacing between lines */
+    color: #664228; /* Text color */
+    padding-right: 20px; /* Space on the right to avoid overlapping */
+}
+
+/* Register Form Styling */
+.register-form {
+    width: 40%; /* Set the width for the form */
+    background: linear-gradient(to top, rgba(255, 223, 186, 0.9), rgba(248, 233, 220, 0.9));
+    border-radius: 10px; /* Slightly rounded corners */
+    padding: 25px; /* Padding inside the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Form Elements Styling */
+.register-form input {
+    width: calc(100% - 20px); /* Full width minus padding */
+    margin: 10px 0; /* Space between elements */
+    padding: 10px; /* Padding inside the input/textarea */
+    border: 1px solid #964B00; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* Styling for Form Labels */
+.register-form label {
+    display: block;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #964B00;
+}
+
+
+/* Styling for Main Content Section */
+.main-content {
+    padding: 80px 20px 40px; /* Padding for content area */
+    max-width: 1200px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content */
+    text-align: center; /* Center text for this section */
+}
+
+/* Hero Section Styling */
+.hero-section {
+    background: rgba(255, 234, 204, 0.9); /* Light background for hero */
+    padding: 40px 20px; /* Padding inside the section */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    margin-bottom: 40px; /* Space below hero section */
+}
+
+.hero-section h1 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 48px; /* Large heading */
+    color: #964B00; /* Darker text color */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+.hero-section p {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #664228; /* Text color */
+}
+
+/* Styling for Forgot Password Link */
+.forgot-password {
+    font-size: 14px;
+    margin-top: 20px; /* Space above the forgot password text */
+}
+
+.forgot-password a {
+    color: #ff7200; /* Highlight the link */
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+/* Register Link Styling in the Form */
+.register-link {
+    margin-top: 20px; /* Space above the link */
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #ff7200; /* Highlight the link */
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+
+/* Forgot Password Container */
+.forgot-container {
+    display: flex;
+    justify-content: center; /* Center the content */
+    align-items: center; /* Center vertically */
+    min-height: 80vh; /* Minimum height to fill the screen */
+    background: rgba(255, 234, 204, 0.8); /* Light background color */
+    padding: 40px 20px; /* Padding inside the container */
+}
+
+/* Forgot Content Styling */
+.forgot-content {
+    width: 100%;
+    max-width: 600px; /* Limit the maximum width */
+    background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    padding: 40px; /* Space inside the content box */
+    text-align: center; /* Center text */
+}
+
+/* Forgot Form Styling */
+.forgot-form h2 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 28px; /* Size of heading */
+    color: #964B00; /* Dark brown color */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+.forgot-form p {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #664228; /* Text color */
+    margin-bottom: 30px; /* Space below paragraph */
+}
+
+.forgot-form label {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 14px;
+    color: #964B00;
+    display: block; /* Block display for proper spacing */
+    margin-bottom: 5px; /* Space below label */
+}
+
+.forgot-form input {
+    width: calc(100% - 20px); /* Full width minus padding */
+    margin: 10px 0; /* Space between elements */
+    padding: 10px; /* Padding inside input */
+    border: 1px solid #964B00; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    font-family: Arial, sans-serif; /* Font style */
+}
+
+
+
+
+/* Back to Login Link */
+.back-to-login {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.back-to-login a {
+    color: #ff7200;
+    text-decoration: none;
+}
+
+.back-to-login a:hover {
+    text-decoration: underline;
+}
+
+
+/* Checkout Container */
+.checkout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Minimum height to fill the screen */
+    padding: 40px 20px;
+    background: rgba(255, 234, 204, 0.8); /* Light background color */
+}
+
+/* Receipt Styling */
+.receipt {
+    background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    padding: 40px; /* Space inside the content box */
+    width: 100%;
+    max-width: 700px; /* Limit the maximum width */
+}
+
+/* Receipt Table Styling */
+.receipt-table {
+    width: 100%;
+    margin-bottom: 20px; /* Space below the table */
+}
+
+/* Receipt Row Styling */
+.receipt-row, .receipt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0; /* Space inside each row */
+    border-bottom: 1px solid #ddd; /* Light border */
+}
+
+/* Receipt Column Header Styling */
+.receipt-column-header {
+    flex: 1;
+    text-align: center;
+    font-weight: bold; /* Bold for headers */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #964B00; /* Dark brown color */
+}
+
+/* Receipt Columns Styling */
+.receipt-item,
+.receipt-quantity,
+.receipt-price,
+.receipt-total {
+    flex: 1;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #664228; /* Text color */
+}
+
+/* Total Row Styling */
+.total-row {
+    font-weight: bold;
+}
+
+/* Thank You Message Styling */
+.thank-you {
+    margin-top: 30px;
+    font-size: 16px;
+    color: #ff7200; /* Highlight thank you text */
+    text-align: center; /* Center-align */
+}
+
+
+
+
+/* Profile Container */
+.profile-container {
+    width: 80%;
+    margin: 60px auto; /* Center the container with margin */
+    padding: 40px;
+    background: rgba(255, 234, 204, 0.8); /* Light background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the header content */
+    margin-bottom: 30px; /* Space below the profile header */
+}
+
+/* Profile Picture Styling */
+.profile-picture {
+    margin-right: 30px; /* Space between picture and info */
+}
+
+.profile-picture img {
+    width: 150px; /* Set width for the profile picture */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 150px; /* Limit the height to prevent oversized images */
+    border-radius: 50%; /* Make the image circular */
+    border: 3px solid #964B00; /* Border around the picture */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+}
+
+/* Profile Information Styling */
+.profile-info h2 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 32px;
+    color: #964B00;
+    margin-bottom: 10px;
+}
+
+.profile-info .username {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #ff7200;
+    margin-bottom: 10px;
+}
+
+.profile-info .bio {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #664228;
+    margin-bottom: 15px;
+    line-height: 1.6; /* Line spacing for bio */
+}
+
+.profile-info .email {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Edit Profile Button */
+.edit-btn {
+    background-color: #964B00;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #ff7200; /* Change background on hover */
+    color: #FFFFFF;
+}
+
+
+
+/* Profile Details Section */
+.profile-details {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.profile-details h3 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 24px;
+    color: #964B00;
+    margin-bottom: 10px;
+}
+
+.profile-details p {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.6;
 }

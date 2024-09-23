@@ -1,7 +1,7 @@
 <?php
 // Initialize session and cart, etc.
 session_start();
-// Your existing code...
+
 
 // Get the current page filename
 $current_page = basename($_SERVER['REQUEST_URI']);
@@ -37,6 +37,8 @@ $current_page = basename($_SERVER['REQUEST_URI']);
         <p>Our store offers a unique blend of comfort and style, designed to give you a relaxing experience. Take a look at our ambiance through the gallery below.</p>
     </div>
 
+ <!-- Background Image -->
+    <img src="images/coffee02.jpg" alt="Coffee Background" class="background-image"> <!-- Add this line -->
 
        
             

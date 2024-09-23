@@ -1,7 +1,7 @@
 <?php
 // Initialize session and cart, etc.
 session_start();
-// Your existing code...
+
 
 // Get the current page filename
 $current_page = basename($_SERVER['REQUEST_URI']);
@@ -49,8 +49,10 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                     <p><strong>Phone:</strong> +123 456 7890</p>
                     <p><strong>Address:</strong> Tamaraw Hills, 120 MacArthur Highway, Valenzuela, Metro Manila</p>
                     
-					
-					
+					<br></br>
+ <!-- Background Image -->
+    <img src="images/coffee02.jpg" alt="Coffee Background" class="background-image"> <!-- Add this line -->
+
                     <!-- Additional Information -->
                     <h3>Why Reach Out to Us?</h3>
                     <p>At Café Solstice, we believe in creating a community where everyone feels welcome. Whether you have suggestions for improving our services, need information about our offerings, or simply want to say hello, we're here to listen. Your feedback helps us grow and provide the best experience possible.</p>

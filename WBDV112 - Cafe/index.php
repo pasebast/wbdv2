@@ -1,10 +1,36 @@
 <?php
-// Initialize session and cart, etc.
+// Start the session to handle user login
 session_start();
 
+// Check if the user is logging in
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Simulate user authentication (replace with actual database query)
+    $users = array(
+        array('username' => 'user1', 'password' => 'password1', 'name' => 'John Doe'),
+        array('username' => 'user2', 'password' => 'password2', 'name' => 'Jane Smith')
+    );
+    
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    foreach ($users as $user) {
+        if ($user['username'] === $username && $user['password'] === $password) {
+            $_SESSION['logged_in'] = true;
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['name'] = $user['name'];
+            // Redirect to index.php after successful login
+            header("Location: index.php");
+            exit;
+        }
+    }
+    $error = "Invalid username or password";
+}
 
-// Get the current page filename
-$current_page = basename($_SERVER['REQUEST_URI']);
+// Check if the user is logging out
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: index.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,37 +53,60 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                     <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
                     <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
                     <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
+					
+					<?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
+                    <li><a href="#" class="active">Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?></a></li>
+                    <li><a href="?logout=true">Logout</a></li>
+					<?php else: ?>
+					<li><a href="login.php"> </a></li>
+					<?php endif; ?>
                 </ul>
         </div>
     </div>
-
-    <div class="content">
 	
-        <div class="text-block">
-            <br><h1>Welcome to<br><span>Café Solstice</span></h1></br>
-            <p class="par">Your favorite place for<br> the best <br> coffee and delightful treats!</p>
+	
+	 <!-- Background Image -->
+    <img src="images/coffee02.jpg" alt="Coffee Background" class="background-image"> <!-- Add this line -->
+
+
+     <!-- Main Content Section -->
+    <div class="main-content">
+        <div class="hero-section">
+            <h1>Welcome to Café Solstice</h1>
+            <p>Your cozy place for the finest coffee and delightful community.</p>
         </div>
-		
-        <div class="form">
-            <form action="login.php" method="POST">
-                <input type="text" name="login" placeholder="Username or Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit" class="btnn">Login</button>
-            </form>
-            <p class="link">Don't have an account?<br><a href="register.php">Sign up here</a></p>
-            <p class="liw">Reach us through our socials:</p>
-            <div class="icons">
-                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+
+        <div class="content">
+            <!-- Text Block -->
+            <div class="text-block">
+                <h1>Discover the Café Experience</h1>
+                <p class="par">At Café Solstice, we pride ourselves on serving quality coffee and creating a warm, inviting atmosphere for all our guests. Whether you're looking for a quiet place to work, a cozy spot to relax with friends, or just a great cup of coffee, you'll find it here.</p>
             </div>
-			
+
+            <!-- Registration Form -->
+            <div class="form">
+                <!-- Display login form if not logged in -->
+                <?php if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']): ?>
+                    <form action="index.php" method="POST">
+                        <h3>Login to Your Account</h3>
+                        <input type="text" name="username" placeholder="Username" required>
+                        <input type="password" name="password" placeholder="Password" required>
+                        <button type="submit" class="btnn">Login</button>
+                        <?php if (isset($error)): ?>
+                            <p style="color: red;"><?php echo $error; ?></p>
+                        <?php endif; ?>
+                        <p class="forgot-password">Forgot your password? <a href="forgot.php">Click here</a> to reset it.</p>
+						<p class="register-link">New here? <a href="register.php">Register now</a></p> <!-- Register Link in Form -->
+                    </form>
+                <?php endif; ?>
+            </div>
         </div>
-		</br>
-		
-        <img src="images/coffee01.png" alt="Coffee" class="coffee-image">
+
+        
     </div>
+		
+        
+ 
 
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     
