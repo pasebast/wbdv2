@@ -162,13 +162,13 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 <h2>Iced Coffee </h2>
                 <div class="menu-container">
                     <?php 
-                    $coffeeItems = array(
+                    $icedcoffeeItems = array(
                         array("image" => "images/menu10.png", "name" => "Vanilla Breeze", "desc" => "A smooth cold brew infused with the light sweetness of vanilla cream, creating a refreshing experience as gentle as a solstice breeze.", "price" => "PHP 100.00"),
                         array("image" => "images/menu11.png", "name" => "Midday Cappuccino", "desc" => "A crisp and invigorating iced cappuccino, perfect for a refreshing boost during the peak of your day.", "price" => "PHP 130.00"),
                         array("image" => "images/menu12.png", "name" => "Golden Hour Caramel", "desc" => "A rich blend of smooth espresso, velvety milk, and sweet caramel drizzle, inspired by the golden light of the solstice’s sunset.", "price" => "PHP 140.00")
                     );
 
-                    foreach ($coffeeItems as $item): ?>
+                    foreach ($icedcoffeeItems as $item): ?>
                     <div class="menu-item">
                         <img src="<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
                         <div>
@@ -239,6 +239,42 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                     );
 
                     foreach ($icedDrinksItems as $item): ?>
+                    <div class="menu-item">
+                        <img src="<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                        <div>
+                            <h3><?php echo htmlspecialchars($item['name']); ?></h3>
+                            <p><?php echo htmlspecialchars($item['desc']); ?></p>
+                            <span><?php echo htmlspecialchars($item['price']); ?></span>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="item" value="<?php echo htmlspecialchars(strtolower(str_replace(' ', '_', $item['name']))); ?>">
+                                <input type="hidden" name="add_to_cart" value="1">
+                                <button class="order-button" type="submit" onclick="startCartAnimation(event)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                                        <circle cx="8" cy="21" r="1" fill="currentColor"/>
+                                        <circle cx="18" cy="21" r="1" fill="currentColor"/>
+                                        <path d="M1 1h4l2 5h13l3 9H6" fill="none"/>
+                                    </svg>
+                                    Order Now
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+			
+			
+			<div class="menu-category">
+                <h2>Pastry </h2>
+                <div class="menu-container">
+                    <?php 
+                    $PastryItems = array(
+                        array("image" => "images/menu16.png", "name" => "French Toast", "desc" => "Bread dipped in a rich egg mixture, pan-fried to golden perfection, and topped with a sprinkle of cinnamon and maple syrup.", "price" => "PHP 110.00"),
+                        array("image" => "images/menu17.png", "name" => "Blueberry Cheesecake", "desc" => "Creamy cheesecake layered with fresh blueberries and a buttery graham cracker crust, topped with a luscious blueberry compote.", "price" => "PHP 160.00"),
+                        array("image" => "images/menu18.png", "name" => "Strawberry Tart Supreme", "desc" => "A delicate, buttery tart shell filled with smooth vanilla custard, topped with vibrant, juicy strawberries and a glossy glaze.", "price" => "PHP 170.00")
+                    );
+
+                    foreach ($PastryItems as $item): ?>
                     <div class="menu-item">
                         <img src="<?php echo $item['image']; ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
                         <div>
