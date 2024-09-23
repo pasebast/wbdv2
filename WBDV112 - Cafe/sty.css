@@ -820,6 +820,7 @@ h2 {
     min-height: 80vh; /* Minimum height to fill the screen */
     background: rgba(255, 234, 204, 0.8); /* Light background color */
     padding: 40px 20px; /* Padding inside the container */
+	margin-top: 80px; /* Ensure content does not hit the navbar */
 }
 
 /* Forgot Content Styling */
@@ -892,6 +893,7 @@ h2 {
     min-height: 80vh; /* Minimum height to fill the screen */
     padding: 40px 20px;
     background: rgba(255, 234, 204, 0.8); /* Light background color */
+	margin-top: 80px; /* Ensure content does not hit the navbar */
 }
 
 /* Receipt Styling */
