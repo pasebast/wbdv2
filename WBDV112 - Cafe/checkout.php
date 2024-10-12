@@ -1,18 +1,19 @@
 <?php
 session_start();
 
-// Check if user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php"); // Redirect to login page
-    exit();
-}
+// Handle checkout confirmation
+if (isset($_POST['confirm_checkout'])) {
+    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+        // Process the order (e.g., store it in the database)
+        // For this example, we'll just clear the cart
 
-// Process checkout
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    // Logic to handle checkout (e.g., save to database, clear cart, etc.)
-    echo "<p>Thank you for your order!</p>";
-    unset($_SESSION['cart']); // Clear the cart after checkout
-} else {
-    echo "<p>Your cart is empty!</p>";
+        // Example: Save order to database logic can go here
+
+        // Clear the cart after checkout
+        unset($_SESSION['cart']);
+        echo "<p>Thank you for your order! Your order has been confirmed.</p>";
+    } else {
+        echo "<p>Your cart is empty. Unable to proceed with checkout.</p>";
+    }
 }
 ?>

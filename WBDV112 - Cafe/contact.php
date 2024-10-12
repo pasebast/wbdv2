@@ -13,6 +13,33 @@ $current_page = basename($_SERVER['REQUEST_URI']);
     <meta charset="UTF-8">
     <title>Café Solstice - Contact Us</title>
     <link rel="stylesheet" href="sty.css"> <!-- Link to your external stylesheet -->
+	
+	
+	<script>
+        function showSuccessMessage() {
+            // Display a success message when the form is submitted
+            const messageBox = document.getElementById("success-message");
+            messageBox.style.display = "block"; // Show the success message
+            setTimeout(() => {
+                messageBox.style.display = "none"; // Hide the message after 4 seconds
+            }, 4000);
+        }
+    </script>
+    <style>
+        /* Styling for the success message */
+        #success-message {
+            display: none;
+            padding: 15px;
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+	
+	
 </head>
 <body>
     <div class="main">
@@ -27,6 +54,12 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                     <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
                     <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
                     <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
+					
+					<?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
+                        <li><a href="profile.php">Profile</a></li>
+                        <li><a href="logout.php">Logout</a></li>
+                    <?php endif; ?>
+					
                 </ul>
             </div>
         </div>  
@@ -64,7 +97,7 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 
                 <!-- Contact Form Section -->
                 <div class="contact-form">
-                    <form action="submit_form.php" method="POST">
+                    <form onsubmit="showSuccessMessage(); return false;">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" placeholder="Your Name" required>
 
@@ -79,6 +112,11 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 
                         <button type="submit" class="btnn">Send Message</button>
                     </form>
+					
+					<!-- Success Message Box -->
+                    <div id="success-message">Your message has been successfully received! We'll get back to you within 24-48 hours.
+					</div>
+					
                 </div>
             </div>
         </div>

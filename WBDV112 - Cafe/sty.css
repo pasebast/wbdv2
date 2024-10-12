@@ -303,31 +303,29 @@ body {
     margin: 10px 0; /* Space around text */
 }
 
-/* Updated Menu Container */
 .menu-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Space between items */
-    justify-content: space-between; /* Ensures even distribution */
+    gap: 20px;
+    justify-content: center; /* Center the items */
     padding: 20px;
-    background-color: rgba(255, 234, 204, 0.2); /* Light background for the container */
+}
 
+
+.menu-category {
+    margin-bottom: 40px; /* Add space between categories */
+    text-align: center; /* Center category titles */
 }
 
 /* Updated Menu Item */
 .menu-item {
-    display: flex;
-    flex-direction: column; /* Vertical stacking */
-    align-items: center; /* Center items */
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px; /* Square corners */
-    padding: 15px;
-    width: 250px; /* Fixed width for uniformity */
-    height: 400px; /* Fixed height to ensure uniformity */
+    width: 250px; /* Ensure all items have the same width */
+    height: auto;
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Center content inside each menu item */
-    box-sizing: border-box; /* Include padding in the width and height */
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
 }
 
 /* Image Styling for Uniformity */
@@ -469,6 +467,12 @@ body {
     cursor: pointer;
     font-size: 24px;
 }
+
+.cart-icon img {
+    width: 30px; /* Adjust the width */
+    height: auto; /* Keep the aspect ratio */
+}
+
 
 /* Category Icon Styling */
 .category-icon {
@@ -895,10 +899,9 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh; /* Minimum height to fill the screen */
+    min-height: 80vh;
     padding: 80px 20px;
     background: rgba(255, 234, 204, 0.8); /* Light background color */
-
 }
 
 /* Receipt Styling */
@@ -922,7 +925,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0; /* Space inside each row */
+    padding: 10px 0;
     border-bottom: 1px solid #ddd; /* Light border */
 }
 
@@ -932,18 +935,15 @@ h2 {
     text-align: center;
     font-weight: bold; /* Bold for headers */
     font-family: 'Comic Sans MS', cursive, sans-serif;
-    color: #964B00; /* Dark brown color */
+    color: #964B00;
 }
 
 /* Receipt Columns Styling */
-.receipt-item,
-.receipt-quantity,
-.receipt-price,
-.receipt-total {
+.receipt-item, .receipt-quantity, .receipt-price, .receipt-total {
     flex: 1;
     text-align: center;
     font-family: 'Comic Sans MS', cursive, sans-serif;
-    color: #664228; /* Text color */
+    color: #664228;
 }
 
 /* Total Row Styling */
@@ -955,8 +955,8 @@ h2 {
 .thank-you {
     margin-top: 30px;
     font-size: 16px;
-    color: #ff7200; /* Highlight thank you text */
-    text-align: center; /* Center-align */
+    color: #ff7200;
+    text-align: center;
 }
 
 
@@ -964,102 +964,322 @@ h2 {
 
 /* Profile Container */
 .profile-container {
-    width: 80%;
-    margin: 60px auto; /* Center the container with margin */
-    padding: 40px;
-    background: rgba(255, 234, 204, 0.8); /* Light background */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    max-width: 800px;  /* Limit the width */
+    margin: 50px auto;  /* Center the container */
+    padding: 30px;
+    background-color: #fff0e6;  /* Soft background color */
+    border-radius: 15px;  /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 /* Profile Header */
 .profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the header content */
-    margin-bottom: 30px; /* Space below the profile header */
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* Profile Picture Styling */
-.profile-picture {
-    margin-right: 30px; /* Space between picture and info */
-}
-
-.profile-picture img {
-    width: 150px; /* Set width for the profile picture */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 150px; /* Limit the height to prevent oversized images */
-    border-radius: 50%; /* Make the image circular */
-    border: 3px solid #964B00; /* Border around the picture */
-    object-fit: cover; /* Ensure the image covers the container without distortion */
-}
-
-/* Profile Information Styling */
-.profile-info h2 {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    font-size: 32px;
+.profile-header h2 {
+    font-size: 28px;
     color: #964B00;
+    text-transform: uppercase;
     margin-bottom: 10px;
 }
 
-.profile-info .username {
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    color: #ff7200;
-    margin-bottom: 10px;
-}
-
-.profile-info .bio {
-    font-family: Arial, sans-serif;
+.profile-header p {
     font-size: 16px;
-    color: #664228;
-    margin-bottom: 15px;
-    line-height: 1.6; /* Line spacing for bio */
+    color: #964B00;
 }
 
-.profile-info .email {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 20px;
+/* Profile Picture */
+.profile-picture img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: 3px solid #964B00;
+    object-fit: cover;
 }
 
-/* Edit Profile Button */
-.edit-btn {
-    background-color: #964B00;
-    color: #FFFFFF;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.edit-btn:hover {
-    background-color: #ff7200; /* Change background on hover */
-    color: #FFFFFF;
-}
-
-
-
-/* Profile Details Section */
+/* Profile Details */
 .profile-details {
     margin-top: 20px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.profile-details h3 {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    font-size: 24px;
+.profile-details label {
+    font-size: 16px;
     color: #964B00;
-    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .profile-details p {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
     margin-bottom: 15px;
-    line-height: 1.6;
+    padding: 10px;
+    border: 1px solid #964B00;
+    border-radius: 10px;
+    background-color: #fffae6;
+}
+
+/* Edit Profile Button */
+.edit-profile-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #964B00;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-profile-btn:hover {
+    background-color: #ff7200;
+}
+
+/* Center everything */
+.profile-picture, .profile-details {
+    text-align: center;
+}
+
+
+
+
+/* Edit Profile Form Styling */
+.edit-profile-container {
+    max-width: 600px;  /* Limit the form width */
+    margin: 100px auto;  /* Center it on the page */
+    padding: 30px;
+    background-color: #fff0e6;  /* Soft, warm background color */
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+}
+
+.edit-profile-container h2 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 28px;
+    color: #964B00;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.edit-profile-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;  /* Space between input fields */
+}
+
+.edit-profile-container label {
+    font-family: 'Comic Sans MS', cursive;
+    color: #964B00;
+    font-size: 14px;
+}
+
+.edit-profile-container input {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 2px solid #964B00;
+    font-family: 'Comic Sans MS', cursive;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.edit-profile-container input:focus {
+    border-color: #ff7200;  /* Highlighted border when focused */
+}
+
+.edit-profile-container .edit-btn {
+    background-color: #964B00;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.edit-profile-container .edit-btn:hover {
+    background-color: #ff7200;  /* Lighter color on hover */
+}
+
+.edit-profile-container a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Comic Sans MS', cursive;
+    color: #964B00;
+    text-decoration: none;
+}
+
+.edit-profile-container a:hover {
+    color: #ff7200;
+}
+
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* Close button for modal */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    cursor: pointer;
+}
+
+
+
+
+/* Profile Details Grid Layout */
+.profile-details-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* Left and Right Columns */
+.profile-left, .profile-right {
+    width: 45%;  /* Each column takes up 45% of the width */
+}
+
+.profile-left label, .profile-right label {
+    font-weight: bold;
+    color: #964B00;
+}
+
+.profile-left p, .profile-right p {
+    background-color: #fffae6;
+    border: 1px solid #964B00;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #333;
+    word-wrap: break-word; /* Ensures long words break and don't overflow */
+    overflow-wrap: break-word; /* Support for breaking long words */
+}
+
+
+
+/* Style for the subtle "Item added to cart" message */
+.item-added-message {
+    color: #964B00;
+    font-size: 12px;
+    margin-top: 5px;
+    transition: opacity 0.5s ease-out;
+}
+
+
+
+button:disabled {
+    background-color: #cccccc; /* Grey background for disabled buttons */
+    cursor: not-allowed; /* Show "not-allowed" cursor */
+    opacity: 0.6; /* Make the button look faded */
+}
+
+
+/* Custom styling for the checkout receipt */
+.receipt-custom {
+    background-color: #fff4e6 !important;
+    border: 1px solid #964B00;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 700px;
+    margin: 20px auto;
+    font-family: 'Comic Sans MS', cursive;
+    color: #664228;
+}
+
+.receipt-custom h2 {
+    font-size: 28px;
+    color: #964B00;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.receipt-custom table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.receipt-custom th, .receipt-custom td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.receipt-custom .total-row {
+    font-weight: bold;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #964B00;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: 'Comic Sans MS', cursive;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #ff7200;
 }

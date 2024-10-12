@@ -58,12 +58,12 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 
                 <!-- Registration Form Section -->
                 <div class="register-form">
-                    <form action="register_process.php" method="POST">
+                    <form action="register_process.php" method="POST" onsubmit="return validateForm()">
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" placeholder="Choose a Username" required>
+                        <input type="text" id="username" name="username" placeholder="Choose a Username" required required pattern="^[a-zA-Z0-9_.]{4,36}$" title="Username should be 4-36 characters long and can only contain letters, numbers, periods, and underscores.">
 
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+                        <input type="email" id="email" name="email" placeholder="Your Email Address" required required pattern="^[a-zA-Z0-9_.@]{4,36}$" title="Email should be 4-36 characters long and can only contain letters, numbers, @, periods, and underscores.">
 
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" placeholder="Create a Password" required>
@@ -71,8 +71,57 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                         <label for="confirm_password">Confirm Password:</label>
                         <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
 
+						<label for="firstname">First Name:</label>
+						<input type="text" id="firstname" name="firstname" placeholder="Your First Name" required>
+
+						<label for="lastname">Last Name:</label>
+						<input type="text" id="lastname" name="lastname" placeholder="Your Last Name" required>
+
+						<label for="address">Address:</label>
+						<input type="text" id="address" name="address" placeholder="Your Address" required>
+
+						<label for="payment">Payment Method:</label>
+						<input type="text" id="payment" name="payment" placeholder="Credit/Debit Card Number" required pattern="\d{16}" title="Enter a valid 16-digit card number.">
+
                         <button type="submit" class="btnn">Register</button>
+						
+						<script>
+function validateForm() {
+    var payment = document.getElementById("payment").value;
+    var paymentPattern = /^\d{16}$/;
+    if (!paymentPattern.test(payment)) {
+        alert("Invalid card number. Please enter a valid 16-digit card number.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+
+
                     </form>
+					<script>
+function validateForm() {
+    var username = document.getElementById("username").value;
+    var regex = /^[a-zA-Z0-9_.]{4,36}$/; // Username should be 4-36 characters long and can contain letters, numbers, periods, and underscores
+    if (!regex.test(username)) {
+        alert("Invalid username. It should be 4-36 characters long and can only contain letters, numbers, periods, and underscores.");
+        return false;
+    }
+    return true;
+}
+</script>
+<script>
+function validateForm() {
+    var email = document.getElementById("email").value;
+    var regex = /^[a-zA-Z0-9_.@]{4,36}$/; // Email should be 4-36 characters long and can contain letters, numbers, and underscores
+    if (!regex.test(email)) {
+        alert("Invalid email. It should be 4-36 characters long and can only contain letters, numbers, @, periods, and underscores.");
+        return false;
+    }
+    return true;
+}
+</script>
                 </div>
             </div>
 			</div>
