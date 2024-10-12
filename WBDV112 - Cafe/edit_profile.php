@@ -141,7 +141,7 @@ $conn->close();
         <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
 
         <label for="saved_payment">Saved Payment Method:</label>
-        <input type="text" name="saved_payment" value="<?php echo htmlspecialchars($user['saved_payment']); ?>" placeholder="Enter card number">
+        <input type="text" name="saved_payment" value="<?php echo htmlspecialchars($user['saved_payment']); ?>" placeholder="Enter card number" pattern="\d{16}" title="Enter a valid 16-digit card number or leave it blank.">
 
         <label for="profile_picture">Upload Profile Picture:</label>
         <input type="file" name="profile_picture" accept="image/*">

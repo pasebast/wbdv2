@@ -81,7 +81,7 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 						<input type="text" id="address" name="address" placeholder="Your Address" required>
 
 						<label for="payment">Payment Method:</label>
-						<input type="text" id="payment" name="payment" placeholder="Credit/Debit Card Number" required pattern="\d{16}" title="Enter a valid 16-digit card number.">
+						<input type="text" id="payment" name="payment" placeholder="Credit/Debit Card Number" pattern="\d{16}" title="Enter a valid 16-digit card number or leave it blank.">
 
                         <button type="submit" class="btnn">Register</button>
 						
