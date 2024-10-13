@@ -72,9 +72,6 @@ const images = [
     'images/menu10.png',
     'images/menu11.png',
     'images/menu12.png',
-    'images/menu13.png',
-    'images/menu14.png',
-    'images/menu15.png',
     'images/menu16.png',
     'images/menu17.png',
     'images/menu18.png'

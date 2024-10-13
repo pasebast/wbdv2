@@ -103,26 +103,35 @@ if (isset($_POST['add_to_cart'])) {
 <script>
 // Add item to cart via AJAX
 function addToCart(itemId) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "add_to_cart.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    // Check if the user is logged in
+    <?php if (!isset($_SESSION['user_id'])): ?>
+        // User is not logged in, show the login prompt modal
+        alert("Please log in to add items to your cart.");
+        return; // Prevent the default behavior
+    <?php else: ?>
+        // User is logged in, proceed with adding the item to the cart
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "add_to_cart.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    // Send the item ID to add to cart
-    xhr.send("item_id=" + itemId);
+        // Send the item ID to add to cart
+        xhr.send("item_id=" + itemId);
 
-    // Update the cart counter and cart contents dynamically
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var response = JSON.parse(xhr.responseText);
-            document.getElementById("cart-count").innerText = response.cartCount; // Update cart count
-            document.getElementById("cart-items").innerHTML = response.cartContent; // Update cart content
+        // Update the cart counter and cart contents dynamically
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById("cart-count").innerText = response.cartCount; // Update cart count
+                document.getElementById("cart-items").innerHTML = response.cartContent; // Update cart content
 
-            // Enable the buttons when items are added
-            document.getElementById("checkoutBtn").disabled = false;
-            document.getElementById("clearCartBtn").disabled = false;
-        }
-    };
+                // Enable the buttons when items are added
+                document.getElementById("checkoutBtn").disabled = false;
+                document.getElementById("clearCartBtn").disabled = false;
+            }
+        };
+    <?php endif; ?>
 }
+
 
 // Clear cart via AJAX (works without refreshing the page)
 function clearCart() {
@@ -212,7 +221,9 @@ function clearCart() {
         <?php if (!empty($_SESSION['cart'])): ?>
             <ul>
                 <?php foreach ($_SESSION['cart'] as $cartItem): ?>
-                    <li><?php echo htmlspecialchars($cartItem['name']); ?> (x<?php echo $cartItem['quantity']; ?>): PHP <?php echo number_format($cartItem['price'], 2); ?> each</li>
+                    <li><img src="<?php echo htmlspecialchars($cartItem['image']); ?>" alt="<?php echo htmlspecialchars($cartItem['name']); ?>" class="cart-item-image">
+            <?php echo htmlspecialchars($cartItem['name']); ?> (x<?php echo $cartItem['quantity']; ?>): PHP <?php echo number_format($cartItem['price'], 2); ?> each
+       </li>
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>

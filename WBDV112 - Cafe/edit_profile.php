@@ -154,6 +154,7 @@ $conn->close();
         <button type="submit" class="edit-btn">Save Changes</button>
     </form>
 </div>
-
+ <!-- Include the footer -->
+    <?php include('footer.php'); ?>
 </body>
 </html>

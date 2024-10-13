@@ -112,7 +112,11 @@ $conn->close();
 	</div>
     </div>
 
-    <a href="edit_profile.php" class="edit-profile-btn">Edit Profile</a>
+    <!-- Add Order History Button -->
+    <div class="profile-actions">
+        <a href="orderhistory.php" class="order-history-button">Order History</a>
+        <a href="edit_profile.php" class="edit-profile-button">Edit Profile</a>
+    </div>
 </div>
 
 <!-- Modal to show enlarged profile picture -->
@@ -141,6 +145,8 @@ span.onclick = function() {
     modal.style.display = "none";
 }
 </script>
+ <!-- Include the footer -->
+    <?php include('footer.php'); ?>
 
 </body>
 </html>

@@ -427,7 +427,8 @@ body {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     box-sizing: border-box;
     border-radius: 8px;
-    overflow: auto;
+    max-height: 600px; /* Set a max height for the cart popup */
+    overflow: hidden; /* Ensure the overall cart popup does not overflow */
 }
 
 .cart-popup h2 {
@@ -438,11 +439,23 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 250px; /* Set max height for the cart items section */
+    overflow-y: auto; /* Add vertical scroll if the item list exceeds max height */
 }
 
 .cart-popup li {
     border-bottom: 1px solid #eee;
     padding: 10px 0;
+    display: flex;
+    align-items: center; /* Align image and text on the same line */
+}
+
+.cart-item-image {
+    width: 40px; /* Small image size */
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
 }
 
 .cart-popup button {
@@ -453,6 +466,8 @@ body {
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+    width: 100%; /* Make buttons take full width */
+    margin-bottom: 10px;
 }
 
 .cart-popup button:hover {
@@ -472,6 +487,7 @@ body {
     width: 30px; /* Adjust the width */
     height: auto; /* Keep the aspect ratio */
 }
+
 
 
 /* Category Icon Styling */
@@ -788,8 +804,8 @@ h2 {
 
 .hero-image {
     position: absolute;
-    width: 100px; /* Size of each small image */
-    height: 100px;
+    width: 150px; /* Size of each small image */
+    height: 150px;
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0; /* Starts fully transparent */
@@ -863,7 +879,7 @@ h2 {
     justify-content: center; /* Center the content */
     align-items: center; /* Center vertically */
     min-height: 80vh; /* Minimum height to fill the screen */
-    background: rgba(255, 234, 204, 0.8); /* Light background color */
+    
     padding: 40px 20px; /* Padding inside the container */
 	margin-top: 80px; /* Ensure content does not hit the navbar */
 }
@@ -1318,4 +1334,159 @@ button:disabled {
 
 .back-button:hover {
     background-color: #ff7200;
+}
+
+.checkout-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #964B00;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #ff7200;
+}
+
+
+
+
+/* Styling for the small image next to the item name */
+.small_img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+/* Profile Buttons Styling */
+.profile-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.order-history-button, .edit-profile-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    text-decoration: none;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.order-history-button {
+    background-color: #7a3e1c;  /* Darker brown */
+    color: white;
+}
+
+.order-history-button:hover {
+    background-color: #5c2d17;  /* Darker hover effect */
+}
+
+.edit-profile-button {
+    background-color: #964B00;  /* Original brown color */
+    color: white;
+}
+
+.edit-profile-button:hover {
+    background-color: #7a3e1c;  /* Same hover effect as other buttons */
+}
+
+
+
+/* Order History Container Styling */
+.order-history-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff0e6; /* Soft background color */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-family: 'Comic Sans MS', cursive;
+    color: #964B00;
+}
+
+.order-history-container h1 {
+    font-size: 28px;
+    color: #964B00;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Order History Table Styling */
+.order-history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-history-table th, .order-history-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive;
+    color: #664228;
+}
+
+.order-history-table th {
+    background-color: #fffae6;
+    font-weight: bold;
+}
+
+.order-history-table td a {
+    color: #964B00;
+    text-decoration: none;
+}
+
+.order-history-table td a:hover {
+    color: #ff7200;
+}
+
+/* Additional Styling for Table */
+.order-history-table td {
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.order-history-table th {
+    font-size: 18px;
+}
+
+/* Back Button for Order History */
+.order-history-back-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.order-history-back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #964B00; /* Match with the existing theme color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.order-history-back-button:hover {
+    background-color: #7a3e1c; /* Hover effect */
 }
