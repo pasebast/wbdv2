@@ -7,6 +7,33 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     exit;
 }
 
+include('db_connection.php'); // Ensure correct path to your DB connection
+
+// Make sure the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+// Get the logged-in user's ID
+$user_id = $_SESSION['user_id'];
+
+// Fetch the saved payment method for the logged-in user
+$query = "SELECT saved_payment FROM users WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($saved_payment);
+$stmt->fetch();
+$stmt->close();
+
+// Check if the saved_payment is empty
+if (empty($saved_payment)) {
+    // If no saved payment, trigger the modal in the frontend
+    $show_payment_modal = true;
+} else {
+    $show_payment_modal = false;
+}
 
 
 // VAT settings
@@ -25,8 +52,81 @@ $grandTotal = 0;
     <meta charset="UTF-8">
     <title>Checkout Receipt</title>
     <link rel="stylesheet" href="sty.css"> <!-- Link to your CSS file -->
+	
+	<style>
+        /* Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+        }
+
+        .modal-content {
+            background-color: #fff4e6;
+            margin: 15% auto;
+            padding: 20px;
+            border: 2px solid #964B00;
+            border-radius: 10px;
+            width: 40%;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            color: #664228;
+        }
+
+        .modal-header h2 {
+            color: #964B00;
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            margin-top: 20px;
+        }
+
+        .close-btn, .btnn {
+            padding: 10px 20px;
+            background-color: #964B00;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .close-btn:hover, .btnn:hover {
+            background-color: #7a3e1c;
+        }
+    </style>
+	
+	
 </head>
 <body>
+
+<?php if ($show_payment_modal): ?>
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Missing Payment Method</h2>
+            </div>
+            <div class="modal-body">
+                <p>You cannot proceed with the checkout as there is no payment method saved in your profile.</p>
+            </div>
+            <div class="modal-footer">
+                <a class="close-btn" href="profile.php">Go to Profile to Add Payment Method</a> <!-- Link to Profile -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show the modal when the page loads if no payment method is saved
+        document.getElementById('paymentModal').style.display = 'block';
+    </script>
+<?php endif; ?>
+
+
 <div class="main">
         <div class="navbar">
             <div class="icon">
@@ -94,8 +194,13 @@ $grandTotal = 0;
         </table>
 
         <form action="checkout.php" method="POST">
-    <button type="submit" name="confirm_checkout" class="checkout-button">Confirm Checkout</button>
-</form>
+        <?php if (!$show_payment_modal): ?>
+            <button type="submit" name="confirm_checkout" class="checkout-button">Confirm Checkout</button>
+        <?php else: ?>
+            <!-- Disable the button if no payment method -->
+            <button type="submit" name="confirm_checkout" class="checkout-button" disabled>Confirm Checkout</button>
+        <?php endif; ?>
+    </form>
 
 
         <!-- Back to Menu Button -->
