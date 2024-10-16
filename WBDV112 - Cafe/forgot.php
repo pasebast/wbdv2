@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
     <link rel="stylesheet" href="sty.css"> 
-	<style>
+    <style>
         /* Modal styling */
         .modal {
             display: none;
@@ -63,8 +63,8 @@
     </style>
 </head>
 <body>
- <!-- Background Image -->
-    <img src="images/coffee02.jpg" alt="Coffee Background" class="background-image"> <!-- Add this line -->
+    <!-- Background Image -->
+    <img src="images/coffee02.jpg" alt="Coffee Background" class="background-image">
 
     <!-- Navbar Section -->
     <div class="navbar">
@@ -73,12 +73,11 @@
         </div>
         <div class="menu">
             <ul>
-                 <li><a href="index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
-                 <li><a href="menu.php" class="<?php echo ($current_page == 'menu.php') ? 'active' : ''; ?>">Menu</a></li>
-                 <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
-                 <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
-                 <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
-					
+                <li><a href="index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
+                <li><a href="menu.php" class="<?php echo ($current_page == 'menu.php') ? 'active' : ''; ?>">Menu</a></li>
+                <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
+                <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
+                <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
             </ul>
         </div>
     </div>
@@ -111,9 +110,6 @@
         </div>
     </div>
 
-    <!-- Include the footer -->
-    <?php include('footer.php'); ?>
-
     <script>
         function closeModal() {
             document.getElementById('forgotModal').style.display = 'none';
@@ -121,55 +117,44 @@
 
         // Listen for form submission
         document.getElementById('forgotForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+            event.preventDefault(); // Prevent the default form submission
 
-    var email = document.getElementById('email').value;
+            var email = document.getElementById('email').value;
 
-    // Check if email is provided
-    if (!email) {
-        alert("Please enter your email address");
-        return;
-    }
+            // AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'forgot_process.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    // AJAX request
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'forgot_process.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        var modalHeader = document.getElementById('modalHeader');
+                        var modalBody = document.getElementById('modalBody');
+                        var modal = document.getElementById('forgotModal');
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                try {
-                    var response = JSON.parse(xhr.responseText); // Attempt to parse JSON
-                    var modalHeader = document.getElementById('modalHeader');
-                    var modalBody = document.getElementById('modalBody');
-                    var modal = document.getElementById('forgotModal');
+                        if (response.success) {
+                            modalHeader.innerHTML = 'Success';
+                            modalBody.innerHTML = 'We have sent you a password reset link. It will expire in 24 hours. Please check your email, including your junk or spam folder.';
+                        } else {
+                            modalHeader.innerHTML = 'Error';
+                            modalBody.innerHTML = response.error || 'The email address you entered is not registered. Please try again.';
+                        }
 
-                    if (response.success) {
-                        modalHeader.innerHTML = 'Success';
-                        modalBody.innerHTML = 'We have sent you a password reset link. It will expire in 24 hours. Please check your email, including your junk or spam folder.';
-                    } else {
-                        modalHeader.innerHTML = 'Error';
-                        modalBody.innerHTML = response.error || 'The email address you entered is not registered. Please try again.';
+                        modal.style.display = 'block'; // Show the modal
+                    } catch (e) {
+                        console.error("Invalid JSON response: ", xhr.responseText);
+                        alert("An unexpected error occurred. Please try again.");
                     }
-                    
-                    modal.style.display = 'block'; // Show the modal
-                } catch (e) {
-                    console.error("Invalid JSON response: ", xhr.responseText);
-                    alert("An unexpected error occurred. Please try again.");
+                } else {
+                    console.error("AJAX error: " + xhr.status); // Handle non-200 HTTP responses
                 }
-            } else {
-                console.error("AJAX error: " + xhr.status); // Handle non-200 HTTP responses
-            }
-        }
-    };
+            };
 
-    // Send the email via AJAX
-    xhr.send('email=' + encodeURIComponent(email));
-});
-
+            // Send the email via AJAX
+            xhr.send('email=' + encodeURIComponent(email));
+        });
     </script>
-	
-	
 </body>
 </html>

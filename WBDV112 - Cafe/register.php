@@ -60,10 +60,10 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 <div class="register-form">
                     <form action="register_process.php" method="POST" onsubmit="return validateForm()">
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" placeholder="Choose a Username" required required pattern="^[a-zA-Z0-9_.]{4,36}$" title="Username should be 4-36 characters long and can only contain letters, numbers, periods, and underscores.">
+                        <input type="text" id="username" name="username" placeholder="Choose a Username" required required pattern="^[a-zA-Z0-9_.]{4,50}$" title="Username should be 4-50 characters long and can only contain letters, numbers, periods, and underscores.">
 
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email Address" required required pattern="^[a-zA-Z0-9_.@]{4,36}$" title="Email should be 4-36 characters long and can only contain letters, numbers, @, periods, and underscores.">
+                        <input type="email" id="email" name="email" placeholder="Your Email Address" required required pattern="^[a-zA-Z0-9_.@]{4,50}$" title="Email should be 4-50 characters long and can only contain letters, numbers, @, periods, and underscores.">
 
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" placeholder="Create a Password" required>
@@ -103,9 +103,9 @@ function validateForm() {
 					<script>
 function validateForm() {
     var username = document.getElementById("username").value;
-    var regex = /^[a-zA-Z0-9_.]{4,36}$/; // Username should be 4-36 characters long and can contain letters, numbers, periods, and underscores
+    var regex = /^[a-zA-Z0-9_.]{4,50}$/; // Username should be 4-36 characters long and can contain letters, numbers, periods, and underscores
     if (!regex.test(username)) {
-        alert("Invalid username. It should be 4-36 characters long and can only contain letters, numbers, periods, and underscores.");
+        alert("Invalid username. It should be 4-50 characters long and can only contain letters, numbers, periods, and underscores.");
         return false;
     }
     return true;
@@ -114,13 +114,41 @@ function validateForm() {
 <script>
 function validateForm() {
     var email = document.getElementById("email").value;
-    var regex = /^[a-zA-Z0-9_.@]{4,36}$/; // Email should be 4-36 characters long and can contain letters, numbers, and underscores
+    var regex = /^[a-zA-Z0-9_.@]{4,50}$/; // Email should be 4-36 characters long and can contain letters, numbers, and underscores
     if (!regex.test(email)) {
-        alert("Invalid email. It should be 4-36 characters long and can only contain letters, numbers, @, periods, and underscores.");
+        alert("Invalid email. It should be 4-50 characters long and can only contain letters, numbers, @, periods, and underscores.");
         return false;
     }
     return true;
 }
+
+
+function validateForm() {
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirm_password').value;
+    var errorMessage = '';
+
+    // Validate password requirements
+    if (password.length < 8) {
+        errorMessage = 'Password must be at least 8 characters long.';
+    } else if (!/[A-Z]/.test(password)) {
+        errorMessage = 'Password must include at least 1 uppercase letter.';
+    } else if (!/[a-z]/.test(password)) {
+        errorMessage = 'Password must include at least 1 lowercase letter.';
+    } else if (!/[0-9]/.test(password)) {
+        errorMessage = 'Password must include at least 1 number.';
+    } else if (password !== confirmPassword) {
+        errorMessage = 'Passwords do not match. Please try again.';
+    }
+
+    if (errorMessage) {
+        alert(errorMessage); // Display error message
+        return false; // Prevent form submission
+    }
+
+    return true; // Allow form submission
+}
+
 </script>
                 </div>
             </div>

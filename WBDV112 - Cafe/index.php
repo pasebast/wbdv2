@@ -34,9 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index.php");  // Redirect back to index.php
         exit();  // Ensure no further code is executed
     } else {
-        echo "<script>alert('Invalid email, username, or password!'); window.location.href='index.php';</script>";
+         // Invalid credentials
+            $_SESSION['login_error'] = 'Invalid email, username, or password!';
     }
+	
 }
+// Fetch the login error if it exists
+$login_error = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : null;
+unset($_SESSION['login_error']); // Clear the error after using it
 
 // Logout functionality
 if (isset($_GET['logout'])) {
@@ -135,6 +140,41 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
 
 
 </script>	
+
+<style>
+        /* Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>	
 	
 </head>
 <body>
@@ -186,7 +226,7 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
             <div class="form">
                 <form action="index.php" method="POST">
                     <h3>Login to Your Account</h3>
-                    <input type="text" name="username" placeholder="Username or Email" required>
+                    <input type="text" name="username" placeholder="Username or Email" required required pattern="^[a-zA-Z0-9_.@]{4,50}$" title="Username or Email should be 4-50 characters long and can only contain letters, numbers, @, periods, and underscores.">
                     <input type="password" name="password" placeholder="Password" required>
                     <button type="submit" class="btnn">Login</button>  <!-- btnn class kept intact -->
                     <p class="forgot-password">Forgot your password? <a href="forgot.php">Click here</a> to reset it.</p>
@@ -201,7 +241,41 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
             </div>
         <?php endif; ?>
     </div>
+	
+	
+<!-- Modal for login error -->
+<div id="loginErrorModal" class="modal" style="display: <?php echo $login_error ? 'block' : 'none'; ?>">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('loginErrorModal').style.display='none'">&times;</span>
+        <h2>Error</h2>
+        <p><?php echo htmlspecialchars($login_error); ?></p>
+    </div>
+</div>	
+	
 </div>
+
+<script>
+
+// Get the modal
+    var modal = document.getElementById('loginErrorModal');
+
+    // When the user clicks on <span> (x), close the modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+function validateForm() {
+    var email = document.getElementById("email").value;
+    var regex = /^[a-zA-Z0-9_.@]{4,50}$/; // Email should be 4-36 characters long and can contain letters, numbers, and underscores
+    if (!regex.test(email)) {
+        alert("Invalid email. It should be 4-50 characters long and can only contain letters, numbers, @, periods, and underscores.");
+        return false;
+    }
+    return true;
+}
+</script>
 
 <!-- Include the footer -->
 <?php include('footer.php'); ?>
