@@ -110,14 +110,50 @@
         </div>
     </div>
 
+
+<!-- Loading Spinner -->
+<div id="loadingSpinner" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9999; text-align: center;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="loader"></div>
+        <p style="color: white;">Loading...</p>
+    </div>
+</div>
+
+
     <script>
+	
+	
+	
         function closeModal() {
             document.getElementById('forgotModal').style.display = 'none';
         }
+		
+		
+		
+		// Show the loading spinner
+    function showLoading() {
+        document.getElementById('loadingSpinner').style.display = 'block';
+        // Disable all inputs
+        var inputs = document.querySelectorAll('input, button');
+        inputs.forEach(function(input) {
+            input.disabled = true;
+        });
+    }
+
+    // Close the loading spinner
+    function hideLoading() {
+        document.getElementById('loadingSpinner').style.display = 'none';
+        // Enable all inputs
+        var inputs = document.querySelectorAll('input, button');
+        inputs.forEach(function(input) {
+            input.disabled = false;
+        });
+    }
 
         // Listen for form submission
         document.getElementById('forgotForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
+            showLoading(); // Prevent the default form submission
+			event.preventDefault(); // Prevent the default form submission
 
             var email = document.getElementById('email').value;
 
@@ -135,6 +171,8 @@
                         var modal = document.getElementById('forgotModal');
 
                         if (response.success) {
+							hideLoading(); // Hide loading spinner if there is an error
+
                             modalHeader.innerHTML = 'Success';
                             modalBody.innerHTML = 'We have sent you a password reset link. It will expire in 24 hours. Please check your email, including your junk or spam folder.';
                         } else {
@@ -148,6 +186,8 @@
                         alert("An unexpected error occurred. Please try again.");
                     }
                 } else {
+					 hideLoading(); // Hide loading spinner if there is an error
+
                     console.error("AJAX error: " + xhr.status); // Handle non-200 HTTP responses
                 }
             };
@@ -155,6 +195,11 @@
             // Send the email via AJAX
             xhr.send('email=' + encodeURIComponent(email));
         });
+		
+		
+		
+		
+		
     </script>
 </body>
 </html>

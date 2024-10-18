@@ -27,21 +27,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        // Store user details in session
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['name'] = $user['username'];  // Store username in session
-        $_SESSION['logged_in'] = true;  // Set logged-in session flag
-        header("Location: index.php");  // Redirect back to index.php
-        exit();  // Ensure no further code is executed
+
+        // Check account status
+        if ($user['account_status'] === 'Active') {
+            // Store user details in session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['name'] = $user['username'];  // Store username in session
+            $_SESSION['logged_in'] = true;  // Set logged-in session flag
+            header("Location: index.php");  // Redirect back to index.php
+            exit();  // Ensure no further code is executed
+        } elseif ($user['account_status'] === 'Pending') {
+			$_SESSION['login_error'] = 'Your account is currently pending activation. Please check your email for the link. <a href="resend_activation.php?email=' . urlencode($user['email']) . '">Resend Activation Link</a>';
+			
+        } elseif ($user['account_status'] === 'Deactivated') {
+            $_SESSION['login_error'] = 'Your account has been deactivated. Please contact support through the "Contact Us" form for assistance. <a href="contact.php">Contact Support</a>';
+        }
     } else {
-         // Invalid credentials
-            $_SESSION['login_error'] = 'Invalid email, username, or password!';
+        // Invalid credentials
+        $_SESSION['login_error'] = 'Invalid email, username, or password!';
     }
-	
 }
+
 // Fetch the login error if it exists
 $login_error = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : null;
 unset($_SESSION['login_error']); // Clear the error after using it
+
+
 
 // Logout functionality
 if (isset($_GET['logout'])) {
@@ -52,6 +63,7 @@ if (isset($_GET['logout'])) {
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -248,10 +260,11 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
     <div class="modal-content">
         <span class="close" onclick="document.getElementById('loginErrorModal').style.display='none'">&times;</span>
         <h2>Error</h2>
-        <p><?php echo htmlspecialchars($login_error); ?></p>
+        <p><?php echo ($login_error); ?></p>
     </div>
 </div>	
-	
+
+
 </div>
 
 <script>
@@ -275,6 +288,11 @@ function validateForm() {
     }
     return true;
 }
+
+
+
+
+
 </script>
 
 <!-- Include the footer -->

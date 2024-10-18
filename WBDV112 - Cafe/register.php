@@ -84,8 +84,12 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 						<input type="text" id="payment" name="payment" placeholder="Credit/Debit Card Number" pattern="\d{16}" title="Enter a valid 16-digit card number or leave it blank.">
 
                         <button type="submit" class="btnn">Register</button>
+
+
+
 						
-						<script>
+						
+<script>
 function validateForm() {
     var payment = document.getElementById("payment").value;
     var paymentPattern = /^\d{16}$/;
@@ -100,7 +104,20 @@ function validateForm() {
 
 
                     </form>
-					<script>
+					
+					
+<!-- Loading Spinner -->
+<div id="loadingSpinner" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9999; text-align: center;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="loader"></div>
+        <p style="color: white;">Loading...</p>
+    </div>
+</div>
+
+
+
+
+<script>
 function validateForm() {
     var username = document.getElementById("username").value;
     var regex = /^[a-zA-Z0-9_.]{4,50}$/; // Username should be 4-36 characters long and can contain letters, numbers, periods, and underscores
