@@ -34,7 +34,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $address = $_POST['address'];
     $saved_payment = $_POST['saved_payment'];
+	$expiry_date = $_POST['expiry_date']; // Add expiry date
+    $cvc = $_POST['cvc']; // Add CVC
 
+
+// Convert MM/YY to YYYY-MM-DD for SQL
+    $expiry_parts = explode('/', $expiry_date);
+    if (count($expiry_parts) === 2) {
+        $month = intval($expiry_parts[0]);
+        $year = intval($expiry_parts[1]) + 2000; // Add 2000 to get full year (e.g., 23 becomes 2023)
+        $expiry_date_sql = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-01'; // Set day to 01
+    } else {
+        $expiry_date_sql = null; // Handle invalid date formats appropriately
+    }
+	
+	
     // Check if the username is already taken by another user
     $check_username = "SELECT id FROM users WHERE username='$username' AND id != '$user_id'";
     $username_result = $conn->query($check_username);
@@ -90,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Only proceed if there are no errors
         if (empty($error)) {
-            // Update user details, including the profile picture
-            $sql = "UPDATE users SET username='$username', first_name='$first_name', last_name='$last_name', email='$email', address='$address', saved_payment='$saved_payment', profile_picture='$profile_picture' WHERE id='$user_id'";
+            // Update user details, including the profile picture, expiry date, and CVC
+            $sql = "UPDATE users SET username='$username', first_name='$first_name', last_name='$last_name', email='$email', address='$address', saved_payment='$saved_payment', expiry_date='$expiry_date_sql', cvc='$cvc', profile_picture='$profile_picture' WHERE id='$user_id'";
             if ($conn->query($sql) === TRUE) {
                 header('Location: profile.php');
                 exit;
@@ -140,8 +154,15 @@ $conn->close();
         <label for="address">Address:</label>
         <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
 
-        <label for="saved_payment">Saved Payment Method:</label>
-        <input type="text" name="saved_payment" value="<?php echo htmlspecialchars($user['saved_payment']); ?>" placeholder="Enter card number" pattern="\d{16}" title="Enter a valid 16-digit card number or leave it blank.">
+        <label for="saved_payment">Card Number:</label>
+        <input type="text" id="saved_payment" name="saved_payment" placeholder="____-____-____-____" required pattern="\d{4}-\d{4}-\d{4}-\d{4}" title="Please enter a valid card number format." maxlength="19" oninput="formatCardNumber(this)">
+		
+		<label for="expiry_date">Expiry Date (MM/YY):</label>
+		<input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$" title="Please enter a valid expiry date in MM/YY format." maxlength="5" oninput="formatExpiryDate(this)" onblur="validateExpiryDate(this)">
+
+		<label for="cvc">CVC:</label>
+		<input type="text" id="cvc" name="cvc" placeholder="CVC" required maxlength="3" pattern="^\d{3}$" title="Please enter a valid 3-digit CVC code." oninput="this.value = this.value.replace(/\D/g, '').slice(0, 3);">
+
 
         <label for="profile_picture">Upload Profile Picture:</label>
         <input type="file" name="profile_picture" accept="image/*">
@@ -153,7 +174,58 @@ $conn->close();
 
         <button type="submit" class="edit-btn">Save Changes</button>
     </form>
+	<a href="profile.php" class="back-btn">Back to Profile</a>
+
 </div>
+
+<script>
+function formatExpiryDate(input) {
+    // Remove all non-digit characters
+    const value = input.value.replace(/\D/g, '');
+
+    // Format the value as MM/YY
+    const formattedValue = value.replace(/(\d{2})(\d+)/, '$1/$2');
+
+    // Set the formatted value back to the input
+    input.value = formattedValue;
+}
+
+function validateExpiryDate(input) {
+    const value = input.value;
+    if (value) {
+        const parts = value.split('/');
+        const month = parseInt(parts[0], 10);
+        const year = parseInt(parts[1], 10) + 2000; // Convert YY to YYYY
+
+        // Get the current date
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1; // Months are zero-indexed
+
+        // Check if the card is expired
+        if (year < currentYear || (year === currentYear && month < currentMonth)) {
+            alert('The card has expired. Please enter a valid expiry date.');
+            input.value = ''; // Clear the input field
+        }
+    }
+}
+
+
+
+function formatCardNumber(input) {
+    // Remove all non-digit characters
+    const value = input.value.replace(/\D/g, '');
+
+    // Format the value as XXXX-XXXX-XXXX-XXXX
+    const formattedValue = value.replace(/(\d{4})(?=\d)/g, '$1-');
+
+    // Set the formatted value back to the input
+    input.value = formattedValue;
+}
+
+</script>
+
+
  <!-- Include the footer -->
     <?php include('footer.php'); ?>
 </body>
