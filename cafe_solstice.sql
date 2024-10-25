@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Oct 20, 2024 at 11:26 AM
+-- Generation Time: Oct 25, 2024 at 02:18 PM
 -- Server version: 5.0.27
 -- PHP Version: 5.2.1
 -- 
@@ -24,7 +24,7 @@ CREATE TABLE `email_verifications` (
   `expires_at` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 -- 
 -- Dumping data for table `email_verifications`
@@ -36,8 +36,7 @@ INSERT INTO `email_verifications` (`id`, `user_id`, `token`, `created_at`, `expi
 (3, 16, '3fb133987da81d2530ec42c46ff6f5e8', '2024-10-18 23:21:41', '2024-10-19 15:21:41'),
 (4, 17, 'a63926df9353808f165ebb7a6f78436e', '2024-10-18 23:25:16', '2024-10-19 15:25:16'),
 (5, 17, '16377de30c73e9bf9f5894fe442138f4', '2024-10-18 23:25:46', '2024-10-19 15:25:46'),
-(6, 18, 'a53e8994dd7321693d50b8f5de675fec', '2024-10-18 23:30:05', '2024-10-19 15:30:05'),
-(7, 18, '369c3f634a6d61ca145b037c94232d93', '2024-10-18 23:30:29', '2024-10-19 15:30:29');
+(25, 35, '06572ad595922a97507bda9764ca79b2', '2024-10-25 21:34:05', '2024-10-26 13:34:05');
 
 -- --------------------------------------------------------
 
@@ -54,7 +53,7 @@ CREATE TABLE `order_items` (
   `image` varchar(255) default NULL,
   PRIMARY KEY  (`id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
 
 -- 
 -- Dumping data for table `order_items`
@@ -89,7 +88,14 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_name`, `quantity`, `price`
 (50, 29, 'Crimson Twilight Tea', 1, 110.00, 'images/menu07.png'),
 (51, 30, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
 (52, 30, 'Blueberry Cheesecake', 1, 160.00, 'images/menu17.png'),
-(53, 31, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png');
+(53, 31, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
+(54, 32, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
+(55, 32, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
+(58, 34, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
+(59, 34, 'Horizon Wildberry Kombucha', 1, 160.00, 'images/menu14.png'),
+(60, 35, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
+(61, 36, 'Dawn Flat White', 1, 120.00, 'images/menu06.png'),
+(62, 36, 'Zenith Grapefruit Tea', 1, 170.00, 'images/menu09.png');
 
 -- --------------------------------------------------------
 
@@ -106,7 +112,7 @@ CREATE TABLE `orders` (
   `saved_payment` varchar(255) default NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 -- 
 -- Dumping data for table `orders`
@@ -126,7 +132,11 @@ INSERT INTO `orders` (`id`, `user_id`, `order_number`, `order_date`, `total_amou
 (28, 1, 'ORD67148613bbd71', '2024-10-20 04:24:51', 302.40, '1111-1111-1111-1111'),
 (29, 1, 'ORD671486f83f463', '2024-10-20 04:28:40', 291.20, '1111-1111-1111-1111'),
 (30, 1, 'ORD67148781de89f', '2024-10-20 04:30:57', 347.20, '1111-1111-1111-1111'),
-(31, 1, 'ORD671487ae7721e', '2024-10-20 04:31:42', 168.00, '1111-1111-1111-1111');
+(31, 1, 'ORD671487ae7721e', '2024-10-20 04:31:42', 168.00, '1111-1111-1111-1111'),
+(32, 1, 'ORD671a53997fd7a', '2024-10-24 14:03:05', 302.40, '1111-1111-1111-1111'),
+(34, 6, 'ORD671ba62aa2b34', '2024-10-25 14:07:38', 313.60, '1235123512351235'),
+(35, 6, 'ORD671ba75fa3630', '2024-10-25 14:12:47', 168.00, '1235123512351235'),
+(36, 6, 'ORD671ba78a70e08', '2024-10-25 14:13:30', 324.80, '1234-1234-8888-6969');
 
 -- --------------------------------------------------------
 
@@ -141,7 +151,7 @@ CREATE TABLE `password_resets` (
   `expires_at` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 -- 
 -- Dumping data for table `password_resets`
@@ -190,31 +200,32 @@ CREATE TABLE `users` (
   `expiry_date` date default NULL,
   `cvc` varchar(4) default NULL,
   `payment_token` varchar(255) default NULL,
+  `role` enum('member','admin') NOT NULL default 'member',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 -- 
 -- Dumping data for table `users`
 -- 
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `address`, `saved_payment`, `profile_picture`, `first_name`, `last_name`, `account_status`, `expiry_date`, `cvc`, `payment_token`) VALUES 
-(1, 'paultest1', 'paultest1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2024-10-12 14:41:06', '123 test madilim 6666666666666666666666666666666', '1111-1111-1111-1111', '1728737660_phy13.jpg', 'paul', 'test', 'Active', '2025-10-01', '823', NULL),
-(2, 'paultest2', 'paultest2@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2024-10-12 14:44:07', 'tulok 123', '1001200223423412', '', 'paul2', 'test2', 'Pending', NULL, NULL, NULL),
-(4, 'paultest3', 'paultest3@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-12 21:17:43', '123 123 6969 madilim', '6969420069694200', '1728739086_phy12.jpg', 'Paul3', 'Test3', 'Pending', NULL, NULL, NULL),
-(5, 'paultest4', 'paultest4@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 03:53:14', '897234k kkk kkkk 69  69 69', '1234123412341234', '1728763128_phy25.jpg', 'Paul4', 'Test4', 'Pending', NULL, NULL, NULL),
-(6, 'paultest5', 'paultest5@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 04:07:47', '123 123 123 123 aaaa', '1235123512351235', '', 'Paul5', 'Test5', 'Pending', NULL, NULL, NULL),
-(7, 'paultest6', 'paultest6@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 04:23:44', '666666 test', '1238123812381238', '', 'Paul6', 'Test6', 'Pending', NULL, NULL, NULL),
-(8, 'paultest7', 'ptsebastian6585val@student.fat', '596793c886612d7387008344222dc79c', '2024-10-16 23:05:15', '123 Tamaraw Hills', '', NULL, 'Paul7', 'Test7', 'Pending', NULL, NULL, NULL),
-(9, 'paultest8', 'paultest8@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2024-10-17 01:18:31', '123 Tamaraw Hills', '', NULL, 'Paul8', 'Test8', 'Pending', NULL, NULL, NULL),
-(10, 'paultest9', 'paultest9@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-17 01:20:48', '123 Tamaraw Hills', '', NULL, 'Paul9', 'Test9', 'Pending', NULL, NULL, NULL),
-(11, 'poltest6969696969', 'ptsebastian6585val@s', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:12:49', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL),
-(12, 'poltest16969696969', 'ptsebastian6585val@st', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:14:34', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL),
-(13, 'poltest14564564564', 'ptsebastian6585val@stu', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:16:11', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL),
-(14, 'poltest178757', 'ptse585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:21:04', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL),
-(15, 'poltest1sdf54564', 'ptsean6585v@studma.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:22:19', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Active', NULL, NULL, NULL),
-(16, 'paultest10', 'paultest10@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:21:41', '123 Tamraw Hills', '', NULL, 'Paul10', 'Test10', 'Pending', NULL, NULL, NULL),
-(17, 'poltest2sdfs43252', '234anv@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:25:16', '123 Tamaraw Hills', '', NULL, 'Pol2', 'Test2', 'Active', NULL, NULL, NULL),
-(18, 'poltest1', 'ptsebastian6585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:30:05', '123 Tamaraw Hills', '', '', 'pol1', 'tes1', 'Pending', NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `address`, `saved_payment`, `profile_picture`, `first_name`, `last_name`, `account_status`, `expiry_date`, `cvc`, `payment_token`, `role`) VALUES 
+(1, 'paultest1', 'paultest1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2024-10-12 14:41:06', '123 test madilim 6666666666666666666666666666666', '1111-1111-1111-1111', '1729783428_phy13.jpg', 'paul', 'test', 'Active', '2025-10-01', '822', NULL, 'member'),
+(2, 'paultest2', 'paultest2@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2024-10-12 14:44:07', 'tulok 123', '1001200223423412', '', 'paul2', 'test2', 'Pending', NULL, NULL, NULL, 'member'),
+(4, 'paultest3', 'paultest3@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-12 21:17:43', '123 123 6969 madilim', '6969420069694200', '1728739086_phy12.jpg', 'Paul3', 'Test3', 'Pending', NULL, NULL, NULL, 'member'),
+(5, 'paultest4', 'paultest4@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 03:53:14', '897234k kkk kkkk 69  69 69', '1234123412341234', '1728763128_phy25.jpg', 'Paul4', 'Test4', 'Pending', NULL, NULL, NULL, 'member'),
+(6, 'paultest5', 'paultest5@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 04:07:47', '123 123 123 123 aaaa', '1234-1234-8888-6969', '1729865591_phy09.jpg', 'Paul5', 'Test5', 'Active', '2025-10-01', '107', NULL, 'member'),
+(7, 'paultest6', 'paultest6@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 04:23:44', '666666 test', '1238123812381238', '', 'Paul6', 'Test6', 'Pending', NULL, NULL, NULL, 'member'),
+(8, 'paultest7', 'ptsebastian6585val@student.fat', '596793c886612d7387008344222dc79c', '2024-10-16 23:05:15', '123 Tamaraw Hills', '', NULL, 'Paul7', 'Test7', 'Pending', NULL, NULL, NULL, 'member'),
+(9, 'paultest8', 'paultest8@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2024-10-17 01:18:31', '123 Tamaraw Hills', '', NULL, 'Paul8', 'Test8', 'Pending', NULL, NULL, NULL, 'member'),
+(10, 'paultest9', 'paultest9@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-17 01:20:48', '123 Tamaraw Hills', '', NULL, 'Paul9', 'Test9', 'Pending', NULL, NULL, NULL, 'member'),
+(11, 'poltest6969696969', 'ptsebastian6585val@s', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:12:49', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
+(12, 'poltest16969696969', 'ptsebastian6585val@st', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:14:34', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
+(13, 'poltest14564564564', 'ptsebastian6585val@stu', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:16:11', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
+(14, 'poltest178757', 'ptse585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:21:04', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
+(15, 'poltest1sdf54564', 'ptsean6585v@studma.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:22:19', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Active', NULL, NULL, NULL, 'member'),
+(16, 'paultest10', 'paultest10@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:21:41', '123 Tamraw Hills', '', NULL, 'Paul10', 'Test10', 'Pending', NULL, NULL, NULL, 'member'),
+(17, 'poltest2sdfs43252', '234anv@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:25:16', '123 Tamaraw Hills', '', NULL, 'Pol2', 'Test2', 'Active', NULL, NULL, NULL, 'member'),
+(35, 'poltest1', 'ptsebastian6585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-25 21:34:05', '123 lkjsadflkj', '', NULL, 'pol1', 'test1', 'Active', NULL, NULL, NULL, 'admin');
 
 -- 
 -- Constraints for dumped tables
