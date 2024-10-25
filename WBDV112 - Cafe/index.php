@@ -34,11 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['name'] = $user['username'];  // Store username in session
             $_SESSION['logged_in'] = true;  // Set logged-in session flag
+            $_SESSION['role'] = $user['role']; // Store user role in session
             header("Location: index.php");  // Redirect back to index.php
             exit();  // Ensure no further code is executed
         } elseif ($user['account_status'] === 'Pending') {
-			$_SESSION['login_error'] = 'Your account is currently pending activation. Please check your email for the link. <a href="resend_activation.php?email=' . urlencode($user['email']) . '">Resend Activation Link</a>';
-			
+            $_SESSION['login_error'] = 'Your account is currently pending activation. Please check your email for the link. <a href="resend_activation.php?email=' . urlencode($user['email']) . '">Resend Activation Link</a>';
         } elseif ($user['account_status'] === 'Deactivated') {
             $_SESSION['login_error'] = 'Your account has been deactivated. Please contact support through the "Contact Us" form for assistance. <a href="contact.php">Contact Support</a>';
         }
@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['login_error'] = 'Invalid email, username, or password!';
     }
 }
+
 
 // Fetch the login error if it exists
 $login_error = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : null;
@@ -196,20 +197,26 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
         <img src="images/logo01.png" alt="Logo">
     </div>
     <div class="menu">
-        <ul>
-            <li><a href="index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
-            <li><a href="menu.php" class="<?php echo ($current_page == 'menu.php') ? 'active' : ''; ?>">Menu</a></li>
-            <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
+    <ul>
+        <li><a href="index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
+        <li><a href="menu.php" class="<?php echo ($current_page == 'menu.php') ? 'active' : ''; ?>">Menu</a></li>
+        <li><a href="gallery.php" class="<?php echo ($current_page == 'gallery.php') ? 'active' : ''; ?>">Gallery</a></li>
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <li><a href="usersadmin.php">Users</a></li>
+            <li><a href="ordersadmin.php">Orders</a></li>
+        <?php else: ?>
             <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
-            <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
-            <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            <?php else: ?>
-                <li><a href="login.php"></a></li>
-            <?php endif; ?>
-        </ul>
-    </div>
+        <?php endif; ?>
+        <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
+        <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        <?php else: ?>
+            <li><a href="login.php">Login</a></li>
+        <?php endif; ?>
+    </ul>
+</div>
+
 </div>
 
 <!-- Background Image -->
@@ -267,6 +274,26 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
 
 </div>
 
+
+
+
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="successMessage">Registration successful! Redirecting to homepage...</p>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div id="errorModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="errorMessage"></p>
+    </div>
+</div>
+
+
 <script>
 
 // Get the modal
@@ -281,7 +308,7 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
 
 function validateForm() {
     var email = document.getElementById("email").value;
-    var regex = /^[a-zA-Z0-9_.@]{4,50}$/; // Email should be 4-36 characters long and can contain letters, numbers, and underscores
+    var regex = /^[a-zA-Z0-9_.@]{4,50}$/; // Email should be 4-50 characters long and can contain letters, numbers, and underscores
     if (!regex.test(email)) {
         alert("Invalid email. It should be 4-50 characters long and can only contain letters, numbers, @, periods, and underscores.");
         return false;
@@ -290,6 +317,61 @@ function validateForm() {
 }
 
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    const success = urlParams.get('success');
+    if (error) {
+        showModal(decodeURIComponent(error));
+    }
+    if (success) {
+        showSuccessModal(decodeURIComponent(success));
+    }
+});
+
+function showModal(message) {
+    var modal = document.getElementById('errorModal');
+    var span = document.getElementsByClassName('close')[0];
+    var errorMessage = document.getElementById('errorMessage');
+
+    errorMessage.innerText = message;
+    modal.style.display = 'block';
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+}
+
+function showSuccessModal(message) {
+    var modal = document.getElementById('successModal');
+    var span = document.getElementsByClassName('close')[1]; // Get the close element for success modal
+    var successMessage = document.getElementById('successMessage');
+
+    successMessage.innerText = message;
+    modal.style.display = 'block';
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+        window.location.href = 'index.php';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+            window.location.href = 'index.php';
+        }
+    }
+
+    setTimeout(() => {
+        window.location.href = 'index.php';
+    }, 5000);
+}
 
 
 

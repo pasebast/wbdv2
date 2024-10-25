@@ -1505,3 +1505,16 @@ button:disabled {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+/* Checkbox Wrapper */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Add space below the checkbox wrapper */
+}
+
+/* Ensure the label and checkbox are aligned */
+.checkbox-wrapper .checkbox-label {
+    margin-right: 8px; /* Space between the label and the checkbox */
+}
