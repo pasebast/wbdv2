@@ -67,26 +67,36 @@ $result = $conn->query($sql);
         a:hover {
             text-decoration: underline;
         }
-		
-		.back-button {
-			margin-top: 20px;
-			text-align: center;
-		}
-
-		.back-button a {
-			background-color: #f8a21c;
-			color: white;
-			padding: 10px 20px;
-			text-decoration: none;
-			border-radius: 5px;
-			font-weight: bold;
-		}
-
-		.back-button a:hover {
-			background-color: #d9534f;
-			color: white;
-		}
-
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-button a {
+            background-color: #f8a21c;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button a:hover {
+            background-color: #d9534f;
+            color: white;
+        }
+        .resend-button {
+            background-color: #f8a21c;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .resend-button:hover {
+            background-color: #d9534f;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -105,10 +115,11 @@ $result = $conn->query($sql);
                         <td>
                             <a href='update_status_admin.php?id={$row['id']}&status=active'>Activate</a> | 
                             <a href='update_status_admin.php?id={$row['id']}&status=pending'>Pending</a> | 
-                            <a href='update_status_admin.php?id={$row['id']}&status=deactivated'>Deactivate</a>
-                        </td>
-                      </tr>"
-					  ;
+                            <a href='update_status_admin.php?id={$row['id']}&status=deactivated'>Deactivate</a>";
+                if ($row['account_status'] === 'Pending') {
+                    echo " | <a href='resend_activation_admin.php?email={$row['email']}' class='resend-button'>Resend Activation Email</a>";
+                }
+                echo "</td></tr>";
             }
             echo "</table>";
         } else {
@@ -116,11 +127,9 @@ $result = $conn->query($sql);
         }
         $conn->close();
         ?>
-
-<div class="back-button">
-<a href="index.php">Back to Home</a>
-</div>
-
+        <div class="back-button">
+            <a href="index.php">Back to Home</a>
+        </div>
     </div>
 </body>
 </html>
