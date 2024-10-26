@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
             <li><a href="profile.php">Profile</a></li>
             <li><a href="logout.php">Logout</a></li>
         <?php else: ?>
-            <li><a href="login.php">Login</a></li>
+            <li><a href=""></a></li>
         <?php endif; ?>
     </ul>
 </div>
@@ -294,6 +294,18 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
 </div>
 
 
+<!-- Modal for Deactivation Notice -->
+<div id="deactivationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Your account has been deactivated.</p>
+        <p>If you wish to reactivate, please contact us by filling out the form on <a href="contact.php">Contact Us</a>.</p>
+    </div>
+</div>
+
+
+
+
 <script>
 
 // Get the modal
@@ -372,6 +384,63 @@ function showSuccessModal(message) {
         window.location.href = 'index.php';
     }, 5000);
 }
+
+
+// For login error modal
+document.addEventListener('DOMContentLoaded', function () {
+    var loginErrorModal = document.getElementById('loginErrorModal');
+    var closeLoginErrorModal = loginErrorModal.querySelector('.close');
+    closeLoginErrorModal.onclick = function() {
+        loginErrorModal.style.display = 'none';
+    };
+    window.onclick = function(event) {
+        if (event.target == loginErrorModal) {
+            loginErrorModal.style.display = 'none';
+        }
+    };
+});
+
+// For deactivation error modal
+document.addEventListener('DOMContentLoaded', function () {
+    const loginError = "<?php echo isset($_SESSION['login_error']) ? $_SESSION['login_error'] : ''; ?>";
+    if (loginError) {
+        var deactivationErrorModal = document.getElementById("deactivationErrorModal");
+        var deactivationErrorMessage = document.getElementById("deactivationErrorMessage");
+        deactivationErrorMessage.innerHTML = loginError;
+        deactivationErrorModal.style.display = "block";
+    }
+
+    var closeDeactivationErrorModal = deactivationErrorModal.querySelector('.close');
+    closeDeactivationErrorModal.onclick = function() {
+        deactivationErrorModal.style.display = "none";
+    };
+    window.onclick = function(event) {
+        if (event.target == deactivationErrorModal) {
+            deactivationErrorModal.style.display = "none";
+        }
+    };
+});
+
+// For deactivation notice modal
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    if (status === 'deactivated') {
+        var deactivationModal = document.getElementById("deactivationModal");
+        deactivationModal.style.display = "block";
+    }
+
+    var closeDeactivationModal = deactivationModal.querySelector('.close');
+    closeDeactivationModal.onclick = function() {
+        deactivationModal.style.display = "none";
+    };
+    window.onclick = function(event) {
+        if (event.target == deactivationModal) {
+            deactivationModal.style.display = "none";
+        }
+    };
+});
+
 
 
 

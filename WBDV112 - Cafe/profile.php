@@ -112,11 +112,13 @@ $conn->close();
 	</div>
     </div>
 
-    <!-- Add Order History Button -->
-    <div class="profile-actions">
-        <a href="orderhistory.php" class="order-history-button">Order History</a>
-        <a href="edit_profile.php" class="edit-profile-button">Edit Profile</a>
-    </div>
+	   <!-- Add Order History Button -->
+	<div class="profile-actions">
+		<a href="orderhistory.php" class="order-history-button">Order History</a>
+		<a href="edit_profile.php" class="edit-profile-button">Edit Profile</a>
+		<a href="deactivateuser.php" class="deactivate-button">Deactivate Account</a>
+	</div>
+
 </div>
 
 <!-- Modal to show enlarged profile picture -->

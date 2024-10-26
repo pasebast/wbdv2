@@ -24,19 +24,41 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                 messageBox.style.display = "none"; // Hide the message after 4 seconds
             }, 4000);
         }
+		
+		function showLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    if (status === 'success' || status === 'error') {
+        document.getElementById('loadingSpinner').style.display = 'none';
+    }
+});
+
     </script>
     <style>
-        /* Styling for the success message */
-        #success-message {
-            display: none;
-            padding: 15px;
-            background-color: #4CAF50; /* Green color */
-            color: white;
-            margin-top: 20px;
-            text-align: center;
-            border-radius: 5px;
-            font-size: 16px;
-        }
+        /* Styling for the success and error messages */
+#success-message, #error-message {
+    display: block;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#success-message {
+    background-color: #4CAF50; /* Green color */
+    color: white;
+}
+
+#error-message {
+    background-color: #f44336; /* Red color */
+    color: white;
+}
+
     </style>
 	
 	
@@ -95,29 +117,38 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                     <p>Drop by and enjoy a relaxing time with your friends and family at Café Solstice. Whether you're looking for a quiet place to work, a casual meeting spot, or a place to unwind, our doors are always open to you.</p>
                 </div>
 
-                <!-- Contact Form Section -->
-                <div class="contact-form">
-                    <form onsubmit="showSuccessMessage(); return false;">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+							  <!-- Contact Form Section -->
+<div class="contact-form">
+    <form action="contact_process.php" method="POST" onsubmit="showLoadingSpinner()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btnn">Send Message</button>
+    </form>
 
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+    <!-- Success and Error Messages -->
+    <?php if (isset($_SESSION['success'])): ?>
+        <div id="success-message"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
+    <?php elseif (isset($_SESSION['error'])): ?>
+        <div id="error-message"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
+    <?php endif; ?>
+    
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9999; text-align: center;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="loader"></div>
+            <p style="color: white;">Loading...</p>
+        </div>
+    </div>
+</div>
 
-                        <label for="subject">Subject:</label>
-                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
 
-                        <label for="message">Message:</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
 
-                        <button type="submit" class="btnn">Send Message</button>
-                    </form>
-					
-					<!-- Success Message Box -->
-                    <div id="success-message">Your message has been successfully received! We'll get back to you within 24-48 hours.
-					</div>
-					
-                </div>
             </div>
         </div>
 

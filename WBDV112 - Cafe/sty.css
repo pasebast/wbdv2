@@ -1518,3 +1518,19 @@ button:disabled {
 .checkbox-wrapper .checkbox-label {
     margin-right: 8px; /* Space between the label and the checkbox */
 }
+
+
+.deactivate-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.deactivate-button:hover {
+    background-color: #d32f2f;
+}
