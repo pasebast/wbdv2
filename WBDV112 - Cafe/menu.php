@@ -430,12 +430,19 @@ function updateCartItem(itemName, action) {
             const response = JSON.parse(xhr.responseText);
             document.getElementById('cart-count').innerText = response.cartCount;
             document.getElementById('cart-items').innerHTML = response.cartContent;
+
+            if (response.cartCount === 0) {
+                disableCheckoutAndClearCartButtons();
+            }
         }
     };
     xhr.send('item_name=' + encodeURIComponent(itemName) + '&action=' + encodeURIComponent(action));
 }
 
-
+function disableCheckoutAndClearCartButtons() {
+    document.getElementById('checkoutBtn').disabled = true;
+    document.getElementById('clearCartBtn').disabled = true;
+}
 
 		
     </script>
