@@ -220,12 +220,17 @@ function clearCart() {
     <div id="cart-items"> <!-- Cart items will be dynamically injected here -->
         <?php if (!empty($_SESSION['cart'])): ?>
             <ul>
-                <?php foreach ($_SESSION['cart'] as $cartItem): ?>
-                    <li><img src="<?php echo htmlspecialchars($cartItem['image']); ?>" alt="<?php echo htmlspecialchars($cartItem['name']); ?>" class="cart-item-image">
+    <?php foreach ($_SESSION['cart'] as $cartItem): ?>
+        <li>
+            <img src="<?php echo htmlspecialchars($cartItem['image']); ?>" alt="<?php echo htmlspecialchars($cartItem['name']); ?>" class="cart-item-image">
             <?php echo htmlspecialchars($cartItem['name']); ?> (x<?php echo $cartItem['quantity']; ?>): PHP <?php echo number_format($cartItem['price'], 2); ?> each
-       </li>
-                <?php endforeach; ?>
-            </ul>
+            <button class="adjust-qty" onclick="updateCartItem('<?php echo htmlspecialchars($cartItem['name']); ?>', 'decrease')">-</button>
+            <button class="adjust-qty" onclick="updateCartItem('<?php echo htmlspecialchars($cartItem['name']); ?>', 'increase')">+</button>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+
         <?php else: ?>
             <p>Your cart is empty.</p>
         <?php endif; ?>
@@ -414,6 +419,25 @@ function clearCart() {
             // Submit form after animation
             button.closest('form').submit();
         }
+		
+
+function updateCartItem(itemName, action) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'update_cart.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            document.getElementById('cart-count').innerText = response.cartCount;
+            document.getElementById('cart-items').innerHTML = response.cartContent;
+        }
+    };
+    xhr.send('item_name=' + encodeURIComponent(itemName) + '&action=' + encodeURIComponent(action));
+}
+
+
+
+		
     </script>
     
     <?php include('footer.php'); ?>
