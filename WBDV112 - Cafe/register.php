@@ -115,10 +115,10 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                         <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
 
 						<label for="firstname">First Name:</label>
-						<input type="text" id="firstname" name="firstname" placeholder="Your First Name" required>
+						<input type="text" id="firstname" name="firstname" placeholder="Your First Name" required required pattern="^[a-zA-Z.]{2,50}$" title="First Name should be 2-50 characters long and can only contain letters, and periods.">
 
 						<label for="lastname">Last Name:</label>
-						<input type="text" id="lastname" name="lastname" placeholder="Your Last Name" required>
+						<input type="text" id="lastname" name="lastname" placeholder="Your Last Name" required required pattern="^[a-zA-Z.]{2,50}$" title="Last Name should be 2-50 characters long and can only contain letters, and periods.">
 
 						<label for="address">Address:</label>
 						<input type="text" id="address" name="address" placeholder="Your Address" required>

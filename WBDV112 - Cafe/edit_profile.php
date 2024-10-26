@@ -227,10 +227,10 @@ $conn->close();
         <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
 
         <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" value="<?php echo htmlspecialchars($user['first_name']); ?>" required>
+        <input type="text" name="first_name" value="<?php echo htmlspecialchars($user['first_name']); ?>" required pattern="^[a-zA-Z.]{2,50}$" title="First Name should be 2-50 characters long and can only contain letters, and periods.">
 
         <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" value="<?php echo htmlspecialchars($user['last_name']); ?>" required>
+        <input type="text" name="last_name" value="<?php echo htmlspecialchars($user['last_name']); ?>" required pattern="^[a-zA-Z.]{2,50}$" title="Last Name should be 2-50 characters long and can only contain letters, and periods.">
 
         <label for="email">Email:</label>
         <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
@@ -366,6 +366,10 @@ const initialData = {
 };
 
 function checkChanges() {
+    if (!validateProfileForm()) {
+        return;
+    }
+
     const savedPayment = document.getElementById('saved_payment').value;
     const expiryDate = document.getElementById('expiry_date').value;
     const cvc = document.getElementById('cvc').value;
@@ -401,6 +405,7 @@ function checkChanges() {
 
 
 
+
 // Modal logic
 const modal = document.getElementById("confirmationModal");
 const span = document.getElementsByClassName("close")[0];
@@ -416,6 +421,29 @@ window.onclick = (event) => {
         modal.style.display = "none";
     }
 }
+
+function validateProfileForm() {
+    var firstName = document.querySelector("[name='first_name']").value;
+    var lastName = document.querySelector("[name='last_name']").value;
+
+    var nameRegex = /^[a-zA-Z.]{2,50}$/;
+
+    if (!nameRegex.test(firstName)) {
+        showModal("Invalid First Name. It should be 2-50 characters long and can only contain letters, and periods.");
+        return false;
+    }
+
+    if (!nameRegex.test(lastName)) {
+        showModal("Invalid Last Name. It should be 2-50 characters long and can only contain letters, and periods.");
+        return false;
+    }
+
+    return true;
+}
+
+
+
+
 </script>
 
 
