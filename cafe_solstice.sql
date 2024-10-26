@@ -3,12 +3,40 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Oct 25, 2024 at 02:18 PM
+-- Generation Time: Oct 26, 2024 at 05:17 PM
 -- Server version: 5.0.27
 -- PHP Version: 5.2.1
 -- 
 -- Database: `cafe_solstice`
 -- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `deactivation_requests`
+-- 
+
+CREATE TABLE `deactivation_requests` (
+  `id` int(11) NOT NULL auto_increment,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `reason` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+-- 
+-- Dumping data for table `deactivation_requests`
+-- 
+
+INSERT INTO `deactivation_requests` (`id`, `username`, `email`, `reason`, `message`, `created_at`) VALUES 
+(1, 'paultest1', 'paultest1@gmail.com', 'Privacy Concerns', 'testing ulit', '2024-10-27 00:24:25'),
+(2, 'paultest1', 'paultest1@gmail.com', 'Not Satisfied with Service', 'pharmacy â™¥', '2024-10-27 00:39:22'),
+(3, 'paultest1', 'paultest1@gmail.com', 'Switching to a Competitor', 'pharmacy 3-Y1-4 â™¥', '2024-10-27 00:46:21'),
+(4, 'paultest1', 'paultest1@gmail.com', 'Switching to a Competitor', 'pharmacy â™¥', '2024-10-27 00:56:14'),
+(5, 'paultest1', 'paultest1@gmail.com', 'Other', 'pharmacy â™¥aaaaaaaaaa', '2024-10-27 01:09:18'),
+(6, 'paultest1', 'paultest1@gmail.com', 'Switching to a Competitor', 'pharmacy', '2024-10-27 01:13:23');
 
 -- --------------------------------------------------------
 
@@ -24,7 +52,7 @@ CREATE TABLE `email_verifications` (
   `expires_at` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 -- 
 -- Dumping data for table `email_verifications`
@@ -36,7 +64,9 @@ INSERT INTO `email_verifications` (`id`, `user_id`, `token`, `created_at`, `expi
 (3, 16, '3fb133987da81d2530ec42c46ff6f5e8', '2024-10-18 23:21:41', '2024-10-19 15:21:41'),
 (4, 17, 'a63926df9353808f165ebb7a6f78436e', '2024-10-18 23:25:16', '2024-10-19 15:25:16'),
 (5, 17, '16377de30c73e9bf9f5894fe442138f4', '2024-10-18 23:25:46', '2024-10-19 15:25:46'),
-(25, 35, '06572ad595922a97507bda9764ca79b2', '2024-10-25 21:34:05', '2024-10-26 13:34:05');
+(25, 35, '06572ad595922a97507bda9764ca79b2', '2024-10-25 21:34:05', '2024-10-26 13:34:05'),
+(26, 16, '453b94d26830f2ec71b087a943e31b13', '2024-10-25 22:47:54', '2024-10-26 14:47:54'),
+(27, 1, 'abd36cf5d883495d700591417fbe28a5', '2024-10-27 01:06:45', '2024-10-27 17:06:45');
 
 -- --------------------------------------------------------
 
@@ -53,7 +83,7 @@ CREATE TABLE `order_items` (
   `image` varchar(255) default NULL,
   PRIMARY KEY  (`id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
 
 -- 
 -- Dumping data for table `order_items`
@@ -95,7 +125,10 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_name`, `quantity`, `price`
 (59, 34, 'Horizon Wildberry Kombucha', 1, 160.00, 'images/menu14.png'),
 (60, 35, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
 (61, 36, 'Dawn Flat White', 1, 120.00, 'images/menu06.png'),
-(62, 36, 'Zenith Grapefruit Tea', 1, 170.00, 'images/menu09.png');
+(62, 36, 'Zenith Grapefruit Tea', 1, 170.00, 'images/menu09.png'),
+(63, 37, 'Sunrise Brew', 1, 80.00, 'images/menu05.png'),
+(64, 37, 'Blueberry Cheesecake', 1, 160.00, 'images/menu17.png'),
+(65, 37, 'Strawberry Tart Supreme', 1, 170.00, 'images/menu18.png');
 
 -- --------------------------------------------------------
 
@@ -112,7 +145,7 @@ CREATE TABLE `orders` (
   `saved_payment` varchar(255) default NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 -- 
 -- Dumping data for table `orders`
@@ -136,7 +169,8 @@ INSERT INTO `orders` (`id`, `user_id`, `order_number`, `order_date`, `total_amou
 (32, 1, 'ORD671a53997fd7a', '2024-10-24 14:03:05', 302.40, '1111-1111-1111-1111'),
 (34, 6, 'ORD671ba62aa2b34', '2024-10-25 14:07:38', 313.60, '1235123512351235'),
 (35, 6, 'ORD671ba75fa3630', '2024-10-25 14:12:47', 168.00, '1235123512351235'),
-(36, 6, 'ORD671ba78a70e08', '2024-10-25 14:13:30', 324.80, '1234-1234-8888-6969');
+(36, 6, 'ORD671ba78a70e08', '2024-10-25 14:13:30', 324.80, '1234-1234-8888-6969'),
+(37, 6, 'ORD671bc796c72cc', '2024-10-25 16:30:14', 459.20, '1234-1234-8888-6969');
 
 -- --------------------------------------------------------
 
@@ -151,7 +185,7 @@ CREATE TABLE `password_resets` (
   `expires_at` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 -- 
 -- Dumping data for table `password_resets`
@@ -223,9 +257,9 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `addre
 (13, 'poltest14564564564', 'ptsebastian6585val@stu', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:16:11', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
 (14, 'poltest178757', 'ptse585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:21:04', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
 (15, 'poltest1sdf54564', 'ptsean6585v@studma.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:22:19', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Active', NULL, NULL, NULL, 'member'),
-(16, 'paultest10', 'paultest10@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:21:41', '123 Tamraw Hills', '', NULL, 'Paul10', 'Test10', 'Pending', NULL, NULL, NULL, 'member'),
+(16, 'paultest10', 'paul.dreadlike3@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:21:41', '123 Tamraw Hills', '', NULL, 'Paul10', 'Test10', 'Active', NULL, NULL, NULL, 'member'),
 (17, 'poltest2sdfs43252', '234anv@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:25:16', '123 Tamaraw Hills', '', NULL, 'Pol2', 'Test2', 'Active', NULL, NULL, NULL, 'member'),
-(35, 'poltest1', 'ptsebastian6585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-25 21:34:05', '123 lkjsadflkj', '', NULL, 'pol1', 'test1', 'Active', NULL, NULL, NULL, 'admin');
+(35, 'poltest1', 'ptsebastian6585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-25 21:34:05', '123 lkjsadflkj', '2024-6894-2457-1234', '1729956067_400.png', 'pol1', 'test1', 'Active', '2025-12-01', '222', NULL, 'admin');
 
 -- 
 -- Constraints for dumped tables
