@@ -1,5 +1,4 @@
 <?php
-// Start the session
 session_start();
 include('db_connection.php'); // Include your database connection file
 
@@ -53,15 +52,22 @@ if (isset($_GET['email'])) {
 
         // Send the email
         if ($mail->send()) {
-            echo "<script>alert('Activation link has been resent. Please check your email.'); window.location.href='index.php';</script>";
+            $_SESSION['activation_message'] = 'Activation link has been resent. Please check your email.';
+            $_SESSION['activation_status'] = 'success';
         } else {
-            echo "<script>alert('Failed to resend activation link. Please try again.'); window.location.href='index.php';</script>";
+            $_SESSION['activation_message'] = 'Failed to resend activation link. Please try again.';
+            $_SESSION['activation_status'] = 'failure';
         }
     } else {
-        echo "<script>alert('No user found with that email.'); window.location.href='index.php';</script>";
+        $_SESSION['activation_message'] = 'No user found with that email.';
+        $_SESSION['activation_status'] = 'failure';
     }
+    header("Location: index.php");
+    exit();
 } else {
-    // If the email is not set in the query string
-    echo "<script>alert('No email provided.'); window.location.href='index.php';</script>";
+    $_SESSION['activation_message'] = 'No email provided.';
+    $_SESSION['activation_status'] = 'failure';
+    header("Location: index.php");
+    exit();
 }
 ?>

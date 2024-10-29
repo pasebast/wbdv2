@@ -42,12 +42,12 @@ if (isset($_GET['email'])) {
 
         // Set up PHPMailer
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'forgot.cafesolstice@gmail.com'; // Your email
-        $mail->Password   = 'llsyciobozilppwy'; // Your app password
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'forgot.cafesolstice@gmail.com'; // Your email
+        $mail->Password = 'llsyciobozilppwy'; // Your app password
         $mail->SMTPSecure = 'tls';
-        $mail->Port       = 587;
+        $mail->Port = 587;
 
         // Set email format to HTML
         $mail->isHTML(true);
@@ -58,15 +58,22 @@ if (isset($_GET['email'])) {
 
         // Send the email
         if ($mail->send()) {
-            echo "<script>alert('Activation link has been resent. Please check your email.'); window.location.href='usersadmin.php';</script>";
+            $_SESSION['activation_message'] = 'Activation link has been resent. Please check your email.';
+            $_SESSION['activation_status'] = 'success';
         } else {
-            echo "<script>alert('Failed to resend activation link. Please try again.'); window.location.href='usersadmin.php';</script>";
+            $_SESSION['activation_message'] = 'Failed to resend activation link. Please try again.';
+            $_SESSION['activation_status'] = 'failure';
         }
     } else {
-        echo "<script>alert('No user found with that email.'); window.location.href='usersadmin.php';</script>";
+        $_SESSION['activation_message'] = 'No user found with that email.';
+        $_SESSION['activation_status'] = 'failure';
     }
+    header("Location: usersadmin.php");
+    exit();
 } else {
-    // If the email is not set in the query string
-    echo "<script>alert('No email provided.'); window.location.href='usersadmin.php';</script>";
+    $_SESSION['activation_message'] = 'No email provided.';
+    $_SESSION['activation_status'] = 'failure';
+    header("Location: usersadmin.php");
+    exit();
 }
 ?>

@@ -69,26 +69,36 @@ $result = $conn->query($sql);
         a:hover {
             text-decoration: underline;
         }
-        .back-button {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .back-button a {
-            background-color: #f8a21c;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .back-button a:hover {
-            background-color: #d9534f;
-            color: white;
-        }
+		
+        .home-back-button {
+			margin-top: 20px;
+			text-align: center;
+		}
+
+		.home-back-button a {
+			background-color: #f8a21c;
+			color: white;
+			padding: 12px 25px; /* Increased padding for better spacing */
+			text-decoration: none;
+			border-radius: 5px;
+			font-weight: bold;
+			transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+		}
+
+		.home-back-button a:hover {
+			background-color: #d9534f;
+			color: white;
+			box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Enhance shadow on hover */
+		}
+		
     </style>
 </head>
 <body>
     <div class="admin-banner">ADMIN ACCESS ONLY</div>
+	<div class="home-back-button">
+            <a href="index.php">Back to Home</a>
+        </div>
     <div class="container">
         <?php
         if ($result->num_rows > 0) {
@@ -109,7 +119,7 @@ $result = $conn->query($sql);
         }
         $conn->close();
         ?>
-        <div class="back-button">
+        <div class="home-back-button">
             <a href="index.php">Back to Home</a>
         </div>
     </div>

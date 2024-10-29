@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: index.php");  // Redirect back to index.php
             exit();  // Ensure no further code is executed
         } elseif ($user['account_status'] === 'Pending') {
-            $_SESSION['login_error'] = 'Your account is currently pending activation. Please check your email for the link. <a href="resend_activation.php?email=' . urlencode($user['email']) . '">Resend Activation Link</a>';
+            $_SESSION['login_error'] = 'Your account is currently pending activation. Please check your email for the link. <a href="resend_activation.php?email=' . urlencode($user['email']) . '" onclick="showLoadingSpinner()">Resend Activation Link</a>';
         } elseif ($user['account_status'] === 'Deactivated') {
             $_SESSION['login_error'] = 'Your account has been deactivated. Please contact support through the "Contact Us" form for assistance. <a href="contact.php">Contact Support</a>';
         }
@@ -191,6 +191,11 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
 	
 </head>
 <body>
+<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+<div class="admin-banner">ADMIN ACCESS ONLY</div>
+<?php else: ?>
+<li></a></li>
+<?php endif; ?>
 
 <div class="navbar">
     <div class="icon">
@@ -304,6 +309,21 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
 </div>
 
 
+<!-- Activation Status Modal -->
+<div id="activationStatusModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="activationStatusMessage"></p>
+    </div>
+</div>
+
+<!-- Loading Spinner -->
+<div id="loadingSpinner" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9999; text-align: center;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="loader"></div>
+        <p style="color: white;">Loading...</p>
+    </div>
+</div>
 
 
 <script>
@@ -442,6 +462,40 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+function showLoadingSpinner() {
+    var spinner = document.getElementById('loadingSpinner');
+    spinner.style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const activationStatus = "<?php echo isset($_SESSION['activation_status']) ? $_SESSION['activation_status'] : ''; ?>";
+    const activationMessage = "<?php echo isset($_SESSION['activation_message']) ? $_SESSION['activation_message'] : ''; ?>";
+
+    if (activationStatus) {
+        var modal = document.getElementById('activationStatusModal');
+        var message = document.getElementById('activationStatusMessage');
+        message.innerHTML = activationMessage;
+        modal.style.display = 'block';
+        
+        // Hide the loading spinner if the modal is shown
+        var spinner = document.getElementById('loadingSpinner');
+        spinner.style.display = 'none';
+
+        // Close modal functionality
+        var closeBtn = modal.querySelector('.close');
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        };
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+    }
+
+    // Clear session variables after use
+    <?php unset($_SESSION['activation_status'], $_SESSION['activation_message']); ?>
+});
 
 
 </script>
