@@ -47,17 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Server-side validation
-    if (!preg_match("/^[a-zA-Z.]{2,50}$/", $first_name)) {
-        $error = "First Name should be 2-50 characters long and can only contain letters, and periods.";
-    } elseif (!preg_match("/^[a-zA-Z.]{2,50}$/", $last_name)) {
-        $error = "Last Name should be 2-50 characters long and can only contain letters, and periods.";
-    } elseif ($saved_payment && !preg_match("/^\d{4}-\d{4}-\d{4}-\d{4}$/", $saved_payment)) {
-        $error = "Invalid Card Number. It should be in the 16-digit format XXXX-XXXX-XXXX-XXXX.";
-    } elseif ($expiry_date && !preg_match("/^(0[1-9]|1[0-2])\/?([0-9]{2})$/", $expiry_date)) {
-        $error = "Invalid Expiry Date. It should be in the format MM/YY.";
-    } elseif ($cvc && !preg_match("/^\d{3}$/", $cvc)) {
-        $error = "Invalid CVC. It should be a 3-digit number.";
-    } else {
+		if (!preg_match("/^[a-zA-Z.]{2,50}$/", $first_name)) {
+			$error = "First Name should be 2-50 characters long and can only contain letters, and periods.";
+		} elseif (!preg_match("/^[a-zA-Z.]{2,50}$/", $last_name)) {
+			$error = "Last Name should be 2-50 characters long and can only contain letters, and periods.";
+		} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$error = "Invalid email format. Please enter a valid email address.";
+		} elseif ($saved_payment && !preg_match("/^\d{4}-\d{4}-\d{4}-\d{4}$/", $saved_payment)) {
+			$error = "Invalid Card Number. It should be in the 16-digit format XXXX-XXXX-XXXX-XXXX.";
+		} elseif ($expiry_date && !preg_match("/^(0[1-9]|1[0-2])\/?([0-9]{2})$/", $expiry_date)) {
+			$error = "Invalid Expiry Date. It should be in the format MM/YY.";
+		} elseif ($cvc && !preg_match("/^\d{3}$/", $cvc)) {
+			$error = "Invalid CVC. It should be a 3-digit number.";
+		} else {
         // Check if the username is already taken by another user
         $check_username = "SELECT id FROM users WHERE username='$username' AND id != '$user_id'";
         $username_result = $conn->query($check_username);
