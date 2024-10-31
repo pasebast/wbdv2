@@ -61,9 +61,9 @@ $conn->close();
             <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
                 <li><a href="profile.php">Profile</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="logout.php">Logout (<?php echo htmlspecialchars($_SESSION['name']); ?>)</a></li>
             <?php else: ?>
-                <li><a href="login.php"></a></li>
+                <li></a></li>
             <?php endif; ?>
         </ul>
     </div>
@@ -112,12 +112,14 @@ $conn->close();
 	</div>
     </div>
 
-	   <!-- Add Order History Button -->
+	   <!-- pol buttons -->
 	<div class="profile-actions">
-		<a href="orderhistory.php" class="order-history-button">Order History</a>
-		<a href="edit_profile.php" class="edit-profile-button">Edit Profile</a>
-		<a href="deactivateuser.php" class="deactivate-button">Deactivate Account</a>
-	</div>
+    <a href="orderhistory.php" class="order-history-button">Order History</a>
+    <a href="edit_profile.php" class="edit-profile-button">Edit Profile</a>
+    <a href="changepassword.php" class="change-password-button">Change Password</a> <!-- New Change Password link -->
+    <a href="deactivateuser.php" class="deactivate-button">Deactivate Account</a>
+</div>
+
 
 </div>
 

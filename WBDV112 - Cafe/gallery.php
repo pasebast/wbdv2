@@ -29,7 +29,7 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                     <li><a href="aboutus.php" class="<?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>">About</a></li>
 					<?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="logout.php">Logout (<?php echo htmlspecialchars($_SESSION['name']); ?>)</a></li>
                     <?php endif; ?>
                 </ul>
             </div>

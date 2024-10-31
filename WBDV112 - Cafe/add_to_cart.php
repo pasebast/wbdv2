@@ -66,7 +66,6 @@ $PastryItems = array(
         echo json_encode(array('error' => 'Invalid item ID'));
         exit();
     }
-
     // Initialize the cart session if it doesn't exist
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = array();

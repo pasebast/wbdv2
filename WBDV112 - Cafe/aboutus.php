@@ -31,7 +31,7 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 					
 					<?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="logout.php">Logout (<?php echo htmlspecialchars($_SESSION['name']); ?>)</a></li>
                     <?php endif; ?>
 					
                 </ul>

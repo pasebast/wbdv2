@@ -67,14 +67,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email_result = $conn->query($check_email);
 
         // Generate specific error messages
-        if ($username_result->num_rows > 0) {
-            $error = "The username '" . htmlspecialchars($username) . "' is already taken. Please choose another one.";
-        } elseif ($email_result->num_rows > 0) {
-            $error = "The email '" . htmlspecialchars($email) . "' is already in use by another account.";
-        } else {
-            // Handle profile picture upload
-            // Existing logic for handling profile picture uploads
+if ($username_result->num_rows > 0) {
+    $error = "The username '" . htmlspecialchars($username) . "' is already taken. Please choose another one.";
+} elseif ($email_result->num_rows > 0) {
+    $error = "The email '" . htmlspecialchars($email) . "' is already in use by another account.";
+} else {
+    // Handle profile picture upload
+    $profile_picture = $user['profile_picture']; // Keep the old picture if no new one is uploaded
+    $target_dir = "uploads/";
+
+    // Check if user wants to remove the profile picture
+    if (isset($_POST['remove_picture']) && $_POST['remove_picture'] == '1') {
+        // Delete the current picture if it exists and is not the default
+        if (!empty($user['profile_picture']) && file_exists($target_dir . $user['profile_picture'])) {
+            unlink($target_dir . $user['profile_picture']); // Delete the file
         }
+        $profile_picture = NULL; // Reset the profile picture to NULL or a default value
+    }
+
+    // If a new profile picture is uploaded and the remove picture is NOT checked, process the upload
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == 0) {
+        $allowed_types = array('image/jpeg', 'image/png', 'image/gif');
+        $allowed_extensions = array('jpg', 'jpeg', 'png', 'gif');
+        $file_extension = strtolower(pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION));
+        $file_type = $_FILES['profile_picture']['type'];
+
+        if (in_array($file_type, $allowed_types) && in_array($file_extension, $allowed_extensions)) {
+            $new_file_name = time() . "_" . basename($_FILES['profile_picture']['name']); // Add timestamp to avoid overwriting
+            $target_file = $target_dir . $new_file_name;
+
+            // Move the uploaded file to the uploads directory
+            if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $target_file)) {
+                // Delete the old picture if it's being replaced
+                if (!empty($user['profile_picture']) && file_exists($target_dir . $user['profile_picture'])) {
+                    unlink($target_dir . $user['profile_picture']); // Delete the old picture
+                }
+                $profile_picture = $new_file_name; // Save the new file name
+            } else {
+                $error = "Error moving uploaded file.";
+            }
+        } else {
+            $error = "Invalid file type. Only JPG, PNG, and GIF files are allowed.";
+        }
+    }
+}
+
 
         // Only proceed if there are no errors
         if (empty($error)) {
@@ -378,13 +415,20 @@ function checkChanges() {
         cvc: document.getElementsByName("cvc")[0].value
     };
 
-    const changesMade = Object.keys(initialData).some(key => initialData[key] !== currentData[key]);
+    // Check if profile picture was changed
+    const profilePicture = document.getElementsByName("profile_picture")[0];
+    const profilePictureChanged = profilePicture.files.length > 0;
+    const initialProfilePicture = "<?php echo isset($user['profile_picture']) ? $user['profile_picture'] : ''; ?>";
+    
+    const changesMade = Object.keys(initialData).some(key => initialData[key] !== currentData[key]) || profilePictureChanged;
+
     if (changesMade) {
         document.getElementById('confirmationModal').style.display = "block";
     } else {
         document.getElementsByTagName('form')[0].submit();
     }
 }
+
 
 
 
