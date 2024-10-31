@@ -1578,3 +1578,19 @@ button:disabled {
 .change-password-button:hover {
     background-color: #d9534f;
 }
+
+
+.admin-link {
+    background-color: #f0ad4e;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.admin-link:hover {
+    background-color: #ec971f;
+    color: white;
+}

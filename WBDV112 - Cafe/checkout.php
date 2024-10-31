@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('db_connection.php'); // Ensure the correct path to db_connection.php
-
+date_default_timezone_set('Asia/Manila'); // Set to your local time zone
 // Handle checkout confirmation
 if (isset($_POST['confirm_checkout'])) {
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {

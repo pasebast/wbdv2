@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+date_default_timezone_set('Asia/Manila'); // Set to your local time zone
 // Check if the cart is empty
 if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     echo "<p>Your cart is empty. Please go back to the menu and add items.</p>";
