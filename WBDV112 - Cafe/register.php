@@ -2,6 +2,35 @@
 // Initialize session and cart, etc.
 session_start();
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $first_name = trim($_POST['firstname']); // Trim any leading/trailing spaces
+    $last_name = trim($_POST['lastname']); // Trim any leading/trailing spaces
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $payment = $_POST['payment'];
+    $expiry_date = !empty($_POST['expiry_date']) ? $_POST['expiry_date'] : NULL;
+    $cvc = $_POST['cvc'];
+
+    // Server-side validation
+    if (!preg_match("/^[a-zA-Z.\s]{2,50}$/", $first_name) || preg_match("/^[.\s]*$/", $first_name) || strlen($first_name) == 0) {
+        $error = "First Name should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.";
+    } elseif (!preg_match("/^[a-zA-Z.\s]{2,50}$/", $last_name) || preg_match("/^[.\s]*$/", $last_name) || strlen($last_name) == 0) {
+        $error = "Last Name should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email format.";
+    } elseif ($payment && !preg_match("/^\d{4}-\d{4}-\d{4}-\d{4}$/", $payment)) {
+        $error = "Invalid Card Number. It should be in the 16-digit format XXXX-XXXX-XXXX-XXXX.";
+    } elseif ($expiry_date && !preg_match("/^(0[1-9]|1[0-2])\/?([0-9]{2})$/", $expiry_date)) {
+        $error = "Invalid Expiry Date. It should be in the format MM/YY.";
+    } elseif ($cvc && !preg_match("/^\d{3}$/", $cvc)) {
+        $error = "Invalid CVC. It should be a 3-digit number.";
+    } else {
+        // Existing logic for handling registration
+    }
+}
+
+
 
 // Get the current page filename
 $current_page = basename($_SERVER['REQUEST_URI']);
@@ -115,10 +144,10 @@ $current_page = basename($_SERVER['REQUEST_URI']);
                         <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
 
 						<label for="firstname">First Name:</label>
-						<input type="text" id="firstname" name="firstname" placeholder="Your First Name" required required pattern="^[a-zA-Z.]{2,50}$" title="First Name should be 2-50 characters long and can only contain letters, and periods.">
+						<input type="text" id="firstname" name="firstname" placeholder="Your First Name" required pattern="^[a-zA-Z.\s]{2,50}$" title="First Name should be 2-50 characters long and can only contain letters, spaces, and periods.">
 
 						<label for="lastname">Last Name:</label>
-						<input type="text" id="lastname" name="lastname" placeholder="Your Last Name" required required pattern="^[a-zA-Z.]{2,50}$" title="Last Name should be 2-50 characters long and can only contain letters, and periods.">
+						<input type="text" id="lastname" name="lastname" placeholder="Your Last Name" required pattern="^[a-zA-Z.\s]{2,50}$" title="Last Name should be 2-50 characters long and can only contain letters, spaces, and periods.">
 
 						<label for="address">Address:</label>
 						<input type="text" id="address" name="address" placeholder="Your Address" required>
@@ -278,6 +307,8 @@ function validateFormAndPayment() {
     var email = document.getElementById("email").value;
     var password = document.getElementById('password').value;
     var confirmPassword = document.getElementById('confirm_password').value;
+    var firstName = document.getElementById("firstname").value;
+    var lastName = document.getElementById("lastname").value;
     var addPaymentCheckbox = document.getElementById('add_payment');
     var payment = document.getElementById('payment').value;
     var expiry_date = document.getElementById('expiry_date').value;
@@ -295,6 +326,19 @@ function validateFormAndPayment() {
     var emailRegex = /^[a-zA-Z0-9_.@]{4,50}$/;
     if (!emailRegex.test(email)) {
         showModal("Invalid email. It should be 4-50 characters long and can only contain letters, numbers, @, periods, and underscores.");
+        return false;
+    }
+
+    // Validate first name
+    var nameRegex = /^[a-zA-Z.\s]{2,50}$/;
+    if (!nameRegex.test(firstName) || firstName.replace(/[.\s]/g, '').length === 0) {
+        showModal("Invalid First Name. It should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.");
+        return false;
+    }
+
+    // Validate last name
+    if (!nameRegex.test(lastName) || lastName.replace(/[.\s]/g, '').length === 0) {
+        showModal("Invalid Last Name. It should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.");
         return false;
     }
 
@@ -334,9 +378,9 @@ function validateFormAndPayment() {
 
     // Show loading spinner
     document.getElementById('loadingSpinner').style.display = 'block';
-
     return true;
 }
+
 
 function formatCardNumber(input) {
     const value = input.value.replace(/\D/g, ''); // Remove all non-digit characters

@@ -47,12 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Server-side validation
-		if (!preg_match("/^[a-zA-Z.]{2,50}$/", $first_name)) {
-			$error = "First Name should be 2-50 characters long and can only contain letters, and periods.";
-		} elseif (!preg_match("/^[a-zA-Z.]{2,50}$/", $last_name)) {
-			$error = "Last Name should be 2-50 characters long and can only contain letters, and periods.";
+		if (!preg_match("/^[a-zA-Z.\s]{2,50}$/", $first_name) || preg_match("/^[.\s]*$/", $first_name)) {
+			$error = "First Name should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.";
+		} elseif (!preg_match("/^[a-zA-Z.\s]{2,50}$/", $last_name) || preg_match("/^[.\s]*$/", $last_name)) {
+			$error = "Last Name should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.";
 		} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$error = "Invalid email format. Please enter a valid email address.";
+			$error = "Invalid email format.";
 		} elseif ($saved_payment && !preg_match("/^\d{4}-\d{4}-\d{4}-\d{4}$/", $saved_payment)) {
 			$error = "Invalid Card Number. It should be in the 16-digit format XXXX-XXXX-XXXX-XXXX.";
 		} elseif ($expiry_date && !preg_match("/^(0[1-9]|1[0-2])\/?([0-9]{2})$/", $expiry_date)) {
@@ -454,14 +454,15 @@ window.onclick = (event) => {
 function validateProfileForm() {
     var firstName = document.querySelector("[name='first_name']").value;
     var lastName = document.querySelector("[name='last_name']").value;
-    var nameRegex = /^[a-zA-Z.]{2,50}$/;
+    var nameRegex = /^[a-zA-Z.\s]{2,50}$/;
 
-    if (!nameRegex.test(firstName)) {
-        showModal("Invalid First Name. It should be 2-50 characters long and can only contain letters, and periods.");
+    if (!nameRegex.test(firstName) || firstName.replace(/[.\s]/g, '').length === 0) {
+        showModal("Invalid First Name. It should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.");
         return false;
     }
-    if (!nameRegex.test(lastName)) {
-        showModal("Invalid Last Name. It should be 2-50 characters long and can only contain letters, and periods.");
+
+    if (!nameRegex.test(lastName) || lastName.replace(/[.\s]/g, '').length === 0) {
+        showModal("Invalid Last Name. It should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.");
         return false;
     }
 
