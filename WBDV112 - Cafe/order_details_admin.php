@@ -38,6 +38,7 @@ $result_items = $conn->query($sql_items);
     <meta charset="UTF-8">
     <title>Order Details</title>
     <link rel="stylesheet" href="sty.css"> <!-- Link to your main CSS file -->
+	<link rel="icon" type="image/png" href="images/logo01.png">
     <style>
         body {
             font-family: 'Arial', sans-serif;

@@ -75,6 +75,7 @@ if (isset($_POST['confirm_checkout'])) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Order Confirmation</title>
             <link rel="stylesheet" href="sty.css"> <!-- Link to your main CSS file -->
+			<link rel="icon" type="image/png" href="images/logo01.png">
             <style>
                 .confirmation-container {
                     max-width: 600px;

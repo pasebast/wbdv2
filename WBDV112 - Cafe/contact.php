@@ -13,7 +13,7 @@ $current_page = basename($_SERVER['REQUEST_URI']);
     <meta charset="UTF-8">
     <title>Café Solstice - Contact Us</title>
     <link rel="stylesheet" href="sty.css"> <!-- Link to your external stylesheet -->
-	
+	<link rel="icon" type="image/png" href="images/logo01.png">
 	
 	<script>
         function showSuccessMessage() {

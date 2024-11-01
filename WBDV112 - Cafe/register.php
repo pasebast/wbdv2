@@ -46,6 +46,7 @@ $current_page = basename($_SERVER['REQUEST_URI']);
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 	<link rel="stylesheet" href="sty.css">
+	<link rel="icon" type="image/png" href="images/logo01.png">
 
 <style>
 /* The Modal (background) */

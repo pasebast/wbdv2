@@ -99,6 +99,7 @@ $conn->close();
     <meta charset="UTF-8">
     <title>Deactivate Account - Café Solstice</title>
     <link rel="stylesheet" href="sty.css"> <!-- Link to your main CSS file -->
+	<link rel="icon" type="image/png" href="images/logo01.png">
     <style>
         .deactivate-container {
             background-color: #fff;

@@ -42,6 +42,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Café Solstice</title>
     <link rel="stylesheet" href="sty.css">
+	<link rel="icon" type="image/png" href="images/logo01.png">
 </head>
 <body>
 

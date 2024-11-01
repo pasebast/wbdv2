@@ -47,6 +47,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History</title>
     <link rel="stylesheet" href="sty.css"> <!-- Link to your main CSS file -->
+	<link rel="icon" type="image/png" href="images/logo01.png">
     <style>
         /* Modal Styling */
         .modal {

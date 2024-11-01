@@ -73,7 +73,7 @@ $conn->close();
     <title>Café Solstice</title>
     <link rel="stylesheet" href="sty.css">
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script> <!-- Ionicons JS -->
-	
+	<link rel="icon" type="image/png" href="images/logo01.png">
 <script>
 
 // Array of images

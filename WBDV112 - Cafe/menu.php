@@ -98,7 +98,7 @@ if (isset($_POST['add_to_cart'])) {
     <meta charset="UTF-8">
     <title>Café Solstice - Menu</title>
     <link rel="stylesheet" href="sty.css">
-	
+	<link rel="icon" type="image/png" href="images/logo01.png">
 	
 <script>
 // Add item to cart via AJAX
