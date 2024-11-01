@@ -249,10 +249,10 @@ $conn->close();
         <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
 
         <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" value="<?php echo htmlspecialchars($user['first_name']); ?>" required pattern="^[a-zA-Z.]{2,50}$" title="First Name should be 2-50 characters long and can only contain letters, and periods.">
+        <input type="text" name="first_name" value="<?php echo htmlspecialchars($user['first_name']); ?>" required pattern="^[a-zA-Z. ]{2,50}$" title="First Name should be 2-50 characters long and can only contain letters, and periods.">
 
         <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" value="<?php echo htmlspecialchars($user['last_name']); ?>" required pattern="^[a-zA-Z.]{2,50}$" title="Last Name should be 2-50 characters long and can only contain letters, and periods.">
+        <input type="text" name="last_name" value="<?php echo htmlspecialchars($user['last_name']); ?>" required pattern="^[a-zA-Z. ]{2,50}$" title="Last Name should be 2-50 characters long and can only contain letters, and periods.">
 
         <label for="email">Email:</label>
         <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
