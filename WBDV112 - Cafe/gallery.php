@@ -14,6 +14,100 @@ $current_page = basename($_SERVER['REQUEST_URI']);
     <title>Café Solstice - Gallery</title>
     <link rel="stylesheet" href="sty.css"> <!-- Link to your external stylesheet -->
 </head>
+
+<style>
+
+
+.image-container {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+
+.image-item {
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    border: solid 12px #fff;
+    background: #fff;
+    box-shadow: 0 0 15px 0px #555;
+    transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    top: 50px;
+}
+
+.image-item:hover {
+    top: 0px;
+    opacity: 0.5;
+}
+
+.image-item:nth-child(1) {
+    transform: rotate(10deg);
+}
+
+.image-item:nth-child(2) {
+    transform: rotate(0deg);
+}
+
+.image-item:nth-child(3) {
+    transform: rotate(-10deg);
+}
+
+.image-item:nth-child(4) {
+    transform: rotate(20deg);
+}
+
+.image-item:nth-child(5) {
+    transform: rotate(-5deg);
+}
+
+.image-item:nth-child(6) {
+    transform: rotate(15deg);
+}
+
+.image-item:nth-child(7) {
+    transform: rotate(-15deg);
+}
+
+.image-item:nth-child(8) {
+    transform: rotate(5deg);
+}
+
+.image-item:nth-child(9) {
+    transform: rotate(25deg);
+}
+
+.image-item:nth-child(10) {
+    transform: rotate(-25deg);
+}
+
+.image-item:nth-child(11) {
+    transform: rotate(8deg);
+}
+
+.image-item:nth-child(12) {
+    transform: rotate(-8deg);
+}
+
+p {
+    margin: -15px 0 0 0;
+}
+
+.light {
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 700px;
+    height: 700px;
+    background: #fff;
+    filter: blur(100px);
+    opacity: 0.3;
+    pointer-events: none;
+}
+</style>
 <body>
     <div class="main">
         <div class="navbar">
@@ -47,62 +141,61 @@ $current_page = basename($_SERVER['REQUEST_URI']);
        
             
             <div class="gallery-container">
-                <!-- First Image -->
-                <div class="gallery-item">
-                    <img src="images/gallery01.jpg" alt="Gallery Image 1">
-                </div>
-
-                <!-- Second Image -->
-                <div class="gallery-item">
-                    <img src="images/gallery02.jpg" alt="Gallery Image 2">
-                </div>
-
-                <!-- Third Image -->
-                <div class="gallery-item">
-                    <img src="images/gallery03.jpg" alt="Gallery Image 3">
-                </div>
+                <div class="image-container">
+			<div class="image-item">
+				<img src="images/gallery01.jpg" width="400">
+			</div>
+			<div class="image-item">
+				<img src="images/gallery02.jpg" width="400">
+			</div>
+			<div class="image-item">
+				<img src="images/gallery03.jpg" width="400">
+			</div>
+			<div class="image-item">
+				<img src="images/gallery04.jpg" width="400">
 				
-				<div class="gallery-item">
-                    <img src="images/gallery04.jpg" alt="Gallery Image 3">
-                </div>
+			</div>
+			<div class="image-item">
+				<img src="images/gallery05.jpg" width="400">
 				
-				<div class="gallery-item">
-                    <img src="images/gallery05.jpg" alt="Gallery Image 3">
-                </div>
+			</div>
+			<div class="image-item">
+				<img src="images/gallery06.jpg" width="400">
 				
-				<div class="gallery-item">
-                    <img src="images/gallery06.jpg" alt="Gallery Image 3">
-                </div>
+			</div>
+			<div class="image-item">
+				<img src="images/gallery07.jpg" width="400">
 				
-				<div class="gallery-item">
-                    <img src="images/gallery07.jpg" alt="Gallery Image 3">
-                </div>	
+			</div>
+			<div class="image-item">
+				<img src="images/gallery08.jpg" width="400">
+				
+			</div>
+			<div class="image-item">
+				<img src="images/gallery09.jpg" width="400">
+				<?php include('footer.php'); ?>
+			</div>
+			<div class="image-item">
+				<img src="images/gallery10.jpg" width="400">
+				<?php include('footer.php'); ?>
+			</div>
+			<div class="image-item">
+				<img src="images/gallery11.jpg" width="400">
+				<?php include('footer.php'); ?>
+			</div>
+			<div class="image-item">
+				<img src="images/gallery12.jpg" width="400">
+			<?php include('footer.php'); ?>
+			</div>
 			
-				<div class="gallery-item">
-                    <img src="images/gallery08.jpg" alt="Gallery Image 3">
-                </div>
-				
-				<div class="gallery-item">
-                    <img src="images/gallery09.jpg" alt="Gallery Image 3">
-                </div>
-				
-				<div class="gallery-item">
-                    <img src="images/gallery10.jpg" alt="Gallery Image 3">
-                </div>
-				
-				<div class="gallery-item">
-                    <img src="images/gallery11.jpg" alt="Gallery Image 3">
-                </div>
-				
-				<div class="gallery-item">
-                    <img src="images/gallery12.jpg" alt="Gallery Image 3">
-                </div>
-				
+				</div>
+			<div class="light"></div>
+			
             </div>
         
     </div>
 
     <!-- Include the footer -->
-    <?php include('footer.php'); ?>
+    
 </body>
 </html>

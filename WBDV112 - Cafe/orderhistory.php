@@ -190,25 +190,24 @@ $conn->close();
 
 function openModal(orderNumber) {
     console.log("Fetching details for order: " + orderNumber);
-
     // AJAX request to fetch order details
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "fetch_order_details.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             console.log(xhr.responseText);
-
             var response = JSON.parse(xhr.responseText);
             var orderDetails = response.order_details;
             var orderSummary = response.order_summary;
+            var address = response.address; // Fetch the address from the response
             var orderDetailsHtml = "Order No: " + orderNumber + "<br><br>";
 
-            // Add order date and saved payment method (assumes these values are the same for all items in the order)
+            // Add order date, saved payment method, and address (assumes these values are the same for all items in the order)
             if (orderDetails.length > 0) {
                 orderDetailsHtml += "Order Date: " + orderDetails[0].order_date + "<br>";
                 orderDetailsHtml += "Payment Method: " + orderDetails[0].saved_payment + "<br><br>";
+                orderDetailsHtml += "Shipping Address: " + address + "<br><br>"; // Display the address
             }
 
             // Loop through the order details and format them with the image on the right
@@ -219,7 +218,7 @@ function openModal(orderNumber) {
                     "Quantity: " + item.quantity + "<br>" +
                     "Price: PHP " + item.price + "<br><br>" +
                     "</div>";
-                
+
                 // Add product image if available
                 if (item.image) {
                     orderDetailsHtml += "<img src='" + item.image + "' style='width: 100px; height: auto; margin-left: 20px;'>";
@@ -235,15 +234,14 @@ function openModal(orderNumber) {
 
             // Insert the details into the modal
             document.getElementById('orderDetails').innerHTML = orderDetailsHtml;
-
             // Show the modal
             document.getElementById('orderDetailsModal').style.display = 'block';
         }
     };
-
     // Send the order number to the PHP script
     xhr.send("order_number=" + orderNumber);
 }
+
 
 
 function closeModal() {

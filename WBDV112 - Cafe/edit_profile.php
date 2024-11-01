@@ -148,8 +148,10 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile - Café Solstice</title>
-    <link rel="stylesheet" href="sty.css">
-	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+	<link rel="stylesheet" href="sty.css">
 
 <style>
 /* Modal (background) */
@@ -258,7 +260,11 @@ $conn->close();
         <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
 
         <label for="address">Address:</label>
-        <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
+		<input type="text" id="address" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
+		<div id="map" style="height: 300px;"></div>
+		<input type="hidden" id="lat" name="lat">
+		<input type="hidden" id="lng" name="lng">
+
 
         <label for="saved_payment">Card Number:</label>
         <input type="text" id="saved_payment" name="saved_payment" value="<?php echo htmlspecialchars($user['saved_payment']); ?>" placeholder="____-____-____-____" required pattern="\d{4}-\d{4}-\d{4}-\d{4}" title="Please enter a valid card number format." maxlength="19" oninput="formatCardNumber(this)">
@@ -307,6 +313,8 @@ $conn->close();
 
 
 </div>
+
+
 
 <script>
 function showModal(message) {
@@ -373,6 +381,7 @@ function formatCardNumber(input) {
 }
 
 </script>
+
 
 
 <script>
@@ -488,6 +497,65 @@ function validateProfileForm() {
 
 
 </script>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Initialize the map with the new coordinates
+    var map = L.map('map').setView([14.6789128, 120.9835721], 15); // Set to your new coordinates
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    // Set the default marker at the new location
+    var marker = L.marker([14.6789128, 120.9835721]).addTo(map);
+
+    // Function to set marker and pan map
+    function setMarkerAndPan(lat, lng) {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = L.marker([lat, lng]).addTo(map);
+        map.setView([lat, lng], 15);
+    }
+
+    // On map click, add a marker and get the address
+    map.on('click', function(e) {
+        setMarkerAndPan(e.latlng.lat, e.latlng.lng);
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&format=json`)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.display_name) {
+                    document.getElementById('address').value = data.display_name;
+                }
+            })
+            .catch(err => console.error(err));
+    });
+
+    // Geocode the address when the user types in the input field
+    document.getElementById('address').addEventListener('change', function() {
+        const address = this.value;
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const { lat, lon } = data[0];
+                    setMarkerAndPan(lat, lon);
+                    document.getElementById('address').value = data[0].display_name;
+                } else {
+                    alert("Address not found. Please try again.");
+                }
+            })
+            .catch(err => console.error(err));
+    });
+
+   
+</script>
+
+
+
 
 
 

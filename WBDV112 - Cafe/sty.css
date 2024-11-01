@@ -528,11 +528,13 @@ body {
 
 
 .gallery-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-left: 80px; /* Adjust this value as needed */
+}
+
 
         .gallery-item {
             border: 3px solid rgba(0, 0, 0, 0.3); /* Slightly transparent border */

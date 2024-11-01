@@ -2,18 +2,19 @@
 session_start();
 include('db_connection.php'); // Ensure the correct path to db_connection.php
 date_default_timezone_set('Asia/Manila'); // Set to your local time zone
+
 // Handle checkout confirmation
 if (isset($_POST['confirm_checkout'])) {
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         // Get the logged-in user's ID
         $user_id = $_SESSION['user_id']; // Ensure user_id is stored in session after login
 
-        // Fetch the saved payment method from the users table
-        $query_user = "SELECT saved_payment FROM users WHERE id = ?";
+        // Fetch the saved payment method and address from the users table
+        $query_user = "SELECT saved_payment, address FROM users WHERE id = ?";
         $stmt_user = $conn->prepare($query_user);
         $stmt_user->bind_param("i", $user_id);
         $stmt_user->execute();
-        $stmt_user->bind_result($saved_payment);
+        $stmt_user->bind_result($saved_payment, $address);
         $stmt_user->fetch();
         $stmt_user->close();
 
@@ -39,10 +40,10 @@ if (isset($_POST['confirm_checkout'])) {
         $tax = $subtotal * $tax_rate;
         $grand_total = $subtotal + $tax;
 
-        // Insert the order into the orders table, including the grand total
-        $query = "INSERT INTO orders (user_id, order_number, order_date, total_amount, saved_payment) VALUES (?, ?, ?, ?, ?)";
+        // Insert the order into the orders table, including the grand total and address
+        $query = "INSERT INTO orders (user_id, order_number, order_date, total_amount, saved_payment, address) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("issds", $user_id, $order_number, $order_date, $grand_total, $saved_payment);
+        $stmt->bind_param("issdss", $user_id, $order_number, $order_date, $grand_total, $saved_payment, $address);
         $stmt->execute();
 
         // Get the ID of the newly inserted order
@@ -67,7 +68,6 @@ if (isset($_POST['confirm_checkout'])) {
 
         // Confirmation page
         ?>
-
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -114,16 +114,15 @@ if (isset($_POST['confirm_checkout'])) {
             </style>
         </head>
         <body>
-
         <div class="confirmation-container">
-            <h1>Thank you for your order!</h1>
-            <p>Your order (Order No: <?php echo $order_number; ?>) has been confirmed and is being processed. We appreciate your business!</p>
-            <a href="index.php" class="confirmation-button">Return to Home</a>
-        </div>
-
+		<h1>Thank you for your order!</h1>
+		<p>Your order (Order No: <?php echo $order_number; ?>) has been confirmed and is being processed. We appreciate your business!</p>
+		<br><p>Shipping Address: <?php echo $address; ?></p></br>
+		<br><p>Estimated Delivery: <?php echo "20-45 minutes"; ?></p></br>
+		<a href="index.php" class="confirmation-button">Return to Home</a>
+		</div>
         </body>
         </html>
-
         <?php
         $stmt->close();
         $item_stmt->close();

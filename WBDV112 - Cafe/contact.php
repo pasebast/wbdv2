@@ -100,9 +100,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 <div class="contact-info">
                     <h3>Contact Information</h3>
                     <p>We are here to help you with any inquiries or feedback. Feel free to reach out to us using the contact form or the information below. We value your thoughts and look forward to hearing from you!</p>
-                    <p><strong>Email:</strong> contact@cafesolstice.com</p>
+                    <p><strong>Email:</strong> forgot.cafesolstice@gmail.com</p>
                     <p><strong>Phone:</strong> +123 456 7890</p>
-                    <p><strong>Address:</strong> Tamaraw Hills, 120 MacArthur Highway, Valenzuela, Metro Manila</p>
+                    <p><strong>Address:</strong> Saint Benedict Hall - Our Lady of Fatima University, Tamaraw Hills, Valenzuela, Metro Manila</p>
                     
 					<br></br>
  <!-- Background Image -->
