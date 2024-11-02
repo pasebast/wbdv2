@@ -12,6 +12,7 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+date_default_timezone_set('Asia/Manila'); // Set to your local time zone
 
 // Process the registration form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,12 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $address = $_POST['address'];
+    $cellphone_number = $_POST['cellphone_number']; // Add cellphone number
     $saved_payment = $_POST['payment']; // Validate as 16-digit card number
     $expiry_date = $_POST['expiry_date']; // Assuming this is passed from the form as MM/YY
     $cvc = $_POST['cvc']; // Assuming this is passed from the form
     $password = md5($_POST['password']);  // Use md5() for older PHP versions (less secure)
-	
-
 
     // Validate and convert MM/YY to YYYY-MM-DD if the add payment checkbox is checked
     $add_payment = isset($_POST['add_payment']) ? true : false;
@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         // Prepare SQL query
-        $sql = "INSERT INTO users (first_name, last_name, username, email, address, saved_payment, password, account_status, role";
-        $sql_values = "VALUES ('$first_name', '$last_name', '$username', '$email', '$address', '$saved_payment', '$password', 'Pending', 'member'";
+        $sql = "INSERT INTO users (first_name, last_name, username, email, address, cellphone_number, saved_payment, password, account_status, role";
+        $sql_values = "VALUES ('$first_name', '$last_name', '$username', '$email', '$address', '$cellphone_number', '$saved_payment', '$password', 'Pending', 'member'";
 
         if ($add_payment) {
             $sql .= ", expiry_date, cvc";

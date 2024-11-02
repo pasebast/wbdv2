@@ -11,8 +11,8 @@ if (!isset($_SESSION['user_id'])) {
 // Get the logged-in user's ID
 $user_id = $_SESSION['user_id'];
 
-// Fetch the user's order history with email and saved payment method from the orders table
-$query = "SELECT orders.order_number, orders.order_date, orders.total_amount, orders.saved_payment, users.email
+// Fetch the user's order history with email, saved payment method, and cellphone number from the orders table
+$query = "SELECT orders.order_number, orders.order_date, orders.total_amount, orders.saved_payment, orders.cellphone_number, users.email
           FROM orders
           INNER JOIN users ON orders.user_id = users.id
           WHERE orders.user_id = ?
@@ -22,7 +22,7 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 
 // Bind the result variables
-$stmt->bind_result($order_number, $order_date, $total_amount, $saved_payment, $email);
+$stmt->bind_result($order_number, $order_date, $total_amount, $saved_payment, $cellphone_number, $email);
 
 // Fetch the data into an array
 $orderHistory = array();
@@ -32,6 +32,7 @@ while ($stmt->fetch()) {
         'order_date' => $order_date,
         'total_amount' => $total_amount,
         'saved_payment' => $saved_payment,  // Now fetched from the orders table
+        'cellphone_number' => $cellphone_number, // Added cellphone number
         'email' => $email
     );
 }
@@ -39,6 +40,7 @@ while ($stmt->fetch()) {
 $stmt->close();
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -202,13 +204,15 @@ function openModal(orderNumber) {
             var orderDetails = response.order_details;
             var orderSummary = response.order_summary;
             var address = response.address; // Fetch the address from the response
+            var cellphoneNumber = response.cellphone_number; // Fetch the cellphone number from the response
             var orderDetailsHtml = "Order No: " + orderNumber + "<br><br>";
 
-            // Add order date, saved payment method, and address (assumes these values are the same for all items in the order)
+            // Add order date, saved payment method, address, and cellphone number (assumes these values are the same for all items in the order)
             if (orderDetails.length > 0) {
                 orderDetailsHtml += "Order Date: " + orderDetails[0].order_date + "<br>";
                 orderDetailsHtml += "Payment Method: " + orderDetails[0].saved_payment + "<br><br>";
                 orderDetailsHtml += "Shipping Address: " + address + "<br><br>"; // Display the address
+                orderDetailsHtml += "Cellphone Number: " + cellphoneNumber + "<br><br>"; // Display the cellphone number
             }
 
             // Loop through the order details and format them with the image on the right
@@ -243,11 +247,10 @@ function openModal(orderNumber) {
     xhr.send("order_number=" + orderNumber);
 }
 
-
-
 function closeModal() {
     document.getElementById('orderDetailsModal').style.display = 'none';
 }
+
 </script>
 
 </body>

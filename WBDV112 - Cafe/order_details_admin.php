@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 $order_number = $_GET['order_number'];
 
 // Fetch order details and user info
-$sql_order = "SELECT o.order_number, o.order_date, o.total_amount, o.saved_payment, o.address, u.username
+$sql_order = "SELECT o.order_number, o.order_date, o.total_amount, o.saved_payment, o.address, o.cellphone_number, u.username
               FROM orders o
               JOIN users u ON o.user_id = u.id
               WHERE o.order_number = '$order_number'";
@@ -109,6 +109,7 @@ $result_items = $conn->query($sql_items);
         <p><strong>Total Amount:</strong> <?php echo htmlspecialchars($order_details['total_amount']); ?></p>
         <p><strong>Saved Payment:</strong> <?php echo htmlspecialchars($order_details['saved_payment']); ?></p>
         <p><strong>Address:</strong> <?php echo htmlspecialchars($order_details['address']); ?></p> <!-- Displaying the address -->
+		<p><strong>Cellphone Number:</strong> <?php echo htmlspecialchars($order_details['cellphone_number']); ?></p> <!-- Displaying the cellphone number -->
         <p><strong>Ordered by:</strong> <?php echo htmlspecialchars($order_details['username']); ?></p>
         <h3>Items</h3>
         <?php

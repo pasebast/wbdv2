@@ -30,10 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
+	$cellphone_number = $_POST['cellphone_number']; // Add cellphone number
     $address = $_POST['address'];
     $saved_payment = $_POST['saved_payment'];
     $expiry_date = !empty($_POST['expiry_date']) ? $_POST['expiry_date'] : NULL;
     $cvc = $_POST['cvc'];
+	
 
     // Convert MM/YY to YYYY-MM-DD for SQL
     $expiry_date_sql = NULL;
@@ -53,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$error = "Last Name should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.";
 		} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$error = "Invalid email format.";
+		} elseif (!preg_match("/^\d{11}$/", $cellphone_number)) {
+			$error = "Cellphone Number must be exactly 11 digits.";
 		} elseif ($saved_payment && !preg_match("/^\d{4}-\d{4}-\d{4}-\d{4}$/", $saved_payment)) {
 			$error = "Invalid Card Number. It should be in the 16-digit format XXXX-XXXX-XXXX-XXXX.";
 		} elseif ($expiry_date && !preg_match("/^(0[1-9]|1[0-2])\/?([0-9]{2})$/", $expiry_date)) {
@@ -118,7 +122,7 @@ if ($username_result->num_rows > 0) {
         // Only proceed if there are no errors
         if (empty($error)) {
             // Update user details, including the profile picture, expiry date, and CVC
-            $sql = "UPDATE users SET username='$username', first_name='$first_name', last_name='$last_name', email='$email', address='$address', saved_payment='$saved_payment', expiry_date=" . ($expiry_date_sql ? "'$expiry_date_sql'" : "NULL") . ", cvc='$cvc', profile_picture='$profile_picture' WHERE id='$user_id'";
+            $sql = "UPDATE users SET username='$username', first_name='$first_name', last_name='$last_name', email='$email', cellphone_number='$cellphone_number', address='$address', saved_payment='$saved_payment', expiry_date=" . ($expiry_date_sql ? "'$expiry_date_sql'" : "NULL") . ", cvc='$cvc', profile_picture='$profile_picture' WHERE id='$user_id'";
             if ($conn->query($sql) === TRUE) {
                 header('Location: profile.php');
                 exit;
@@ -259,6 +263,9 @@ $conn->close();
 
         <label for="email">Email:</label>
         <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+		
+		<label for="cellphone_number">Cellphone Number:</label>
+		<input type="text" id="cellphone_number" name="cellphone_number" placeholder="Your 11-digit Cellphone Number" value="<?php echo htmlspecialchars($user['cellphone_number']); ?>" required pattern="^\d{11}$" title="Cellphone Number must be exactly 11 digits.">
 
         <label for="address">Address:</label>
 		<input type="text" id="address" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
@@ -394,7 +401,8 @@ const initialData = {
     address: "<?php echo htmlspecialchars($user['address']); ?>",
     saved_payment: "<?php echo htmlspecialchars($user['saved_payment']); ?>",
     expiry_date: "<?php echo htmlspecialchars($user['expiry_date']); ?>",
-    cvc: "<?php echo htmlspecialchars($user['cvc']); ?>"
+    cvc: "<?php echo htmlspecialchars($user['cvc']); ?>",
+	cellphone_number: "<?php echo htmlspecialchars($user['cellphone_number']); ?>"
 };
 
 function checkChanges() {
@@ -424,7 +432,8 @@ function checkChanges() {
         address: document.getElementsByName("address")[0].value,
         saved_payment: document.getElementsByName("saved_payment")[0].value,
         expiry_date: document.getElementsByName("expiry_date")[0].value,
-        cvc: document.getElementsByName("cvc")[0].value
+        cvc: document.getElementsByName("cvc")[0].value,
+		cellphone_number: document.getElementsByName("cellphone_number")[0].value
     };
 
     // Check if profile picture was changed
@@ -465,6 +474,7 @@ function validateProfileForm() {
     var firstName = document.querySelector("[name='first_name']").value;
     var lastName = document.querySelector("[name='last_name']").value;
     var nameRegex = /^[a-zA-Z.\s]{2,50}$/;
+	var cellphoneNumber = document.getElementById("cellphone_number").value; // Add cellphone number
 
     if (!nameRegex.test(firstName) || firstName.replace(/[.\s]/g, '').length === 0) {
         showModal("Invalid First Name. It should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.");
@@ -473,6 +483,11 @@ function validateProfileForm() {
 
     if (!nameRegex.test(lastName) || lastName.replace(/[.\s]/g, '').length === 0) {
         showModal("Invalid Last Name. It should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.");
+        return false;
+    }
+	// Validate cellphone number
+    if (!/^\d{11}$/.test(cellphoneNumber)) {
+        showModal("Invalid Cellphone Number. It should be exactly 11 digits.");
         return false;
     }
 

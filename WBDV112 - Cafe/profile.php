@@ -98,7 +98,11 @@ $conn->close();
 
         <label>Last Name:</label>
         <p><?php echo htmlspecialchars($user['last_name']); ?></p>
+		
+		<label>Cellphone Number:</label>
+        <p><?php echo htmlspecialchars($user['cellphone_number']); ?></p>
 	</div>
+		
 	
 	<!-- Right Side (Email, Address, Payment Method) -->
 	<div class="profile-right">

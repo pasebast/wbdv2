@@ -7,7 +7,7 @@ if (isset($_POST['order_number'])) {
 
     // Prepare the SQL query
     $query = "SELECT order_items.product_name, order_items.quantity, order_items.price, order_items.image,
-              orders.order_date, orders.saved_payment, orders.address
+              orders.order_date, orders.saved_payment, orders.address, orders.cellphone_number
               FROM order_items
               INNER JOIN orders ON orders.id = order_items.order_id
               WHERE orders.order_number = ?";
@@ -18,7 +18,7 @@ if (isset($_POST['order_number'])) {
         $stmt->execute();
 
         // Bind result variables
-        $stmt->bind_result($product_name, $quantity, $price, $image, $order_date, $saved_payment, $address);
+        $stmt->bind_result($product_name, $quantity, $price, $image, $order_date, $saved_payment, $address, $cellphone_number);
 
         // Fetch the data into an array and calculate subtotal
         $order_details = array();
@@ -32,7 +32,8 @@ if (isset($_POST['order_number'])) {
                 'image' => $image,
                 'order_date' => $order_date,
                 'saved_payment' => $saved_payment,
-                'address' => $address // Include address in the response
+                'address' => $address, // Include address in the response
+                'cellphone_number' => $cellphone_number // Include cellphone number in the response
             );
 
             $subtotal += $price * $quantity; // Calculate the subtotal
@@ -51,7 +52,7 @@ if (isset($_POST['order_number'])) {
         );
 
         // Return the details and order summary as a JSON object
-        echo json_encode(array('order_details' => $order_details, 'order_summary' => $order_summary, 'address' => $address));
+        echo json_encode(array('order_details' => $order_details, 'order_summary' => $order_summary, 'address' => $address, 'cellphone_number' => $cellphone_number));
         $stmt->close();
     } else {
         // If query preparation failed, log the error message

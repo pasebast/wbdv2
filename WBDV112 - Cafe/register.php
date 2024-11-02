@@ -1,6 +1,7 @@
 <?php
 // Initialize session and cart, etc.
 session_start();
+date_default_timezone_set('Asia/Manila'); // Set to your local time zone
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -11,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $payment = $_POST['payment'];
     $expiry_date = !empty($_POST['expiry_date']) ? $_POST['expiry_date'] : NULL;
     $cvc = $_POST['cvc'];
+	$cellphone_number = $_POST['cellphone_number']; // Add cellphone number
 
     // Server-side validation
     if (!preg_match("/^[a-zA-Z.\s]{2,50}$/", $first_name) || preg_match("/^[.\s]*$/", $first_name) || strlen($first_name) == 0) {
@@ -19,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = "Last Name should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Invalid email format.";
+    } elseif (!preg_match("/^\d{11}$/", $cellphone_number)) {
+        $error = "Cellphone Number must be exactly 11 digits.";
     } elseif ($payment && !preg_match("/^\d{4}-\d{4}-\d{4}-\d{4}$/", $payment)) {
         $error = "Invalid Card Number. It should be in the 16-digit format XXXX-XXXX-XXXX-XXXX.";
     } elseif ($expiry_date && !preg_match("/^(0[1-9]|1[0-2])\/?([0-9]{2})$/", $expiry_date)) {
@@ -152,6 +156,10 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 
 						<label for="lastname">Last Name:</label>
 						<input type="text" id="lastname" name="lastname" placeholder="Your Last Name" required pattern="^[a-zA-Z.\s]{2,50}$" title="Last Name should be 2-50 characters long and can only contain letters, spaces, and periods.">
+						
+						<!-- Add the cellphone number field -->
+						<label for="cellphone_number">Cellphone Number:</label>
+						<input type="text" id="cellphone_number" name="cellphone_number" placeholder="Your 11-digit Cellphone Number" required pattern="^\d{11}$" title="Cellphone Number must be exactly 11 digits.">
 
 						<label for="address">Address:</label>
 						<input type="text" id="address" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
@@ -320,6 +328,7 @@ function validateFormAndPayment() {
     var payment = document.getElementById('payment').value;
     var expiry_date = document.getElementById('expiry_date').value;
     var cvc = document.getElementById('cvc').value;
+	var cellphoneNumber = document.getElementById("cellphone_number").value; // Add cellphone number
     var errorMessage = '';
 
     // Validate username
@@ -346,6 +355,12 @@ function validateFormAndPayment() {
     // Validate last name
     if (!nameRegex.test(lastName) || lastName.replace(/[.\s]/g, '').length === 0) {
         showModal("Invalid Last Name. It should be 2-50 characters long, can contain letters, spaces, and periods, but cannot consist solely of periods or spaces.");
+        return false;
+    }
+	
+	// Validate cellphone number
+    if (!/^\d{11}$/.test(cellphoneNumber)) {
+        showModal("Invalid Cellphone Number. It should be exactly 11 digits.");
         return false;
     }
 
