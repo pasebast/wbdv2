@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Nov 01, 2024 at 07:24 PM
+-- Generation Time: Nov 02, 2024 at 09:16 AM
 -- Server version: 5.0.27
 -- PHP Version: 5.2.1
 -- 
@@ -52,7 +52,7 @@ CREATE TABLE `email_verifications` (
   `expires_at` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
 -- 
 -- Dumping data for table `email_verifications`
@@ -78,7 +78,8 @@ INSERT INTO `email_verifications` (`id`, `user_id`, `token`, `created_at`, `expi
 (36, 37, '123a23bc22124aed06594bf5d8994ee2', '2024-10-31 12:05:51', '2024-11-01 04:05:51'),
 (37, 38, '6bc770548e15d24f406d5db517acdd07', '2024-10-31 12:07:17', '2024-11-01 04:07:17'),
 (38, 39, 'd0a09c2324eee2e0929053419b7d4263', '2024-10-31 12:10:23', '2024-11-01 04:10:23'),
-(39, 40, '19a5f926b2cb2be339130ddf675536e3', '2024-11-02 01:11:57', '2024-11-02 17:11:57');
+(39, 40, '19a5f926b2cb2be339130ddf675536e3', '2024-11-02 01:11:57', '2024-11-02 17:11:57'),
+(40, 41, '72058a185aaf7b1888a01c1873724172', '2024-11-02 16:18:37', '2024-11-03 08:18:37');
 
 -- --------------------------------------------------------
 
@@ -95,65 +96,13 @@ CREATE TABLE `order_items` (
   `image` varchar(255) default NULL,
   PRIMARY KEY  (`id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=93 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
 
 -- 
 -- Dumping data for table `order_items`
 -- 
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_name`, `quantity`, `price`, `image`) VALUES 
-(25, 18, 'Vanilla Breeze', 3, 100.00, 'images/menu10.png'),
-(26, 18, 'Blueberry Cheesecake', 1, 160.00, 'images/menu17.png'),
-(27, 19, 'French Toast', 1, 110.00, 'images/menu16.png'),
-(28, 19, 'Strawberry Tart Supreme', 1, 170.00, 'images/menu18.png'),
-(29, 19, 'Vanilla Cloud', 1, 160.00, 'images/menu08.png'),
-(30, 19, 'Dawn Flat White', 1, 120.00, 'images/menu06.png'),
-(31, 20, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
-(32, 21, 'Solstice Berry Bliss', 4, 150.00, 'images/menu01.png'),
-(33, 21, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
-(34, 21, 'Vanilla Cloud', 1, 160.00, 'images/menu08.png'),
-(35, 21, 'Strawberry Tart Supreme', 1, 170.00, 'images/menu18.png'),
-(36, 22, 'Blueberry Cheesecake', 1, 160.00, 'images/menu17.png'),
-(37, 23, 'Eclipse Choco Delight', 2, 120.00, 'images/menu02.png'),
-(38, 23, 'Golden Hour Caramel', 1, 140.00, 'images/menu12.png'),
-(39, 24, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(40, 25, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(41, 25, 'Vanilla Cloud', 1, 160.00, 'images/menu08.png'),
-(42, 25, 'Crimson Twilight Tea', 2, 110.00, 'images/menu07.png'),
-(43, 26, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
-(44, 26, 'Aurora Matcha Dream', 1, 190.00, 'images/menu03.png'),
-(45, 27, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
-(46, 27, 'Aurora Matcha Dream', 1, 190.00, 'images/menu03.png'),
-(47, 28, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(48, 28, 'Dawn Flat White', 1, 120.00, 'images/menu06.png'),
-(49, 29, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(50, 29, 'Crimson Twilight Tea', 1, 110.00, 'images/menu07.png'),
-(51, 30, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(52, 30, 'Blueberry Cheesecake', 1, 160.00, 'images/menu17.png'),
-(53, 31, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(54, 32, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(55, 32, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
-(58, 34, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
-(59, 34, 'Horizon Wildberry Kombucha', 1, 160.00, 'images/menu14.png'),
-(60, 35, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(61, 36, 'Dawn Flat White', 1, 120.00, 'images/menu06.png'),
-(62, 36, 'Zenith Grapefruit Tea', 1, 170.00, 'images/menu09.png'),
-(63, 37, 'Sunrise Brew', 1, 80.00, 'images/menu05.png'),
-(64, 37, 'Blueberry Cheesecake', 1, 160.00, 'images/menu17.png'),
-(65, 37, 'Strawberry Tart Supreme', 1, 170.00, 'images/menu18.png'),
-(66, 38, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
-(67, 38, 'Solstice Berry Bliss', 1, 150.00, 'images/menu01.png'),
-(68, 38, 'Aurora Matcha Dream', 1, 190.00, 'images/menu03.png'),
-(69, 38, 'Vanilla Cloud', 1, 160.00, 'images/menu08.png'),
-(70, 39, 'Solstice Berry Bliss', 6, 150.00, 'images/menu01.png'),
-(71, 39, 'Blueberry Cheesecake', 8, 160.00, 'images/menu17.png'),
-(72, 39, 'Aurora Matcha Dream', 1, 190.00, 'images/menu03.png'),
-(73, 40, 'Aurora Matcha Dream', 4, 190.00, 'images/menu03.png'),
-(74, 40, 'Dawn Flat White', 1, 120.00, 'images/menu06.png'),
-(75, 41, 'Sunrise Brew', 2, 80.00, 'images/menu05.png'),
-(76, 41, 'Dawn Flat White', 1, 120.00, 'images/menu06.png'),
-(77, 42, 'Solstice Berry Bliss', 2, 150.00, 'images/menu01.png'),
-(78, 42, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
 (79, 43, 'Sunrise Brew', 1, 80.00, 'images/menu05.png'),
 (80, 43, 'Dawn Flat White', 3, 120.00, 'images/menu06.png'),
 (81, 44, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
@@ -167,7 +116,18 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_name`, `quantity`, `price`
 (89, 48, 'Vanilla Breeze', 1, 100.00, 'images/menu10.png'),
 (90, 48, 'Crimson Twilight Tea', 1, 110.00, 'images/menu07.png'),
 (91, 48, 'Aurora Matcha Dream', 1, 190.00, 'images/menu03.png'),
-(92, 48, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png');
+(92, 48, 'Eclipse Choco Delight', 1, 120.00, 'images/menu02.png'),
+(93, 49, 'Eclipse Choco Delight', 2, 120.00, 'images/menu02.png'),
+(94, 50, 'Crimson Twilight Tea', 2, 110.00, 'images/menu07.png'),
+(95, 50, 'Vanilla Cloud', 3, 160.00, 'images/menu08.png'),
+(96, 50, 'Blueberry Cheesecake', 3, 160.00, 'images/menu17.png'),
+(97, 51, 'Vanilla Breeze', 2, 100.00, 'images/menu10.png'),
+(98, 51, 'Zenith Grapefruit Tea', 2, 170.00, 'images/menu09.png'),
+(99, 51, 'Stellar Soy Cocoa', 3, 170.00, 'images/menu15.png'),
+(100, 52, 'Vanilla Breeze', 1, 100.00, 'images/menu10.png'),
+(101, 52, 'Stellar Soy Cocoa', 1, 170.00, 'images/menu15.png'),
+(102, 52, 'French Toast', 3, 110.00, 'images/menu16.png'),
+(103, 52, 'Aurora Matcha Dream', 2, 190.00, 'images/menu03.png');
 
 -- --------------------------------------------------------
 
@@ -183,45 +143,26 @@ CREATE TABLE `orders` (
   `total_amount` decimal(10,2) NOT NULL,
   `saved_payment` varchar(255) default NULL,
   `address` varchar(255) default NULL,
+  `cellphone_number` varchar(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
 
 -- 
 -- Dumping data for table `orders`
 -- 
 
-INSERT INTO `orders` (`id`, `user_id`, `order_number`, `order_date`, `total_amount`, `saved_payment`, `address`) VALUES 
-(18, 1, 'ORD670b9c59ab69d', '2024-10-13 10:09:29', 515.20, '1234567894545667', NULL),
-(19, 1, 'ORD670b9cc2834e4', '2024-10-13 10:11:14', 627.20, '1111111111111111', NULL),
-(20, 1, 'ORD670b9cf943c1b', '2024-10-13 10:12:09', 134.40, '1111111111111111', NULL),
-(21, 1, 'ORD670b9f1e210f0', '2024-10-13 10:21:18', 1176.00, '1111111111111111', NULL),
-(22, 1, 'ORD670b9fbd7ace3', '2024-10-13 10:23:57', 179.20, '6969696969696969', NULL),
-(23, 2, 'ORD670ba44c0722f', '2024-10-13 10:43:24', 425.60, '1001200223423412', NULL),
-(24, 4, 'ORD670ba48b116b0', '2024-10-13 10:44:27', 168.00, 'Unknown', NULL),
-(25, 4, 'ORD670bdce2059f7', '2024-10-13 14:44:50', 593.60, '6969420069694200', NULL),
-(26, 1, 'ORD6713c34f33a58', '2024-10-19 14:33:51', 347.20, '6969696969696969', NULL),
-(27, 1, 'ORD671485ed7d041', '2024-10-20 04:24:13', 347.20, '1111-1111-1111-1111', NULL),
-(28, 1, 'ORD67148613bbd71', '2024-10-20 04:24:51', 302.40, '1111-1111-1111-1111', NULL),
-(29, 1, 'ORD671486f83f463', '2024-10-20 04:28:40', 291.20, '1111-1111-1111-1111', NULL),
-(30, 1, 'ORD67148781de89f', '2024-10-20 04:30:57', 347.20, '1111-1111-1111-1111', NULL),
-(31, 1, 'ORD671487ae7721e', '2024-10-20 04:31:42', 168.00, '1111-1111-1111-1111', NULL),
-(32, 1, 'ORD671a53997fd7a', '2024-10-24 14:03:05', 302.40, '1111-1111-1111-1111', NULL),
-(34, 6, 'ORD671ba62aa2b34', '2024-10-25 14:07:38', 313.60, '1235123512351235', NULL),
-(35, 6, 'ORD671ba75fa3630', '2024-10-25 14:12:47', 168.00, '1235123512351235', NULL),
-(36, 6, 'ORD671ba78a70e08', '2024-10-25 14:13:30', 324.80, '1234-1234-8888-6969', NULL),
-(37, 6, 'ORD671bc796c72cc', '2024-10-25 16:30:14', 459.20, '1234-1234-8888-6969', NULL),
-(38, 1, 'ORD671d4547d5e43', '2024-10-26 19:38:47', 694.40, '1111-1111-1111-1111', NULL),
-(39, 1, 'ORD671d4b5dd3917', '2024-10-26 20:04:45', 2654.40, '6969-6969-6969-6996', NULL),
-(40, 1, 'ORD671d4f6675113', '2024-10-26 20:21:58', 985.60, '6969-6969-6969-6996', NULL),
-(41, 1, 'ORD6722f887b51f6', '2024-10-31 11:24:55', 313.60, '6969-6969-6969-6969', NULL),
-(42, 40, 'ORD67250d5eb9680', '2024-11-02 01:18:22', 470.40, '1234-5555-6785-4785', NULL),
-(43, 40, 'ORD67250fb295525', '2024-11-02 01:28:18', 492.80, '1234-5555-6785-4785', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines'),
-(44, 40, 'ORD67251383c3321', '2024-11-02 01:44:35', 313.60, '1234-5555-6785-4785', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines'),
-(45, 40, 'ORD672513a5c5a27', '2024-11-02 01:45:09', 134.40, '1234-5555-6785-4785', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines'),
-(46, 40, 'ORD67251419b187b', '2024-11-02 01:47:05', 168.00, '1234-5555-6785-4785', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines'),
-(47, 1, 'ORD6725188b517ca', '2024-11-02 02:06:03', 358.40, '6969-6969-6969-6969', 'Our Lady of Fatima University, 120, MacArthur Highway, Marulas, 2nd District, Valenzuela, Northern Manila District, Metro Manila, 1441, Philippines'),
-(48, 1, 'ORD672518bf8bfbe', '2024-11-02 02:06:55', 1713.60, '6969-6969-6969-6969', 'SM North Edsa, Bago Bantay, 1st District, Quezon City, Eastern Manila District, Metro Manila, Philippines');
+INSERT INTO `orders` (`id`, `user_id`, `order_number`, `order_date`, `total_amount`, `saved_payment`, `address`, `cellphone_number`) VALUES 
+(43, 40, 'ORD67250fb295525', '2024-11-02 01:28:18', 492.80, '1234-5555-6785-4785', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines', ''),
+(44, 40, 'ORD67251383c3321', '2024-11-02 01:44:35', 313.60, '1234-5555-6785-4785', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines', ''),
+(45, 40, 'ORD672513a5c5a27', '2024-11-02 01:45:09', 134.40, '1234-5555-6785-4785', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines', ''),
+(46, 40, 'ORD67251419b187b', '2024-11-02 01:47:05', 168.00, '1234-5555-6785-4785', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines', ''),
+(47, 1, 'ORD6725188b517ca', '2024-11-02 02:06:03', 358.40, '6969-6969-6969-6969', 'Our Lady of Fatima University, 120, MacArthur Highway, Marulas, 2nd District, Valenzuela, Northern Manila District, Metro Manila, 1441, Philippines', ''),
+(48, 1, 'ORD672518bf8bfbe', '2024-11-02 02:06:55', 1713.60, '6969-6969-6969-6969', 'SM North Edsa, Bago Bantay, 1st District, Quezon City, Eastern Manila District, Metro Manila, Philippines', ''),
+(49, 41, 'ORD6725e61f24633', '2024-11-02 16:43:11', 268.80, '1235-5554-7824-3458', 'Our Lady of Fatima University, Tamaraw Hills Road, Deato Subdivision, 2nd District, Valenzuela, Northern Manila District, Metro Manila, 0550, Philippines', ''),
+(50, 41, 'ORD6725e7bb7826c', '2024-11-02 16:50:03', 1321.60, '1235-5554-7824-3458', 'Our Lady of Fatima University, Tamaraw Hills Road, Deato Subdivision, 2nd District, Valenzuela, Northern Manila District, Metro Manila, 0550, Philippines', '09691234565'),
+(51, 41, 'ORD6725e99e4b07d', '2024-11-02 16:58:06', 1176.00, '1235-5554-7824-3458', 'Our Lady of Fatima University, Tamaraw Hills Road, Deato Subdivision, 2nd District, Valenzuela, Northern Manila District, Metro Manila, 0550, Philippines', '09885588877'),
+(52, 1, 'ORD6725edfb6446c', '2024-11-02 17:16:43', 1097.60, '6969-6969-6969-6969', 'SM North Edsa, Bago Bantay, 1st District, Quezon City, Eastern Manila District, Metro Manila, Philippines', '09241124578');
 
 -- --------------------------------------------------------
 
@@ -286,36 +227,38 @@ CREATE TABLE `users` (
   `cvc` varchar(4) default NULL,
   `payment_token` varchar(255) default NULL,
   `role` enum('member','admin') NOT NULL default 'member',
+  `cellphone_number` varchar(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 -- 
 -- Dumping data for table `users`
 -- 
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `address`, `saved_payment`, `profile_picture`, `first_name`, `last_name`, `account_status`, `expiry_date`, `cvc`, `payment_token`, `role`) VALUES 
-(1, 'paultest1', 'paultest1@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-12 14:41:06', 'SM North Edsa, Bago Bantay, 1st District, Quezon City, Eastern Manila District, Metro Manila, Philippines', '6969-6969-6969-6969', '1730343420_phy13.jpg', 'paul', 'test', 'Active', '2026-10-01', '758', NULL, 'member'),
-(2, 'paultest2', 'paultest2@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2024-10-12 14:44:07', 'tulok 123', '1001200223423412', '', 'paul2', 'test2', 'Pending', NULL, NULL, NULL, 'member'),
-(4, 'paultest3', 'paultest3@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-12 21:17:43', '123 123 6969 madilim', '6969420069694200', '1728739086_phy12.jpg', 'Paul3', 'Test3', 'Pending', NULL, NULL, NULL, 'member'),
-(5, 'paultest4', 'paultest4@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 03:53:14', '897234k kkk kkkk 69  69 69', '1234123412341234', '1728763128_phy25.jpg', 'Paul4', 'Test4', 'Pending', NULL, NULL, NULL, 'member'),
-(6, 'paultest5', 'paultest5@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 04:07:47', '123 123 123 123 aaaa', '1234-1234-8888-6969', '1729865591_phy09.jpg', 'Paul5', 'Test5', 'Active', '2025-10-01', '107', NULL, 'member'),
-(7, 'paultest6', 'paultest6@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 04:23:44', '666666 test', '1238123812381238', '', 'Paul6', 'Test6', 'Pending', NULL, NULL, NULL, 'member'),
-(8, 'paultest7', 'ptsebastian6585val@student.fat', '596793c886612d7387008344222dc79c', '2024-10-16 23:05:15', '123 Tamaraw Hills', '', NULL, 'Paul7', 'Test7', 'Pending', NULL, NULL, NULL, 'member'),
-(9, 'paultest8', 'paultest8@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2024-10-17 01:18:31', '123 Tamaraw Hills', '', NULL, 'Paul8', 'Test8', 'Pending', NULL, NULL, NULL, 'member'),
-(10, 'paultest9', 'paultest9@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-17 01:20:48', '123 Tamaraw Hills', '', NULL, 'Paul9', 'Test9', 'Pending', NULL, NULL, NULL, 'member'),
-(11, 'poltest6969696969', 'ptsebastian6585val@s', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:12:49', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
-(12, 'poltest16969696969', 'ptsebastian6585val@st', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:14:34', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
-(13, 'poltest14564564564', 'ptsebastian6585val@stu', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:16:11', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
-(14, 'poltest178757', 'ptse585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:21:04', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member'),
-(15, 'poltest1sdf54564', 'ptsean6585v@studma.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:22:19', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Active', NULL, NULL, NULL, 'member'),
-(16, 'paultest10', 'paul.dreadlike3@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:21:41', '123 Tamraw Hills', '', NULL, 'Paul10', 'Test10', 'Pending', NULL, NULL, NULL, 'member'),
-(17, 'poltest2sdfs43252', '234anv@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:25:16', '123 Tamaraw Hills', '', NULL, 'Pol2', 'Test2', 'Active', NULL, NULL, NULL, 'member'),
-(35, 'poltest1', 'ptsebastian6585val@student.fatima.edu.ph', '751cb3f4aa17c36186f4856c8982bf27', '2024-10-25 21:34:05', 'Our Lady of Fatima University, Tamaraw Hills Road, Deato Subdivision, 2nd District, Valenzuela, Northern Manila District, Metro Manila, 0550, Philippines', '2024-6894-2457-1234', '1730484513_phy48.jpg', 'pol', 'test', 'Active', '2025-12-01', '222', NULL, 'admin'),
-(36, 'poltest6999', 'paultest11111@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-31 12:03:04', '6969 123 madilim', '', NULL, '     ', 'test', 'Pending', NULL, NULL, NULL, 'member'),
-(37, 'poltest69999', 'paultest111111@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-31 12:05:51', '6969 123 madilim', '', NULL, '              ', 'test', 'Pending', NULL, NULL, NULL, 'member'),
-(38, 'poltest6999999', 'paultest11111111@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-31 12:07:17', '6969 123 madilim', '', NULL, '              ', 'test', 'Pending', NULL, NULL, NULL, 'member'),
-(39, 'poltest6999999999', 'paultest11111111111@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-31 12:10:23', '6969 123 madilim', '', NULL, 'paul jr.', 'test', 'Pending', NULL, NULL, NULL, 'member'),
-(40, 'paultest66', 'paultest66@gmail.com', '072f684e153b48e80c68bf14f3098663', '2024-11-02 01:11:57', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines', '1234-5555-6785-4785', '1730481486_rys01.jpg', 'paul gerald', 'sebastian', 'Active', '2028-10-01', '443', NULL, 'member');
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `address`, `saved_payment`, `profile_picture`, `first_name`, `last_name`, `account_status`, `expiry_date`, `cvc`, `payment_token`, `role`, `cellphone_number`) VALUES 
+(1, 'paultest1', 'paultest1@gmail.com', '072f684e153b48e80c68bf14f3098663', '2024-10-12 14:41:06', 'SM North Edsa, Bago Bantay, 1st District, Quezon City, Eastern Manila District, Metro Manila, Philippines', '6969-6969-6969-6969', '1730343420_phy13.jpg', 'paul', 'test', 'Active', '2026-10-01', '758', NULL, 'member', '09241124578'),
+(2, 'paultest2', 'paultest2@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2024-10-12 14:44:07', 'tulok 123', '1001200223423412', '', 'paul2', 'test2', 'Pending', NULL, NULL, NULL, 'member', ''),
+(4, 'paultest3', 'paultest3@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-12 21:17:43', '123 123 6969 madilim', '6969420069694200', '1728739086_phy12.jpg', 'Paul3', 'Test3', 'Pending', NULL, NULL, NULL, 'member', ''),
+(5, 'paultest4', 'paultest4@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 03:53:14', '897234k kkk kkkk 69  69 69', '1234123412341234', '1728763128_phy25.jpg', 'Paul4', 'Test4', 'Pending', NULL, NULL, NULL, 'member', ''),
+(6, 'paultest5', 'paultest5@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 04:07:47', '123 123 123 123 aaaa', '1234-1234-8888-6969', '1729865591_phy09.jpg', 'Paul5', 'Test5', 'Active', '2025-10-01', '107', NULL, 'member', ''),
+(7, 'paultest6', 'paultest6@gmail.com', '670b14728ad9902aecba32e22fa4f6bd', '2024-10-13 04:23:44', '666666 test', '1238123812381238', '', 'Paul6', 'Test6', 'Pending', NULL, NULL, NULL, 'member', ''),
+(8, 'paultest7', 'ptsebastian6585val@student.fat', '596793c886612d7387008344222dc79c', '2024-10-16 23:05:15', '123 Tamaraw Hills', '', NULL, 'Paul7', 'Test7', 'Pending', NULL, NULL, NULL, 'member', ''),
+(9, 'paultest8', 'paultest8@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2024-10-17 01:18:31', '123 Tamaraw Hills', '', NULL, 'Paul8', 'Test8', 'Pending', NULL, NULL, NULL, 'member', ''),
+(10, 'paultest9', 'paultest9@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-17 01:20:48', '123 Tamaraw Hills', '', NULL, 'Paul9', 'Test9', 'Pending', NULL, NULL, NULL, 'member', ''),
+(11, 'poltest6969696969', 'ptsebastian6585val@s', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:12:49', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member', ''),
+(12, 'poltest16969696969', 'ptsebastian6585val@st', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:14:34', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member', ''),
+(13, 'poltest14564564564', 'ptsebastian6585val@stu', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:16:11', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member', ''),
+(14, 'poltest178757', 'ptse585val@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:21:04', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Pending', NULL, NULL, NULL, 'member', ''),
+(15, 'poltest1sdf54564', 'ptsean6585v@studma.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 22:22:19', '123 Tamaraw Hills', '', NULL, 'pol1', 'tes1', 'Active', NULL, NULL, NULL, 'member', ''),
+(16, 'paultest10', 'paul.dreadlike3@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:21:41', '123 Tamraw Hills', '', NULL, 'Paul10', 'Test10', 'Pending', NULL, NULL, NULL, 'member', ''),
+(17, 'poltest2sdfs43252', '234anv@student.fatima.edu.ph', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-18 23:25:16', '123 Tamaraw Hills', '', NULL, 'Pol2', 'Test2', 'Active', NULL, NULL, NULL, 'member', ''),
+(35, 'poltest1', 'ptsebastian6585val@student.fatima.edu.phg', '751cb3f4aa17c36186f4856c8982bf27', '2024-10-25 21:34:05', 'Our Lady of Fatima University, Tamaraw Hills Road, Deato Subdivision, 2nd District, Valenzuela, Northern Manila District, Metro Manila, 0550, Philippines', '2024-6894-2457-1234', '1730484513_phy48.jpg', 'pol', 'test', 'Active', '2025-12-01', '222', NULL, 'admin', '09053312618'),
+(36, 'poltest6999', 'paultest11111@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-31 12:03:04', '6969 123 madilim', '', NULL, '     ', 'test', 'Pending', NULL, NULL, NULL, 'member', ''),
+(37, 'poltest69999', 'paultest111111@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-31 12:05:51', '6969 123 madilim', '', NULL, '              ', 'test', 'Pending', NULL, NULL, NULL, 'member', ''),
+(38, 'poltest6999999', 'paultest11111111@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-31 12:07:17', '6969 123 madilim', '', NULL, '              ', 'test', 'Pending', NULL, NULL, NULL, 'member', ''),
+(39, 'poltest6999999999', 'paultest11111111111@gmail.com', 'd77d1c8fd85502a8fe5858da6bd44446', '2024-10-31 12:10:23', '6969 123 madilim', '', NULL, 'paul jr.', 'test', 'Pending', NULL, NULL, NULL, 'member', ''),
+(40, 'paultest66', 'paultest66@gmail.com', '072f684e153b48e80c68bf14f3098663', '2024-11-02 01:11:57', 'SM City Grand Central, Rizal Avenue Extension, Barangay 88, Zone 8, Grace Park East, District 2, Caloocan, Northern Manila District, Metro Manila, 1403, Philippines', '1234-5555-6785-4785', '1730481486_rys01.jpg', 'paul gerald', 'sebastian', 'Active', '2028-10-01', '443', NULL, 'member', ''),
+(41, 'paultest55', 'ptsebastian6585val@student.fatima.edu.ph', '072f684e153b48e80c68bf14f3098663', '2024-11-02 16:18:37', 'Our Lady of Fatima University, Tamaraw Hills Road, Deato Subdivision, 2nd District, Valenzuela, Northern Manila District, Metro Manila, 0550, Philippines', '1235-5554-7824-3458', '1730536749_phy41.jpg', 'Paul Pinas', 'Testing', 'Active', '2027-11-01', '743', NULL, 'member', '09885588877');
 
 -- 
 -- Constraints for dumped tables
