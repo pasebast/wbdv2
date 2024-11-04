@@ -1556,6 +1556,20 @@ button:disabled {
 }
 
 
+.delete-button {
+    background-color: #ff0000;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
 
 .admin-banner {
 	background-color: #d9534f;
@@ -1596,3 +1610,26 @@ button:disabled {
     background-color: #ec971f;
     color: white;
 }
+
+/* Deactivation Modal Styling */
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+.modal-content {
+			background-color: #fff;
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			width: 80%;
+		}
+		

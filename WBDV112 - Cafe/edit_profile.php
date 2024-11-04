@@ -566,7 +566,7 @@ function validateProfileForm() {
             })
             .catch(err => console.error(err));
     });
-	
+
 document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"], input[type="file"]').forEach(input => {
     input.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
@@ -577,6 +577,10 @@ document.querySelectorAll('input[type="text"], input[type="email"], input[type="
 });
    
 </script>
+
+
+
+
 
 
 

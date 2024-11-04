@@ -123,6 +123,8 @@ $conn->close();
     <a href="edit_profile.php" class="edit-profile-button">Edit Profile</a>
     <a href="changepassword.php" class="change-password-button">Change Password</a> <!-- New Change Password link -->
     <a href="deactivateuser.php" class="deactivate-button">Deactivate Account</a>
+	<a href="#" class="delete-button" onclick="confirmDelete()">Delete Account</a>
+	
 </div>
 
 
@@ -134,6 +136,19 @@ $conn->close();
     <img class="modal-content" id="imgModal">
     <div id="caption"></div>
 </div>
+
+<!-- Modal Structure -->
+<div id="confirmModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <p>Are you sure you want to delete your account? This cannot be undone.</p>
+    
+    <div class="modal-actions">
+        <button id="confirmYes" class="btnn">Yes</button>
+        <button id="confirmNo" class="btnn">No</button>
+    </div>
+	</div>
+</div>
+<form id="deleteForm" action="deleteuser.php" method="POST" style="display: none;"></form>
 
 <script>
 // Modal functionality
@@ -153,6 +168,28 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() { 
     modal.style.display = "none";
 }
+
+function confirmDelete() {
+    var modal = document.getElementById('confirmModal');
+    modal.style.display = 'block';
+
+    document.getElementById('confirmYes').onclick = function() {
+        document.getElementById('deleteForm').submit();
+    };
+
+    document.getElementById('confirmNo').onclick = function() {
+        modal.style.display = 'none';
+    };
+}
+
+// Close the modal if the user clicks anywhere outside of it
+window.onclick = function(event) {
+    var modal = document.getElementById('confirmModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
+
 </script>
  <!-- Include the footer -->
     <?php include('footer.php'); ?>
