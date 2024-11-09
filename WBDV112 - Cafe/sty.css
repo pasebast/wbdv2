@@ -1,0 +1,1770 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and HTML Setup */
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Color */
+body {
+    background: linear-gradient(
+        to top,
+        rgba(255, 223, 186, 0.7),
+        rgba(255, 234, 204, 0.7)
+    );
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content horizontally */
+    width: 100%;
+    max-width: 1200px;
+    height: 75px;
+    margin: 0 auto;
+    padding: 0 20px;
+    margin-bottom: 20px; /* Add space below the navbar */
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.icon {
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-right: 20px; /* Space between logo and menu */
+    margin-top: 10px; /* Adjust this value to move the logo down */
+}
+
+.icon img {
+    max-width: 120px;
+    height: auto;
+    border-radius: 15px;
+    padding: 5px;
+    background-clip: padding-box;
+}
+
+/* Menu Styling */
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative; /* Establish a positioning context */
+}
+
+.menu ul li {
+    position: relative; /* Establish a positioning context for the pseudo-element */
+    margin: 0 10px;
+    overflow: hidden; /* Ensure the background doesn't spill outside the list item */
+}
+
+/* Menu Item Styling */
+.menu ul li a {
+    text-decoration: none;
+    color: #664228;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: block;
+    border-radius: 8px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    position: relative; /* Required for the pseudo-element */
+    z-index: 1; /* Ensure text is above the background */
+}
+
+/* Menu Item Hover Effect */
+.menu ul li a:hover {
+    color: #964B00;
+    background-color: rgba(255, 234, 204, 0.5);
+}
+
+/* Background Image/Icon behind the text */
+.menu ul li a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -12px;
+    width: 50%;
+    height: 50%;
+    background: url('images/hover.png') no-repeat center center; /* Replace with your image */
+    background-size: contain; /* Ensure the image scales correctly */
+    z-index: -1; /* Place the background behind the text */
+    transition: opacity 0.3s ease;
+    opacity: 0; /* Initially hidden */
+}
+
+/* Show the background on hover */
+.menu ul li a:hover::before {
+    opacity: 1;
+}
+
+/* Show the background on active menu item */
+.menu ul li a.active::before {
+    opacity: 1;
+}
+
+/* Content Styling */
+.content {
+    display: flex; /* Flexbox for horizontal alignment */
+    justify-content: space-between; /* Space between text block and form */
+    align-items: flex-start; /* Align items to the top */
+    padding: 100px 20px 20px; /* Adjusted for navbar height */
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1; /* Allow content to expand */
+	align-items: center;
+    justify-content: center; /* Center the content horizontally */
+	position: relative;
+	
+}
+
+/* Coffee Image Styling */
+.coffee-image {
+    width: 300px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 20px; /* Space between form and image */
+}
+
+/* Text Block Styling */
+.text-block {
+    width: 50%; /* Take up half of the content area */
+    text-align: left;
+    margin-right: 30px; /* Space between text block and form */
+}
+
+.text-block h1 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: #964B00;
+    margin-bottom: 20px;
+}
+
+.text-block span {
+    color: #664228;
+    font-size: 65px;
+}
+
+.text-block .par {
+    font-family: Arial, sans-serif;
+    letter-spacing: 1.2px;
+    line-height: 30px;
+    color: #664228;
+}
+
+/* Form Styling */
+.form {
+    width: 40%; /* Adjust width as needed */
+    background: linear-gradient(
+        to top,
+        rgba(255, 223, 186, 0.9),
+        rgba(248, 233, 220, 0.9)
+    );
+    border-radius: 50px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    z-index: 2; /* Ensure form is above background */
+    position: relative;
+    margin-right: 50px; /* Space between form and coffee image */
+}
+
+/* Form Elements */
+.form input {
+    width: calc(100% - 20px);
+    height: 35px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #ff7200; /* Line indicating where to enter text */
+    color: #664228;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    padding: 5px 0; /* Adjust padding to align with the line */
+}
+
+.form input:focus {
+    outline: none;
+    border-bottom: 2px solid #964B00; /* Change line color on focus */
+}
+
+::placeholder {
+    color: #000;
+    font-family: Comic Sans MS;
+}
+
+.btnn {
+    width: 100%;
+    height: 40px;
+    background: #964B00;
+    border: none;
+    margin-top: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #FFFFFF;
+    transition: 0.4s ease;
+}
+
+.btnn:hover {
+    background: #fff;
+    color: #ff7200;
+}
+
+.form .link {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    padding-top: 20px;
+}
+
+.form .link a {
+    text-decoration: none;
+    color: #ff7200;
+}
+
+.liw {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.icons a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.icons ion-icon {
+    color: #fff;
+    font-size: 30px;
+    padding: 0 14px;
+    transition: 0.3s ease;
+}
+
+.icons ion-icon:hover {
+    color: #964B00;
+}
+
+/* Background Image Styling */
+.background-image {
+    position: fixed; /* Fixes the image in place */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container */
+    z-index: -1; /* Ensure image is behind all content */
+    opacity: 0.2; /* Adjust opacity for a subtle effect */
+}
+
+/* Footer Styling */
+.footer {
+    background: #964B00; /* Dark brown background */
+    color: #FFFFFF; /* White text */
+    padding: 20px 0; /* Top and bottom padding */
+    text-align: center; /* Center align text */
+    position: relative; /* Position relative to its normal position */
+    width: 100%; /* Full width */
+    bottom: 0; /* Stick to the bottom of the content */
+	
+}
+
+.footer .social-links a {
+    color: #FFFFFF; /* White icons */
+    font-size: 24px; /* Icon size */
+    margin: 0 10px; /* Space between icons */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.footer .social-links a:hover {
+    color: #ff7200; /* Change color on hover */
+}
+
+.footer p {
+    margin: 10px 0; /* Space around text */
+}
+
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Center the items */
+    padding: 20px;
+}
+
+
+.menu-category {
+    margin-bottom: 40px; /* Add space between categories */
+    text-align: center; /* Center category titles */
+}
+
+/* Updated Menu Item */
+.menu-item {
+    width: 250px; /* Ensure all items have the same width */
+    height: auto;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Image Styling for Uniformity */
+.menu-item img {
+    width: 80%; /* Ensure the image fits the container width */
+    height: 150px; /* Set a consistent height for all images */
+    object-fit: cover; /* Maintain image aspect ratio and cover the container */
+    margin-bottom: 15px; /* Space between image and text */
+}
+
+/* Adjusting Paragraph Text */
+.menu-item p {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #000000;
+    font-size: 12px;
+    line-height: 1.4; /* Adjusts the space between lines of text */
+    height: 80px; /* Set a specific height for the paragraph */
+    overflow: hidden; /* Hides any text that goes beyond the height */
+    margin: 5px 0;
+    padding: 5px; /* Adjust the padding inside the paragraph */
+    text-overflow: ellipsis; /* Adds '...' if text overflows */
+}
+
+/* Price Styling */
+.menu-item span {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-weight: bold;
+    color: #964B00;
+    font-size: 15px;
+    height: 30px; /* Control the height of the span */
+    line-height: 30px; /* Vertically center text within the span */
+    display: block; /* Ensure the span takes full width */
+    text-align: center; /* Center the text horizontally */
+    margin: 5px 0; /* Adjust margin for spacing above and below */
+}
+
+/* Updated Order Button */
+.order-button {
+    background-color: #964B00;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the content within the button */
+    gap: 8px;
+    margin-top: auto; /* Push the button to the bottom of the container */
+    margin-left: auto; /* Center the button horizontally */
+    margin-right: auto; /* Center the button horizontally */
+}
+
+
+.order-button svg {
+    color: #FFFFFF;
+}
+
+/* Cart Animation */
+.cart-item-animation {
+    position: relative;
+    z-index: 1000;
+    pointer-events: none;
+    transition: transform 0.5s ease-in-out, left 0.5s ease-in-out, top 0.5s ease-in-out;
+    transform-origin: center center;
+    display: none; /* Hidden by default */
+}
+
+@keyframes moveToCart {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.5);
+        left: calc(100vw - 60px); /* Adjust to align with your cart icon */
+        top: 10px; /* Adjust to align with your cart icon */
+        opacity: 0;
+    }
+}
+
+/* Cart Popup Styling */
+.cart-popup {
+    display: none;
+    position: fixed;
+    top: 10%;
+    right: 10px;
+    max-width: 350px; /* Increased max-width to 350px */
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 20px; /* Increased padding to 20px */
+    color: #964B00;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    box-sizing: border-box;
+    border-radius: 8px;
+    max-height: 600px; /* Set a max height for the cart popup */
+    overflow: hidden; /* Ensure the overall cart popup does not overflow */
+}
+
+.cart-popup h2 {
+    margin-top: 0;
+}
+
+.cart-popup ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px; /* Increased max-height to 300px */
+    overflow-y: auto; /* Add vertical scroll if the item list exceeds max height */
+}
+
+.cart-popup li {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    display: flex;
+    align-items: center; /* Align image and text on the same line */
+}
+
+.cart-item-image {
+    width: 50px; /* Increased image size to 50px */
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.cart-popup button {
+    background-color: #964B00;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%; /* Make buttons take full width */
+    margin-bottom: 10px;
+}
+
+.cart-popup button:hover {
+    background-color: #7a3e1c;
+}
+
+
+.cart-popup button.adjust-qty {
+    background-color: #964B00;
+    color: white;
+    border: none;
+    padding: 5px 10px; /* Smaller padding */
+    cursor: pointer;
+    font-size: 14px; /* Smaller font size */
+    border-radius: 5px;
+    margin: 0 5px; /* Margin between buttons */
+    width: auto; /* Auto width */
+}
+
+.cart-popup button.adjust-qty:hover {
+    background-color: #7a3e1c;
+}
+
+
+/* Cart Icon Styling */
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.cart-icon img {
+    width: 30px; /* Adjust the width */
+    height: auto; /* Keep the aspect ratio */
+}
+
+
+
+/* Category Icon Styling */
+.category-icon {
+    width: 24px; /* Adjust the size as needed */
+    height: auto;
+    vertical-align: middle; /* Align with text */
+    margin-left: 10px; /* Space between text and icon */
+}
+
+/* Ensure menu items have the hover effect applied */
+.menu ul li a.active::before {
+    opacity: 1; /* Ensure image is visible for active item */
+}
+
+.menu ul li a.active {
+    color: #964B00; /* Example active color */
+    font-weight: bold;
+}
+
+
+.gallery-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-left: 80px; /* Adjust this value as needed */
+}
+
+
+        .gallery-item {
+            border: 3px solid rgba(0, 0, 0, 0.3); /* Slightly transparent border */
+            border-radius: 20px; /* Rounded corners */
+            padding: 5px; /* Space between the image and border */
+            background-clip: padding-box; /* Ensures background does not overlap border */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+            margin: 10px; /* Space around each image */
+            max-width: 400px; /* Set a maximum width for images */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px; /* Rounded corners for the image itself */
+        }
+		
+		/* Center the heading */
+.centered-heading {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: #964B00;
+    margin: 2px;
+}
+
+.abouttext {
+            width: 1200px;
+            margin: auto;
+            padding: 20px;
+            color: #964B00;
+            margin-top: 80px; /* Ensure content does not hit the navbar */
+        }
+		
+		
+h2 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #964B00;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+		
+.abouttext p {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #664228;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+        }
+		
+		
+		.team-member {
+            width: 30%;
+            text-align: center;
+        }
+        .team-member img {
+            max-width: 100%;
+            height: 350px;
+            border: 3px solid rgba(0, 0, 0, 0.3); /* Slightly visible border */
+            border-radius: 10px; /* Curved corners */
+            margin-bottom: 10px;
+        }
+        .team-member h3 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #664228;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .team-member p {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #000000;
+            font-size: 16px;
+        }
+        .team-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+		
+		
+		
+		
+		
+/* Styling for Contact Container */
+.contact-container {
+    width: 80%;
+    margin: 60px auto;
+	padding-top: 60px;
+}
+
+/* Centered Title Styling */
+.contact-title {
+    font-family: 'Arial', cursive, sans-serif;
+    font-size: 48px;
+    color: #964B00;
+    text-align: center; /* Center the title */
+    margin-bottom: 30px; /* Space below the title */
+}
+
+/* Flexbox Container for Contact Content */
+.contact-content {
+    display: flex; /* Flexbox layout for text and form */
+    justify-content: space-between; /* Space between text and form */
+    align-items: flex-start; /* Align items at the top */
+    flex-wrap: nowrap; /* Prevent wrapping to keep side-by-side */
+    gap: 20px; /* Space between text and form */
+}
+
+/* Contact Info Styling */
+.contact-info {
+    width: 55%; /* Set the width for the text section */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 16px;
+    line-height: 1.6; /* Spacing between lines */
+    color: #664228; /* Text color */
+    padding-right: 20px; /* Space on the right to avoid overlapping */
+}
+
+/* Contact Form Styling */
+.contact-form {
+    width: 40%; /* Set the width for the form */
+    background: linear-gradient(to top, rgba(255, 223, 186, 0.9), rgba(248, 233, 220, 0.9));
+    border-radius: 10px; /* Slightly rounded corners */
+    padding: 25px; /* Padding inside the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Form Elements Styling */
+.contact-form input,
+.contact-form textarea {
+    width: calc(100% - 20px); /* Full width minus padding */
+    margin: 10px 0; /* Space between elements */
+    padding: 10px; /* Padding inside the input/textarea */
+    border: 1px solid #964B00; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+
+
+/* Styling for the Contact Image */
+.contact-image {
+    width: 30%; /* Full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px 0; /* Space above and below the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+
+
+
+/* Styling for Additional Information Section */
+.additional-info {
+    background: rgba(255, 234, 204, 0.5); /* Light background color */
+    padding: 30px;
+    border-radius: 10px;
+    margin: 40px auto; /* Space around the section */
+    width: 80%; /* Set width for content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.additional-info h3 {
+    font-size: 24px;
+    color: #964B00; /* Text color */
+    margin-bottom: 10px; /* Space below heading */
+}
+
+.additional-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #664228; /* Text color */
+    margin-bottom: 20px; /* Space below paragraph */
+}
+
+
+
+
+/* Styling for Register Container */
+.register-container {
+    width: 80%;
+    margin: 60px auto;
+    padding-top: 60px;
+}
+
+/* Intro Section Styling */
+.intro {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #964B00;
+}
+
+.intro h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #664228;
+}
+
+/* Flexbox Container for Register Content */
+.register-content {
+    display: flex; /* Flexbox layout for text and form */
+    justify-content: space-between; /* Space between text and form */
+    align-items: flex-start; /* Align items at the top */
+    flex-wrap: nowrap; /* Prevent wrapping to keep side-by-side */
+    gap: 20px; /* Space between text and form */
+}
+
+/* Register Info Styling */
+.register-info {
+    width: 55%; /* Set the width for the text section */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 16px;
+    line-height: 1.6; /* Spacing between lines */
+    color: #664228; /* Text color */
+    padding-right: 20px; /* Space on the right to avoid overlapping */
+}
+
+/* Register Form Styling */
+.register-form {
+    width: 40%; /* Set the width for the form */
+    background: linear-gradient(to top, rgba(255, 223, 186, 0.9), rgba(248, 233, 220, 0.9));
+    border-radius: 10px; /* Slightly rounded corners */
+    padding: 25px; /* Padding inside the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Form Elements Styling */
+.register-form input {
+    width: calc(100% - 20px); /* Full width minus padding */
+    margin: 10px 0; /* Space between elements */
+    padding: 10px; /* Padding inside the input/textarea */
+    border: 1px solid #964B00; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* Styling for Form Labels */
+.register-form label {
+    display: block;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #964B00;
+}
+
+
+/* Styling for Main Content Section */
+.main-content {
+    padding: 80px 20px 40px; /* Padding for content area */
+    max-width: 1200px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content */
+    text-align: center; /* Center text for this section */
+}
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    padding: 40px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    text-align: center;
+    z-index: 1;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.hero-image {
+    position: absolute;
+    width: 150px; /* Size of each small image */
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0; /* Starts fully transparent */
+    transition: opacity 1s ease-in-out; /* Smooth fade-in and fade-out */
+}
+
+
+.hero-content {
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 48px;
+    color: #964B00;
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #000000;
+}
+
+
+
+
+
+/* Styling for Forgot Password Link */
+.forgot-password {
+    font-size: 14px;
+    margin-top: 20px; /* Space above the forgot password text */
+}
+
+.forgot-password a {
+    color: #ff7200; /* Highlight the link */
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+/* Register Link Styling in the Form */
+.register-link {
+    margin-top: 20px; /* Space above the link */
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #ff7200; /* Highlight the link */
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+
+/* Forgot Password Container */
+.forgot-container {
+    display: flex;
+    justify-content: center; /* Center the content */
+    align-items: center; /* Center vertically */
+    min-height: 80vh; /* Minimum height to fill the screen */
+    
+    padding: 40px 20px; /* Padding inside the container */
+	margin-top: 80px; /* Ensure content does not hit the navbar */
+}
+
+/* Forgot Content Styling */
+.forgot-content {
+    width: 100%;
+    max-width: 600px; /* Limit the maximum width */
+    background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    padding: 40px; /* Space inside the content box */
+    text-align: center; /* Center text */
+}
+
+/* Forgot Form Styling */
+.forgot-form h2 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 28px; /* Size of heading */
+    color: #964B00; /* Dark brown color */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+.forgot-form p {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #664228; /* Text color */
+    margin-bottom: 30px; /* Space below paragraph */
+}
+
+.forgot-form label {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 14px;
+    color: #964B00;
+    display: block; /* Block display for proper spacing */
+    margin-bottom: 5px; /* Space below label */
+}
+
+.forgot-form input {
+    width: calc(100% - 20px); /* Full width minus padding */
+    margin: 10px 0; /* Space between elements */
+    padding: 10px; /* Padding inside input */
+    border: 1px solid #964B00; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    font-family: Arial, sans-serif; /* Font style */
+}
+
+
+
+
+/* Back to Login Link */
+.back-to-login {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.back-to-login a {
+    color: #ff7200;
+    text-decoration: none;
+}
+
+.back-to-login a:hover {
+    text-decoration: underline;
+}
+
+
+/* Checkout Container */
+.checkout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 80px 20px;
+    background: rgba(255, 234, 204, 0.8); /* Light background color */
+}
+
+/* Receipt Styling */
+.receipt {
+    background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    padding: 40px; /* Space inside the content box */
+    width: 100%;
+    max-width: 700px; /* Limit the maximum width */
+}
+
+/* Receipt Table Styling */
+.receipt-table {
+    width: 100%;
+    margin-bottom: 20px; /* Space below the table */
+}
+
+/* Receipt Row Styling */
+.receipt-row, .receipt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd; /* Light border */
+}
+
+/* Receipt Column Header Styling */
+.receipt-column-header {
+    flex: 1;
+    text-align: center;
+    font-weight: bold; /* Bold for headers */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #964B00;
+}
+
+/* Receipt Columns Styling */
+.receipt-item, .receipt-quantity, .receipt-price, .receipt-total {
+    flex: 1;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #664228;
+}
+
+/* Total Row Styling */
+.total-row {
+    font-weight: bold;
+}
+
+/* Thank You Message Styling */
+.thank-you {
+    margin-top: 30px;
+    font-size: 16px;
+    color: #ff7200;
+    text-align: center;
+}
+
+
+
+
+/* Profile Container */
+.profile-container {
+    max-width: 800px;  /* Limit the width */
+    margin: 50px auto;  /* Center the container */
+    padding: 30px;
+    background-color: #fff0e6;  /* Soft background color */
+    border-radius: 15px;  /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* Profile Header */
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-header h2 {
+    font-size: 28px;
+    color: #964B00;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.profile-header p {
+    font-size: 16px;
+    color: #964B00;
+}
+
+/* Profile Picture */
+.profile-picture img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: 3px solid #964B00;
+    object-fit: cover;
+}
+
+/* Profile Details */
+.profile-details {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profile-details label {
+    font-size: 16px;
+    color: #964B00;
+    font-weight: bold;
+}
+
+.profile-details p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #964B00;
+    border-radius: 10px;
+    background-color: #fffae6;
+}
+
+/* Edit Profile Button */
+.edit-profile-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #964B00;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-profile-btn:hover {
+    background-color: #ff7200;
+}
+
+/* Center everything */
+.profile-picture, .profile-details {
+    text-align: center;
+}
+
+
+
+
+/* Edit Profile Form Styling */
+.edit-profile-container {
+    max-width: 600px;  /* Limit the form width */
+    margin: 100px auto;  /* Center it on the page */
+    padding: 30px;
+    background-color: #fff0e6;  /* Soft, warm background color */
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+}
+
+.edit-profile-container h2 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 28px;
+    color: #964B00;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.edit-profile-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;  /* Space between input fields */
+}
+
+.edit-profile-container label {
+    font-family: 'Comic Sans MS', cursive;
+    color: #964B00;
+    font-size: 14px;
+}
+
+.edit-profile-container input {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 2px solid #964B00;
+    font-family: 'Comic Sans MS', cursive;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.edit-profile-container input:focus {
+    border-color: #ff7200;  /* Highlighted border when focused */
+}
+
+.edit-profile-container .edit-btn {
+    background-color: #964B00;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.edit-profile-container .edit-btn:hover {
+    background-color: #ff7200;  /* Lighter color on hover */
+}
+
+.edit-profile-container a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Comic Sans MS', cursive;
+    color: #964B00;
+    text-decoration: none;
+}
+
+.edit-profile-container a:hover {
+    color: #ff7200;
+}
+
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* Close button for modal */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    cursor: pointer;
+}
+
+
+
+
+/* Profile Details Grid Layout */
+.profile-details-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* Left and Right Columns */
+.profile-left, .profile-right {
+    width: 45%;  /* Each column takes up 45% of the width */
+}
+
+.profile-left label, .profile-right label {
+    font-weight: bold;
+    color: #964B00;
+}
+
+.profile-left p, .profile-right p {
+    background-color: #fffae6;
+    border: 1px solid #964B00;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #333;
+    word-wrap: break-word; /* Ensures long words break and don't overflow */
+    overflow-wrap: break-word; /* Support for breaking long words */
+}
+
+
+
+/* Style for the subtle "Item added to cart" message */
+.item-added-message {
+    color: #964B00;
+    font-size: 12px;
+    margin-top: 5px;
+    transition: opacity 0.5s ease-out;
+}
+
+
+
+button:disabled {
+    background-color: #cccccc; /* Grey background for disabled buttons */
+    cursor: not-allowed; /* Show "not-allowed" cursor */
+    opacity: 0.6; /* Make the button look faded */
+}
+
+
+/* Custom styling for the checkout receipt */
+.receipt-custom {
+    background-color: #fff4e6 !important;
+    border: 1px solid #964B00;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 700px;
+    margin: 20px auto;
+    font-family: 'Comic Sans MS', cursive;
+    color: #664228;
+}
+
+.receipt-custom h2 {
+    font-size: 28px;
+    color: #964B00;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.receipt-custom table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.receipt-custom th, .receipt-custom td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.receipt-custom .total-row {
+    font-weight: bold;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #964B00;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: 'Comic Sans MS', cursive;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #ff7200;
+}
+
+.checkout-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #964B00;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #ff7200;
+}
+
+
+
+
+/* Styling for the small image next to the item name */
+.small_img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+/* Profile Buttons Styling */
+.profile-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.order-history-button, .edit-profile-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    text-decoration: none;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.order-history-button {
+    background-color: #7a3e1c;  /* Darker brown */
+    color: white;
+}
+
+.order-history-button:hover {
+    background-color: #5c2d17;  /* Darker hover effect */
+}
+
+.edit-profile-button {
+    background-color: #964B00;  /* Original brown color */
+    color: white;
+}
+
+.edit-profile-button:hover {
+    background-color: #7a3e1c;  /* Same hover effect as other buttons */
+}
+
+
+
+/* Order History Container Styling */
+.order-history-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff0e6; /* Soft background color */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-family: 'Comic Sans MS', cursive;
+    color: #964B00;
+}
+
+.order-history-container h1 {
+    font-size: 28px;
+    color: #964B00;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Order History Table Styling */
+.order-history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-history-table th, .order-history-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive;
+    color: #664228;
+}
+
+.order-history-table th {
+    background-color: #fffae6;
+    font-weight: bold;
+}
+
+.order-history-table td a {
+    color: #964B00;
+    text-decoration: none;
+}
+
+.order-history-table td a:hover {
+    color: #ff7200;
+}
+
+/* Additional Styling for Table */
+.order-history-table td {
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.order-history-table th {
+    font-size: 18px;
+}
+
+/* Back Button for Order History */
+.order-history-back-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.order-history-back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #964B00; /* Match with the existing theme color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.order-history-back-button:hover {
+    background-color: #7a3e1c; /* Hover effect */
+}
+
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Checkbox Wrapper */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Add space below the checkbox wrapper */
+}
+
+/* Ensure the label and checkbox are aligned */
+.checkbox-wrapper .checkbox-label {
+    margin-right: 8px; /* Space between the label and the checkbox */
+}
+
+
+.deactivate-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.deactivate-button:hover {
+    background-color: #d32f2f;
+}
+
+
+.delete-button {
+    background-color: #ff0000;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+.admin-banner {
+	background-color: #d9534f;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.change-password-button {
+    background-color: #f8a21c;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.change-password-button:hover {
+    background-color: #d9534f;
+}
+
+
+.admin-link {
+    background-color: #f0ad4e;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.admin-link:hover {
+    background-color: #ec971f;
+    color: white;
+}
+
+/* Deactivation Modal Styling */
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+.modal-content {
+			background-color: #fff;
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			width: 80%;
+		}
+		
+
+.home-back-button {
+    margin-top: 20px;
+    margin-bottom: 20px; /* Added to create space below the button */
+    text-align: center;
+}
+
+.home-back-button a {
+    background-color: #f8a21c;
+    color: white;
+    padding: 12px 25px; /* Increased padding for better spacing */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.home-back-button a:hover {
+    background-color: #d9534f;
+    color: white;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Enhance shadow on hover */
+}
+
+
+
+
+.admin-product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+.admin-product-table th, .admin-product-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-product-table th {
+    background-color: #f8a21c;
+    color: white;
+}
+
+.admin-product-table tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.admin-product-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.admin-product-table input[type="text"], 
+.admin-product-table textarea, 
+.admin-product-table input[type="number"], 
+.admin-product-table select {
+    width: 100%;
+    padding: 8px;
+    margin: 4px 0;
+    box-sizing: border-box;
+}
+
+.admin-product-table button {
+    background-color: #f8a21c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-product-table button:hover {
+    background-color: #d9534f;
+}
+
+.admin-product-table a {
+    color: #d9534f;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 1px solid #d9534f;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-product-table a:hover {
+    background-color: #d9534f;
+    color: white;
+}
+
+.admin-product-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.admin-product-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.admin-product-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.admin-product-modal-close:hover,
+.admin-product-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.message {
+    background-color: #d9534f;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
