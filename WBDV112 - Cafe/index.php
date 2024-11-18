@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', startFixedImageAnimation);
 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
 <div class="admin-banner">ADMIN ACCESS ONLY</div>
 <?php else: ?>
-<li></a></li>
+
 <?php endif; ?>
 
 <div class="navbar">
