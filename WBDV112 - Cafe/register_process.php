@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
 
             // Prepare verification email
-            $verification_link = "http://localhost/WBDV112%20-%20Cafe/verify_email.php?token=" . $verification_token;
+            $verification_link = "https://certain-lovely-monkfish.ngrok-free.app/WBDV112%20-%20Cafe/verify_email.php?token=" . $verification_token;
 
             // Include PHPMailer classes
             require 'src/PHPMailerAutoload.php'; // Ensure this path is correct

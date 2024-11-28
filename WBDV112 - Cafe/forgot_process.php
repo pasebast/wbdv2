@@ -35,7 +35,7 @@ if (isset($_POST['email'])) {
         $insert_stmt->close();
 
         // Set up the reset link
-        $reset_link = "http://localhost/WBDV112%20-%20Cafe/reset_password.php?token=" . $token;
+        $reset_link = "https://certain-lovely-monkfish.ngrok-free.app/WBDV112%20-%20Cafe/reset_password.php?token=" . $token;
 
         // Set up PHPMailer
         $mail = new PHPMailer();
